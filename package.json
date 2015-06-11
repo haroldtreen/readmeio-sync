@@ -1,0 +1,32 @@
+{
+  "name": "readme-sync",
+  "version": "1.0.0",
+  "description": "Sync documentation between Readme.io and your Github Repo",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "readme.io",
+    "sync",
+    "markdown",
+    "docs",
+    "documentation"
+  ],
+  "author": "Mobify Inc.",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.0.0",
+    "cheerio": "^0.19.0",
+    "grunt": "^0.4.5",
+    "mocha": "^2.2.5",
+    "request": "^2.57.0",
+    "tough-cookie": "^2.0.0"
+  },
+  "devDependencies": {
+    "grunt-mocha-test": "^0.12.7"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "readme-sync": "index.js"
+  }
+}
