@@ -18,4 +18,4 @@ describe('Authenticator', function(){
 			assert.equal(auth.configs[key], authConfigs[key]);
 		});
 	});
-})
+});
