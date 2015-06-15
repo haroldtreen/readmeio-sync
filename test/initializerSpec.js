@@ -2,9 +2,9 @@
 
 var assert = require('chai').assert;
 var nock = require('nock');
-
 var fs = require('fs');
-var init = require('../lib/initializer');
+
+var Initializer = require('../lib/initializer');
 var UrlGenerator = require('../lib/urlGenerator');
 
 var urlGen;
@@ -14,18 +14,39 @@ describe('Initializer', function() {
         urlGen = new UrlGenerator('github-upload', 'v1.0');
     });
 
-    it('accepts a project info through the configs/project.json', function() {
-        var projectInfo = JSON.parse(fs.readFileSync('config/project.json'));
-        assert.equal(init.configs.project, projectInfo.project);
-        assert.equal(init.configs.apiBase, projectInfo.apiBase);
-    });
-
     it('initializes project info', function(done) {
-        nock(urlGen.base()).get(urlGen.versionsPath()).reply(200, fs.readFileSync('test/fixtures/projectInfo.json'));
+        var urlGenv1 = new UrlGenerator('github-upload', 'v1.0');
+        var urlGenv2 = new UrlGenerator('github-upload', 'v2.0');
 
-        init.initProjectInfo({}, function(info) {
-            assert(info.length, 2);
+        nock(urlGenv1.base()).get(urlGenv1.versionsPath()).reply(200, fs.readFileSync('test/fixtures/project-versions.json'));
+        nock(urlGenv1.base()).get(urlGenv1.docsPath()).reply(200, fs.readFileSync('test/fixtures/docs-v1.json'));
+        nock(urlGenv2.base()).get(urlGenv2.docsPath()).reply(200, fs.readFileSync('test/fixtures/docs-v2.json'));
+        nock(urlGenv1.base()).get(urlGenv1.contentPath()).reply(200, fs.readFileSync('test/fixtures/content-v1.json'));
+        nock(urlGenv2.base()).get(urlGenv2.contentPath()).reply(200, fs.readFileSync('test/fixtures/content-v2.json'));
+        nock(urlGenv1.base()).get(urlGenv1.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v1.json'));
+        nock(urlGenv2.base()).get(urlGenv2.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v2.json'));
+
+        Initializer.initProjectInfo({}, function(registry) {
+            assert.equal(Object.keys(registry.versions).length, 2);
+
+            assert.isDefined(registry.versions['v1.0'].documentation);
+            assert.equal(registry.versions['v1.0'].documentation.length, 2);
+
+            assert.isDefined(registry.versions['v2.0'].documentation);
+            assert.equal(registry.versions['v2.0'].documentation.length, 2);
+
+            assert.isDefined(registry.versions['v1.0'].content);
+            assert.isDefined(registry.versions['v2.0'].content);
+
+            assert.isDefined(registry.versions['v1.0'].customPages);
+            assert.isDefined(registry.versions['v2.0'].customPages);
+
+            var files = fs.readdirSync('.');
+
+            assert.isAbove(files.indexOf('syncRegistry.json'), -1, 'Registry file was not created');
+
             done();
         });
     });
 });
+
