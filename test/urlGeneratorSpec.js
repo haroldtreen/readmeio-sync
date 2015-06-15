@@ -23,8 +23,16 @@ describe('UrlGenerator', function() {
         assert.equal(urlGen.docsUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs');
     });
 
-    it('knows the projects url', function() {
+    it('knows the versions url', function() {
         assert.equal(urlGen.versionsUrl(), 'https://dash.readme.io/api/projects-v/github-upload');
+    });
+
+    it('knows the content url', function() {
+        assert.equal(urlGen.contentUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0');
+    });
+
+    it('knows the pages url', function() {
+        assert.equal(urlGen.pagesUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
     });
 
     it('pulls api base from project.json', function() {
