@@ -19,6 +19,7 @@
     "cheerio": "^0.19.0",
     "grunt": "^0.4.5",
     "jsonfile": "^2.0.1",
+    "lodash": "^3.9.3",
     "mocha": "^2.2.5",
     "request": "^2.57.0",
     "simple-mock": "^0.3.1",
