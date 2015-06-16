@@ -35,6 +35,10 @@ describe('UrlGenerator', function() {
         assert.equal(urlGen.pagesUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
     });
 
+    it('can pass a slug to pages', function() {
+        assert.equal(urlGen.pagesUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
+    });
+
     it('pulls api base from project.json', function() {
         var projectSettings = js.readFileSync('config/project.json');
         assert.equal(urlGen.base(), projectSettings.apiBase);
