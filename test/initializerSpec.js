@@ -27,22 +27,9 @@ describe('Initializer', function() {
         nock(urlGenv2.base()).get(urlGenv2.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v2.json'));
 
         Initializer.initProjectInfo({}, function(registry) {
-            assert.equal(Object.keys(registry.versions).length, 2);
-
-            assert.isDefined(registry.versions['v1.0'].documentation);
-            assert.equal(registry.versions['v1.0'].documentation.length, 2);
-
-            assert.isDefined(registry.versions['v2.0'].documentation);
-            assert.equal(registry.versions['v2.0'].documentation.length, 2);
-
-            assert.isDefined(registry.versions['v1.0'].content);
-            assert.isDefined(registry.versions['v2.0'].content);
-
-            assert.isDefined(registry.versions['v1.0'].customPages);
-            assert.isDefined(registry.versions['v2.0'].customPages);
-
             var files = fs.readdirSync('.');
 
+            assert.isDefined(registry['github-upload']['v1.0']);
             assert.isAbove(files.indexOf('syncRegistry.json'), -1, 'Registry file was not created');
 
             done();
