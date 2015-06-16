@@ -26,7 +26,7 @@ describe('Initializer', function() {
         nock(urlGenv1.base()).get(urlGenv1.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v1.json'));
         nock(urlGenv2.base()).get(urlGenv2.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v2.json'));
 
-        Initializer.initProjectInfo({}, function(registry) {
+        Initializer.initProjectInfo('test/tmp', {}, function(registry) {
             var files = fs.readdirSync('.');
 
             assert.isDefined(registry['github-upload']['v1.0']);
