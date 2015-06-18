@@ -52,5 +52,13 @@ describe('UrlGenerator', function() {
         it('can be generated for docs put', function() {
             assert.equal(urlGen.docsPutUrl('doc-slug'), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/doc-slug');
         });
+
+        it('can be generated for doc category post', function() {
+            assert.equal(urlGen.docCategoriesPostUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/category');
+        });
+
+        it('can be generated for doc category put', function() {
+            assert.equal(urlGen.docCategoriesPutUrl('updated-category'), 'https://dash.readme.io/api/projects/github-upload/v1.0/category/updated-category');
+        });
     });
 });
