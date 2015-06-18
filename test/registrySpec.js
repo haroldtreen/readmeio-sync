@@ -3,6 +3,7 @@
 var assert = require('chai').assert;
 var Registry = require('../lib/registry');
 var js = require('jsonfile');
+var fs = require('fs');
 
 var mockContents;
 var registry;
@@ -66,6 +67,19 @@ describe('Registry', function() {
 
         it('can pull custom page data', function() {
             assert.equal(registry.pages('v1.0'), mockContents['github-upload']['v1.0'].customPages);
+        });
+
+        it('can be saved to a file', function() {
+            var registryFilePath = 'test/tmp';
+            registry.save(registryFilePath);
+
+            var savedRegistryData = js.readFileSync(registryFilePath + '/syncRegistry.json');
+            var savedRegistry = new Registry();
+
+            savedRegistry.import(savedRegistryData);
+            assert.deepEqual(registry.export(), savedRegistry.export());
+
+            fs.unlinkSync(registryFilePath + '/syncRegistry.json');
         });
     });
 
