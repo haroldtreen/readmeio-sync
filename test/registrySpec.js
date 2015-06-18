@@ -50,18 +50,6 @@ describe('Registry', function() {
         assert.deepEqual(registry.export(), expectedRegistry);
     });
 
-    it('can flag contents as uploaded', function() {
-        var assertUploaded = function(content) { assert.isTrue(content.isUploaded); };
-
-        registry.import(mockContents);
-
-        registry.markUploaded();
-
-        registry.allDocs().forEach(assertUploaded);
-        registry.allDocCategories().forEach(assertUploaded);
-        registry.allCustomPages().forEach(assertUploaded);
-    });
-
     describe('contents', function() {
         before(function() {
             registry = new Registry();
