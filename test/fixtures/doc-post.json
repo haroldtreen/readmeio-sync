@@ -1,0 +1,43 @@
+{
+  "__v": 0,
+  "project": "556f429a9893290d00988bba",
+  "version": "556f429a9893290d00988bbd",
+  "category": "557f1a0be211d20d006013e6",
+  "_id": "5580b44a04ae5b0d00262804",
+  "user": "556f41bcfc3aa80d00e1ab4e",
+  "updates": [],
+  "createdAt": "2015-06-16T23:42:02.851Z",
+  "link_external": false,
+  "link_url": "",
+  "githubsync": "",
+  "sync_unique": "",
+  "hidden": false,
+  "api": {
+    "results": {
+      "codes": [
+        {
+          "status": 200,
+          "language": "json",
+          "code": "{}",
+          "name": ""
+        },
+        {
+          "status": 400,
+          "language": "json",
+          "code": "{}",
+          "name": ""
+        }
+      ]
+    },
+    "settings": "",
+    "auth": "required",
+    "params": [],
+    "url": ""
+  },
+  "order": 999,
+  "body": "Here's that new docs!",
+  "excerpt": "Describe",
+  "slug": "new-doc-again",
+  "type": "basic",
+  "title": "New Doc AGAIN"
+}
