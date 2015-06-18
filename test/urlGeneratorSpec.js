@@ -43,4 +43,14 @@ describe('UrlGenerator', function() {
         var projectSettings = js.readFileSync('config/project.json');
         assert.equal(urlGen.base(), projectSettings.apiBase);
     });
+
+    describe('post/put urls', function() {
+        it('can be generated for docs post', function() {
+            assert.equal(urlGen.docsPostUrl('category-slug'), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/category-slug');
+        });
+
+        it('can be generated for docs put', function() {
+            assert.equal(urlGen.docsPutUrl('doc-slug'), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/doc-slug');
+        });
+    });
 });
