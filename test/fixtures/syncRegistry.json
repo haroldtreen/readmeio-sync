@@ -67,7 +67,7 @@
         "v1.0": {
             "documentation": [
                 {
-                    "slug": "documentation",
+                    "slug": "newww-category",
                     "title": "Documentation",
                     "pages": [
                         {
@@ -83,18 +83,18 @@
                             "title": "This is a doc",
                             "slug": "this-is-a-doc",
                             "type": "basic"
-                        }
-                    ]
-                },
-                {
-                    "title": "Not Uploaded Category!",
-                    "pages": [
+                        },
                         {
                             "body": "test/tmp/github-upload/v1.0/documentation/Second Category/Second Category Doc.md",
                             "excerpt": "Second Category Doc Description",
                             "title": "Not Uploaded Doc!",
                             "type": "basic"
                         }
+                    ]
+                },
+                {
+                    "title": "Not Uploaded Category!",
+                    "pages": [
                     ]
                 }
             ],
