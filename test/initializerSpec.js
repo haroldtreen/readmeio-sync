@@ -18,13 +18,14 @@ describe('Initializer', function() {
         var urlGenv1 = new UrlGenerator('github-upload', 'v1.0');
         var urlGenv2 = new UrlGenerator('github-upload', 'v2.0');
 
-        nock(urlGenv1.base()).get(urlGenv1.versionsPath()).reply(200, fs.readFileSync('test/fixtures/project-versions.json'));
-        nock(urlGenv1.base()).get(urlGenv1.docsPath()).reply(200, fs.readFileSync('test/fixtures/docs-v1.json'));
-        nock(urlGenv2.base()).get(urlGenv2.docsPath()).reply(200, fs.readFileSync('test/fixtures/docs-v2.json'));
-        nock(urlGenv1.base()).get(urlGenv1.contentPath()).reply(200, fs.readFileSync('test/fixtures/content-v1.json'));
-        nock(urlGenv2.base()).get(urlGenv2.contentPath()).reply(200, fs.readFileSync('test/fixtures/content-v2.json'));
-        nock(urlGenv1.base()).get(urlGenv1.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v1.json'));
-        nock(urlGenv2.base()).get(urlGenv2.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v2.json'));
+        var scope = nock(urlGenv1.base());
+        scope.get(urlGenv1.versionsPath()).reply(200, fs.readFileSync('test/fixtures/project-versions.json'));
+        scope.get(urlGenv1.docsPath()).reply(200, fs.readFileSync('test/fixtures/docs-v1.json'));
+        scope.get(urlGenv2.docsPath()).reply(200, fs.readFileSync('test/fixtures/docs-v2.json'));
+        scope.get(urlGenv1.contentPath()).reply(200, fs.readFileSync('test/fixtures/content-v1.json'));
+        scope.get(urlGenv2.contentPath()).reply(200, fs.readFileSync('test/fixtures/content-v2.json'));
+        scope.get(urlGenv1.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v1.json'));
+        scope.get(urlGenv2.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v2.json'));
 
         Initializer.initProjectInfo('test/tmp', { 'cookie': 'jar' }, function(registry) {
             var files = fs.readdirSync('.');
