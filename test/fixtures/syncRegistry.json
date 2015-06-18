@@ -1,0 +1,122 @@
+{
+    "github-upload": {
+        "v2.0": {
+            "documentation": [
+                {
+                    "slug": "documentation",
+                    "title": "Documentation",
+                    "pages": [
+                        {
+                            "body": "test/tmp/github-upload/v2.0/documentation/Documentation/Getting Started with Github Upload.md",
+                            "excerpt": "This page will help you get started with Github Upload. You'll be up and running in a jiffy!",
+                            "title": "Getting Started with Github Upload",
+                            "slug": "getting-started",
+                            "type": "basic"
+                        },
+                        {
+                            "body": "test/tmp/github-upload/v2.0/documentation/Documentation/This is a doc.md",
+                            "excerpt": "This is that docs Description",
+                            "title": "This is a doc",
+                            "slug": "this-is-a-doc",
+                            "type": "basic"
+                        }
+                    ]
+                },
+                {
+                    "slug": "second-category",
+                    "title": "Second Category",
+                    "pages": [
+                        {
+                            "body": "test/tmp/github-upload/v2.0/documentation/Second Category/Second Category Doc.md",
+                            "excerpt": "Second Category Doc Description",
+                            "title": "Second Category Doc",
+                            "slug": "second-category-doc",
+                            "type": "basic"
+                        },
+                        {
+                            "body": "test/tmp/github-upload/v2.0/documentation/Second Category/Version 2 Doc.md",
+                            "excerpt": "Version 2 doc Description",
+                            "title": "Version 2 Doc",
+                            "slug": "version-2-doc",
+                            "type": "basic"
+                        }
+                    ]
+                }
+            ],
+            "customPages": [
+                {
+                    "title": "This Is Custom Content",
+                    "body": "test/tmp/github-upload/v2.0/customPages/This Is Custom Content.md",
+                    "html": "",
+                    "slug": "this-is-custom-content"
+                },
+                {
+                    "title": "More Custom Content",
+                    "body": "test/tmp/github-upload/v2.0/customPages/More Custom Content.md",
+                    "html": "",
+                    "slug": "more-custom-content"
+                }
+            ],
+            "customContent": {
+                "appearance": {
+                    "html_body": "test/tmp/github-upload/v2.0/customContent/appearance/landing_page.html",
+                    "stylesheet": "test/tmp/github-upload/v2.0/customContent/appearance/styles.css"
+                }
+            }
+        },
+        "v1.0": {
+            "documentation": [
+                {
+                    "slug": "documentation",
+                    "title": "Documentation",
+                    "pages": [
+                        {
+                            "body": "test/tmp/github-upload/v1.0/documentation/Documentation/Getting Started with Github Upload.md",
+                            "excerpt": "This page will help you get started with Github Upload. You'll be up and running in a jiffy!",
+                            "title": "Getting Started with Github Upload",
+                            "slug": "getting-started",
+                            "type": "basic"
+                        },
+                        {
+                            "body": "test/tmp/github-upload/v1.0/documentation/Documentation/This is a doc.md",
+                            "excerpt": "This is that docs Description",
+                            "title": "This is a doc",
+                            "slug": "this-is-a-doc",
+                            "type": "basic"
+                        }
+                    ]
+                },
+                {
+                    "title": "Not Uploaded Category!",
+                    "pages": [
+                        {
+                            "body": "test/tmp/github-upload/v1.0/documentation/Second Category/Second Category Doc.md",
+                            "excerpt": "Second Category Doc Description",
+                            "title": "Not Uploaded Doc!",
+                            "type": "basic"
+                        }
+                    ]
+                }
+            ],
+            "customPages": [
+                {
+                    "title": "This Is Custom Content",
+                    "body": "test/tmp/github-upload/v1.0/customPages/This Is Custom Content.md",
+                    "html": "",
+                    "slug": "this-is-custom-content"
+                },
+                {
+                    "title": "Not Uploaded Page!",
+                    "body": "test/tmp/github-upload/v1.0/customPages/More Custom Content.md",
+                    "html": ""
+                }
+            ],
+            "customContent": {
+                "appearance": {
+                    "html_body": "test/tmp/github-upload/v1.0/customContent/appearance/landing_page.html",
+                    "stylesheet": "test/tmp/github-upload/v1.0/customContent/appearance/styles.css"
+                }
+            }
+        }
+    }
+}
