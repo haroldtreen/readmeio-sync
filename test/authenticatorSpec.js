@@ -11,13 +11,4 @@ describe('Authenticator', function() {
             done();
         });
     });
-
-    it('should load settings from a json', function() {
-        var authJson = fs.readFileSync('config/auth.json');
-        var authConfigs = JSON.parse(authJson);
-
-        Object.keys(authConfigs).forEach(function(key) {
-            assert.equal(auth.configs[key], authConfigs[key]);
-        });
-    });
 });

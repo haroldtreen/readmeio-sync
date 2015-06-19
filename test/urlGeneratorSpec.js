@@ -2,8 +2,7 @@
 
 var assert = require('chai').assert;
 var UrlGenerator = require('../lib/urlGenerator');
-
-var js = require('jsonfile');
+var config = require('../lib/config');
 
 var urlGen;
 describe('UrlGenerator', function() {
@@ -39,9 +38,8 @@ describe('UrlGenerator', function() {
         assert.equal(urlGen.pagesUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
     });
 
-    it('pulls api base from project.json', function() {
-        var projectSettings = js.readFileSync('config/project.json');
-        assert.equal(urlGen.base(), projectSettings.apiBase);
+    it('pulls api base from config', function() {
+        assert.equal(urlGen.base(), config.apiBase);
     });
 
     describe('post/put urls', function() {
