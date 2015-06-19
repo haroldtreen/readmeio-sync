@@ -1,5 +1,5 @@
 {
-  "name": "readme-sync",
+  "name": "readmeio-sync",
   "version": "1.0.0",
   "description": "Sync documentation between Readme.io and your Github Repo",
   "scripts": {
@@ -33,6 +33,6 @@
   },
   "preferGlobal": true,
   "bin": {
-    "readme-sync": "index.js"
+    "readmeio-sync": "index.js"
   }
 }
