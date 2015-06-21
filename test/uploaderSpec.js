@@ -56,10 +56,22 @@ var mockAllPageRequests = function(uploaderRegistry) {
     });
 };
 
+var mockAllContentRequests = function(uploaderRegistry) {
+    var putResponse = js.readFileSync('test/fixtures/content-put.json');
+    var scope = nock(urlGen1.base());
+
+    uploaderRegistry.allCustomContent().forEach(function(content) {
+        var appearance = content.appearance;
+        var urlGen = content.version === 'v1.0' ? urlGen1 : urlGen2;
+        var requestBody = { appearance: { html_body: fs.readFileSync(appearance.html_body), stylesheet: fs.readFileSync(appearance.stylesheet) }};
+
+        scope.put(urlGen.contentPutPath(), requestBody).reply(200, putResponse);
+    });
+};
+
 describe('Uploader', function() {
     var uploader;
     var registry;
-    var assertUploaded
     var assertUploaded = function(resource) {
         assert.isDefined(resource.slug);
     };
@@ -74,7 +86,6 @@ describe('Uploader', function() {
         assert.equal(uploader.registry, registry);
     });
 
-
     it('uploads docs', function(done) {
         mockAllDocCategoriesRequests(registry);
         mockAllDocRequests(registry);
@@ -87,8 +98,21 @@ describe('Uploader', function() {
         });
     });
 
-    it('uploads custom pages', function(){
+    it('uploads custom pages', function(done) {
+        mockAllPageRequests(registry);
 
+        uploader.uploadCustomPages('cookie', function(uploadedRegistry) {
+            uploadedRegistry.allCustomPages().forEach(assertUploaded);
 
+            done();
+        });
+    });
+
+    it('uploads custom content', function(done) {
+        mockAllContentRequests(registry);
+
+        uploader.uploadCustomContent('cookie', function(uploadedRegistry) {
+            done();
+        });
     });
 });

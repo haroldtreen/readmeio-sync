@@ -183,6 +183,29 @@ describe('Requestor', function() {
             });
         });
 
+        it('can post/put custom content', function(done) {
+            var putResponse = js.readFileSync('test/fixtures/content-put.json');
+            var scope = nock(urlGen1.base());
+
+            registry.allCustomContent().forEach(function(content) {
+                var appearance = content.appearance;
+                var urlGen = content.version === 'v1.0' ? urlGen1 : urlGen2;
+                var requestBody = { appearance: { html_body: fs.readFileSync(appearance.html_body).toString(), stylesheet: fs.readFileSync(appearance.stylesheet).toString()}};
+                scope.put(urlGen.contentPutPath(), requestBody).reply(200, putResponse);
+            });
+
+            requestor.uploadContent(registry.allCustomContent(), function(failedUploads) {
+                assert.lengthOf(failedUploads, 0);
+
+                registry.allCustomContent().forEach(function(content) {
+                    assert.equal(fs.readFileSync(content.appearance.html_body).toString(), putResponse.appearance.html_body);
+                    assert.equal(fs.readFileSync(content.appearance.stylesheet).toString(), putResponse.appearance.stylesheet);
+
+                });
+                done();
+            });
+        });
+
     });
 });
 

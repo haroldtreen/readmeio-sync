@@ -72,5 +72,10 @@ describe('UrlGenerator', function() {
             var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/page/updated-page';
             assert.equal(urlGen.pagesPutUrl('updated-page'), expectedUrl);
         });
+
+        it('can be generated for content put', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0';
+            assert.equal(urlGen.contentPutUrl(), expectedUrl);
+        });
     });
 });
