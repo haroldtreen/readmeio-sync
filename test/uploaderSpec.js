@@ -9,7 +9,6 @@ var UrlGenerator = require('../lib/urlGenerator');
 var Registry = require('../lib/registry');
 var Uploader = require('../lib/uploader');
 
-var registry;
 var projectName = 'github-upload';
 var urlGen1 = new UrlGenerator(projectName, 'v1.0');
 var urlGen2 = new UrlGenerator(projectName, 'v2.0');
@@ -43,27 +42,40 @@ var mockAllDocRequests = function(uploaderRegistry) {
     });
 };
 
+var mockAllPageRequests = function(uploaderRegistry) {
+    var postResponse = js.readFileSync('test/fixtures/custom-page-post.json');
+    var scope = nock(urlGen1.base());
+
+    uploaderRegistry.allCustomPages().forEach(function(page) {
+        var requestFn = page.slug ? 'put' : 'post';
+        var urlFn = page.slug ? 'pagesPutPath' : 'pagesPostPath';
+        var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
+
+        var requestBody = { title: page.title, body: fs.readFileSync(page.body).toString() }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
+        scope[requestFn](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
+    });
+};
+
 describe('Uploader', function() {
-    before(function() {
+    var uploader;
+    var registry;
+    var assertUploaded
+    var assertUploaded = function(resource) {
+        assert.isDefined(resource.slug);
+    };
+
+    beforeEach(function() {
         registry = new Registry();
+        registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
+        uploader = new Uploader(registry);
     });
 
     it('maintains a link to a registry', function() {
-        registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
-        var uploader = new Uploader(registry);
-
         assert.equal(uploader.registry, registry);
     });
 
 
     it('uploads docs', function(done) {
-        registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
-
-        var uploader = new Uploader(registry);
-        var assertUploaded = function(resource) {
-            assert.isDefined(resource.slug);
-        };
-
         mockAllDocCategoriesRequests(registry);
         mockAllDocRequests(registry);
 
@@ -73,5 +85,10 @@ describe('Uploader', function() {
 
             done();
         });
+    });
+
+    it('uploads custom pages', function(){
+
+
     });
 });
