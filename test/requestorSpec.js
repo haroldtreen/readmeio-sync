@@ -24,48 +24,6 @@ describe('Requestor', function() {
         assert.equal(requestor.cookie, 'cookie');
     });
 
-    it('can request custom content', function(done) {
-        requestor = new Requestor('cookie', projectName);
-
-        nock(urlGen1.base()).get(urlGen1.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
-        nock(urlGen2.base()).get(urlGen2.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
-
-        requestor.customContent(resources, function(content) {
-            assert.isDefined(content[projectName]['v1.0'].customContent.appearance.html_body);
-            assert.isDefined(content[projectName]['v2.0'].customContent.appearance.stylesheet);
-
-            done();
-        });
-    });
-
-    it('can request documentation', function(done) {
-        requestor = new Requestor('cookie', projectName);
-
-        nock(urlGen1.base()).get(urlGen1.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v1.json'));
-        nock(urlGen2.base()).get(urlGen2.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v2.json'));
-
-        requestor.documentation(resources, function(documentation) {
-            assert.isDefined(documentation[projectName]['v1.0'].documentation);
-            assert.lengthOf(documentation[projectName]['v2.0'].documentation, 2);
-
-            done();
-        });
-    });
-
-    it('can request customPages', function(done) {
-        requestor = new Requestor('cookie', projectName);
-
-        nock(urlGen1.base()).get(urlGen1.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v1.json'));
-        nock(urlGen2.base()).get(urlGen2.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v2.json'));
-
-        requestor.customPages(resources, function(documentation) {
-            assert.isDefined(documentation[projectName]['v1.0'].customPages);
-            assert.lengthOf(documentation[projectName]['v2.0'].customPages, 2);
-
-            done();
-        });
-    });
-
     it('caches request responses', function(done) {
         requestor = new Requestor('cookie', projectName);
 
@@ -87,69 +45,145 @@ describe('Requestor', function() {
         });
     });
 
-    it('can post/put new doc categories', function(done) {
-        var registry = new Registry();
-        registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
+    describe('get', function() {
+        it('can request custom content', function(done) {
+            requestor = new Requestor('cookie', projectName);
 
-        // Create network request mocks
-        var postResponse = js.readFileSync('test/fixtures/doc-category-post.json');
-        var scope = nock(urlGen1.base());
+            nock(urlGen1.base()).get(urlGen1.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
+            nock(urlGen2.base()).get(urlGen2.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
 
-        registry.allDocCategories().forEach(function(category) {
-            var requestFn = category.slug ? 'put' : 'post';
-            var urlFn = category.slug ? 'docCategoriesPutPath' : 'docCategoriesPostPath';
-            var urlGen = category.version === 'v1.0' ? urlGen1 : urlGen2;
+            requestor.customContent(resources, function(content) {
+                assert.isDefined(content[projectName]['v1.0'].customContent.appearance.html_body);
+                assert.isDefined(content[projectName]['v2.0'].customContent.appearance.stylesheet);
 
-            scope[requestFn](urlGen[urlFn](category.slug), { title: category.title }).reply(200, postResponse);
+                done();
+            });
         });
 
-        // Make requests
-        requestor = new Requestor('cookie', projectName);
-        requestor.uploadDocCategories(registry.allDocCategories(), function(failedUploads) {
-            assert.lengthOf(failedUploads, 0);
+        it('can request documentation', function(done) {
+            requestor = new Requestor('cookie', projectName);
+
+            nock(urlGen1.base()).get(urlGen1.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v1.json'));
+            nock(urlGen2.base()).get(urlGen2.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v2.json'));
+
+            requestor.documentation(resources, function(documentation) {
+                assert.isDefined(documentation[projectName]['v1.0'].documentation);
+                assert.lengthOf(documentation[projectName]['v2.0'].documentation, 2);
+
+                done();
+            });
+        });
+
+        it('can request customPages', function(done) {
+            requestor = new Requestor('cookie', projectName);
+
+            nock(urlGen1.base()).get(urlGen1.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v1.json'));
+            nock(urlGen2.base()).get(urlGen2.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v2.json'));
+
+            requestor.customPages(resources, function(documentation) {
+                assert.isDefined(documentation[projectName]['v1.0'].customPages);
+                assert.lengthOf(documentation[projectName]['v2.0'].customPages, 2);
+
+                done();
+            });
+        });
+    });
+
+    describe('post/put', function() {
+        var registry = new Registry();
+
+        beforeEach(function() {
+            registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
+        });
+
+        it('can post/put new doc categories', function(done) {
+            // Create network request mocks
+            var postResponse = js.readFileSync('test/fixtures/doc-category-post.json');
+            var scope = nock(urlGen1.base());
 
             registry.allDocCategories().forEach(function(category) {
-                assert.equal(category.title, postResponse.title);
-                assert.equal(category.slug, postResponse.slug);
+                var requestFn = category.slug ? 'put' : 'post';
+                var urlFn = category.slug ? 'docCategoriesPutPath' : 'docCategoriesPostPath';
+                var urlGen = category.version === 'v1.0' ? urlGen1 : urlGen2;
+
+                scope[requestFn](urlGen[urlFn](category.slug), { title: category.title }).reply(200, postResponse);
             });
-            done();
+
+            // Make requests
+            requestor = new Requestor('cookie', projectName);
+            requestor.uploadDocCategories(registry.allDocCategories(), function(failedUploads) {
+                assert.lengthOf(failedUploads, 0);
+
+                registry.allDocCategories().forEach(function(category) {
+                    assert.equal(category.title, postResponse.title);
+                    assert.equal(category.slug, postResponse.slug);
+                });
+                done();
+            });
+
+
         });
 
-
-    });
-
-    it('can post/put new docs', function(done) {
-        var registry = new Registry();
-        registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
-
-        // Create network request mocks
-        var postResponse = js.readFileSync('test/fixtures/doc-post.json');
-        var scope = nock(urlGen1.base());
-
-        registry.allDocs().forEach(function(doc) {
-            var requestFn = doc.slug ? 'put' : 'post';
-            var urlFn = doc.slug ? 'docsPutPath' : 'docsPostPath';
-            var urlGen = doc.version === 'v1.0' ? urlGen1 : urlGen2;
-            var slug = doc.slug || doc.categorySlug;
-
-            var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString(), type: doc.type };
-            scope[requestFn](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
-        });
-
-        // Make requests
-        requestor.uploadDocs(registry.allDocs(), function(failedUploads) {
-            assert.lengthOf(failedUploads, 0);
+        it('can post/put new docs', function(done) {
+            // Create network request mocks
+            var postResponse = js.readFileSync('test/fixtures/doc-post.json');
+            var scope = nock(urlGen1.base());
 
             registry.allDocs().forEach(function(doc) {
-                assert.equal(doc.title, postResponse.title);
-                assert.equal(doc.slug, postResponse.slug);
-                assert.equal(doc.excerpt, postResponse.excerpt);
-                assert.equal(fs.readFileSync(doc.body).toString(), postResponse.body);
+                var requestFn = doc.slug ? 'put' : 'post';
+                var urlFn = doc.slug ? 'docsPutPath' : 'docsPostPath';
+                var urlGen = doc.version === 'v1.0' ? urlGen1 : urlGen2;
+                var slug = doc.slug || doc.categorySlug;
+
+                var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString(), type: doc.type };
+                scope[requestFn](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
             });
 
-            assert.isTrue(scope.isDone());
-            done();
+            // Make requests
+            requestor.uploadDocs(registry.allDocs(), function(failedUploads) {
+                assert.lengthOf(failedUploads, 0);
+
+                registry.allDocs().forEach(function(doc) {
+                    assert.equal(doc.title, postResponse.title);
+                    assert.equal(doc.slug, postResponse.slug);
+                    assert.equal(doc.excerpt, postResponse.excerpt);
+                    assert.equal(fs.readFileSync(doc.body).toString(), postResponse.body);
+                });
+
+                assert.isTrue(scope.isDone());
+                done();
+            });
         });
+
+        it('can post/put new custom pages', function(done) {
+            var postResponse = js.readFileSync('test/fixtures/custom-page-post.json');
+            var scope = nock(urlGen1.base());
+
+            registry.allCustomPages().forEach(function(page) {
+                var requestFn = page.slug ? 'put' : 'post';
+                var urlFn = page.slug ? 'pagesPutPath' : 'pagesPostPath';
+                var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
+
+                var requestBody = { title: page.title, body: fs.readFileSync(page.body).toString() }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
+                scope[requestFn](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
+            });
+
+            requestor.uploadPages(registry.allCustomPages(), function(failedUploads) {
+                assert.lengthOf(failedUploads, 0);
+
+                registry.allCustomPages().forEach(function(page) {
+                    assert.equal(page.title, postResponse.title);
+                    assert.equal(page.slug, postResponse.slug);
+                    assert.isUndefined(page.subdomain);
+                    assert.equal(fs.readFileSync(page.body).toString(), postResponse.body);
+                });
+
+                assert.isTrue(scope.isDone());
+                done();
+            });
+        });
+
     });
 });
+
 

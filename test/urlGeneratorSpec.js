@@ -44,19 +44,33 @@ describe('UrlGenerator', function() {
 
     describe('post/put urls', function() {
         it('can be generated for docs post', function() {
-            assert.equal(urlGen.docsPostUrl('category-slug'), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/category-slug');
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/category-slug';
+            assert.equal(urlGen.docsPostUrl('category-slug'), expectedUrl);
         });
 
         it('can be generated for docs put', function() {
-            assert.equal(urlGen.docsPutUrl('doc-slug'), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/doc-slug');
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/doc-slug';
+            assert.equal(urlGen.docsPutUrl('doc-slug'), expectedUrl);
         });
 
         it('can be generated for doc category post', function() {
-            assert.equal(urlGen.docCategoriesPostUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/category');
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/category';
+            assert.equal(urlGen.docCategoriesPostUrl(), expectedUrl);
         });
 
         it('can be generated for doc category put', function() {
-            assert.equal(urlGen.docCategoriesPutUrl('updated-category'), 'https://dash.readme.io/api/projects/github-upload/v1.0/category/updated-category');
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/category/updated-category';
+            assert.equal(urlGen.docCategoriesPutUrl('updated-category'), expectedUrl);
+        });
+
+        it('can be generated for page post', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/page';
+            assert.equal(urlGen.pagesPostUrl(), expectedUrl);
+        });
+
+        it('can be generated for page put', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/page/updated-page';
+            assert.equal(urlGen.pagesPutUrl('updated-page'), expectedUrl);
         });
     });
 });
