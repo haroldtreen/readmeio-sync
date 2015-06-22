@@ -18,7 +18,12 @@ authenticator.createSession(function(cookie) {
 
         var uploader = new Uploader(registry);
         uploader.uploadDocs(cookie, function(uploadedRegistry) {
-            uploadedRegistry.save('./');
+            uploader.uploadCustomPages(cookie, function(pageUploadedRegistry) {
+                uploader.uploadCustomContent(cookie, function(contentUploadedRegistry) {
+                    contentUploadedRegistry.save('./');
+                    console.log('BOOM');
+                });
+            });
         });
     } else if (process.argv[2] === 'init') {
         console.log('Init!');
