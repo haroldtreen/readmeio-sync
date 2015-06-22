@@ -63,7 +63,7 @@ var mockAllContentRequests = function(uploaderRegistry) {
     uploaderRegistry.allCustomContent().forEach(function(content) {
         var appearance = content.appearance;
         var urlGen = content.version === 'v1.0' ? urlGen1 : urlGen2;
-        var requestBody = { appearance: { html_body: fs.readFileSync(appearance.html_body), stylesheet: fs.readFileSync(appearance.stylesheet) }};
+        var requestBody = { appearance: { html_head: fs.readFileSync(appearance.html_head), stylesheet: fs.readFileSync(appearance.stylesheet) }};
 
         scope.put(urlGen.contentPutPath(), requestBody).reply(200, putResponse);
     });

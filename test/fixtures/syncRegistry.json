@@ -59,7 +59,7 @@
             ],
             "customContent": {
                 "appearance": {
-                    "html_body": "test/tmp/github-upload/v2.0/customContent/appearance/landing_page.html",
+                    "html_head": "test/tmp/github-upload/v2.0/customContent/appearance/landing_page.html",
                     "stylesheet": "test/tmp/github-upload/v2.0/customContent/appearance/styles.css"
                 }
             }
@@ -113,7 +113,7 @@
             ],
             "customContent": {
                 "appearance": {
-                    "html_body": "test/tmp/github-upload/v1.0/customContent/appearance/landing_page.html",
+                    "html_head": "test/tmp/github-upload/v1.0/customContent/appearance/landing_page.html",
                     "stylesheet": "test/tmp/github-upload/v1.0/customContent/appearance/styles.css"
                 }
             }
