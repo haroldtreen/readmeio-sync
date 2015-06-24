@@ -2,33 +2,35 @@
 
 'use strict';
 
-var js = require('jsonfile');
+var program = require('commander');
 
-var authenticator = require('./lib/authenticator');
-var Initializer = require('./lib/initializer');
-var Registry = require('./lib/registry');
-var Uploader = require('./lib/uploader');
+var Cli = require('./lib/cli');
 
+program.version('0.5.0');
 
-authenticator.createSession(function(cookie) {
-    if (process.argv[2] === 'upload') {
-        console.log('Upload!');
-        var registry = new Registry();
-        registry.import(js.readFileSync('syncRegistry.json'));
-
-        var uploader = new Uploader(registry);
-        uploader.uploadDocs(cookie, function(uploadedRegistry) {
-            uploader.uploadCustomPages(cookie, function(pageUploadedRegistry) {
-                uploader.uploadCustomContent(cookie, function(contentUploadedRegistry) {
-                    contentUploadedRegistry.save('./');
-                    console.log('BOOM');
-                });
-            });
-        });
-    } else if (process.argv[2] === 'init') {
+program
+    .command('init')
+    .description('initialize a local readmeio project that can be synced')
+    .action(function() {
         console.log('Init!');
-        Initializer.initProjectInfo('./', cookie, function(initRepository) {
-            console.log('Done!');
-        });
-    }
-});
+    });
+
+program
+    .command('upload')
+    .description('uploads the files specified in syncRegistry.json to readmeio')
+    .option('-P, --production', 'Use production project')
+    .action(function(options) {
+        Cli.upload(options);
+    });
+
+program
+    .command('config')
+    .description('set the project name configurations for the project')
+    .option('-s, --staging [staging]', 'set the staging project name')
+    .option('-p, --production [production]', 'set the production project name')
+    .action(function(options) {
+        console.log('Config!');
+        console.log(options);
+    });
+
+program.parse(process.argv);
