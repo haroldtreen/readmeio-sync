@@ -4,6 +4,7 @@ var assert = require('chai').assert;
 var js = require('jsonfile');
 var fs = require('fs');
 var nock = require('nock');
+var simple = require('simple-mock');
 
 var UrlGenerator = require('../lib/urlGenerator');
 var Registry = require('../lib/registry');
@@ -24,6 +25,7 @@ var mockAllDocCategoriesRequests = function(uploaderRegistry) {
 
         scope[requestFn](urlGen[urlFn](category.slug), { title: category.title }).reply(200, postResponse);
     });
+    return scope;
 };
 
 var mockAllDocRequests = function(uploaderRegistry) {
@@ -40,6 +42,7 @@ var mockAllDocRequests = function(uploaderRegistry) {
         var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString(), type: doc.type };
         scope[requestFn](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
     });
+    return scope;
 };
 
 var mockAllPageRequests = function(uploaderRegistry) {
@@ -54,6 +57,7 @@ var mockAllPageRequests = function(uploaderRegistry) {
         var requestBody = { title: page.title, body: fs.readFileSync(page.body).toString() }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
         scope[requestFn](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
     });
+    return scope;
 };
 
 var mockAllContentRequests = function(uploaderRegistry) {
@@ -63,10 +67,10 @@ var mockAllContentRequests = function(uploaderRegistry) {
     uploaderRegistry.allCustomContent().forEach(function(content) {
         var appearance = content.appearance;
         var urlGen = content.version === 'v1.0' ? urlGen1 : urlGen2;
-        var requestBody = { appearance: { html_head: fs.readFileSync(appearance.html_head), stylesheet: fs.readFileSync(appearance.stylesheet) }};
-
+        var requestBody = { appearance: { html_head: fs.readFileSync(appearance.html_head).toString(), stylesheet: fs.readFileSync(appearance.stylesheet).toString() }};
         scope.put(urlGen.contentPutPath(), requestBody).reply(200, putResponse);
     });
+    return scope;
 };
 
 describe('Uploader', function() {
@@ -109,10 +113,25 @@ describe('Uploader', function() {
     });
 
     it('uploads custom content', function(done) {
-        mockAllContentRequests(registry);
+        var scope = mockAllContentRequests(registry);
 
         uploader.uploadCustomContent('cookie', function(uploadedRegistry) {
+            assert.isTrue(scope.isDone());
             done();
         });
+    });
+
+    it('can upload all content', function() {
+        var contentStub = simple.mock(uploader, 'uploadCustomContent').callbackWith(registry);
+        var pagesStub = simple.mock(uploader, 'uploadCustomPages').callbackWith(registry);
+        var docsStub = simple.mock(uploader, 'uploadDocs').callbackWith(registry);
+
+        uploader.uploadAll('cookie', function(uploadedRegistry) {
+            assert.equal(uploadedRegistry, registry);
+            assert.equal(contentStub.callCount, 1);
+            assert.equal(pagesStub.callCount, 1);
+            assert.equal(docsStub.callCount, 1);
+        });
+        simple.restore();
     });
 });
