@@ -1,0 +1,76 @@
+{
+    "adaptive-restructing-test": {
+        "v1.0": {
+            "documentation": [
+                {
+                    "title": "Overview",
+                    "pages": [
+                        {
+                            "body": "adaptive-restructing-test/v1.0/documentation/Overview/What is Adaptive.js?.md",
+                            "excerpt": "Documentation page description!",
+                            "title": "What is Adaptive.js?",
+                            "type": "basic",
+                            "slug": "what-is-adaptivejs"
+                        },
+                        {
+                            "body": "adaptive-restructing-test/v1.0/documentation/Overview/How Does Adaptive.js Work?.md",
+                            "excerpt": "Adaptive.js transforms your site via the Mobify tag.",
+                            "title": "How Does Adaptive.js Work?",
+                            "type": "basic",
+                            "slug": "how-does-adaptivejs-work"
+                        }
+                    ],
+                    "slug": "overview"
+                },
+                {
+                    "title": "Getting Started",
+                    "pages": [
+                        {
+                            "body": "adaptive-restructing-test/v1.0/documentation/Getting Started/Quick Start.md",
+                            "excerpt": "Experience Adaptive.js in action in 5 - 10 minutes!",
+                            "title": "Quick Start",
+                            "type": "basic",
+                            "slug": "quick-start"
+                        },
+                        {
+                            "body": "adaptive-restructing-test/v1.0/documentation/Getting Started/Video Get Started.md",
+                            "excerpt": "See a 3-minute video of a sample mobile site adaptation done with Adaptive.js!",
+                            "title": "Video Get Started",
+                            "type": "basic",
+                            "slug": "video-get-started"
+                        },
+                        {
+                            "body": "adaptive-restructing-test/v1.0/documentation/Getting Started/Scroll-Down Get Started.md",
+                            "excerpt": "Another draft for a start-to-finish Get Started article.",
+                            "title": "Scroll-Down Get Started",
+                            "type": "basic",
+                            "slug": "scroll-down-get-started"
+                        }
+                    ],
+                    "slug": "getting-started"
+                }
+            ],
+            "customPages": [
+                {
+                    "title": "Adapting Desktop Markup",
+                    "html": "www/categories/adapting-desktop-markup.html",
+                    "selector": ".c-readme-body",
+                    "slug": "adapting-desktop-markup"
+                },
+                {
+                    "title": "Adding Interactivity",
+                    "html": "www/categories/adding-interactivity.html",
+                    "selector": ".c-readme-body",
+                    "slug": "adding-interactivity"
+                }
+            ],
+            "customContent": {
+                "selector": ".c-readme-body",
+                "appearance": {
+                    "html_body": "www/index.html",
+                    "stylesheet": "www/css/main.css"
+                }
+            }
+        }
+    }
+}
