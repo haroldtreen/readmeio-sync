@@ -1,0 +1,6 @@
+{
+    "projectNames": {
+        "staging": "github-upload",
+        "production": "github-upload"
+    }
+}

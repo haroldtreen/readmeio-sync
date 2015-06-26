@@ -29,8 +29,7 @@ program
     .option('-s, --staging [staging]', 'set the staging project name')
     .option('-p, --production [production]', 'set the production project name')
     .action(function(options) {
-        console.log('Config!');
-        console.log(options);
+        Cli.config(options);
     });
 
 program.parse(process.argv);
