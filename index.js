@@ -10,7 +10,7 @@ program.version('0.5.0');
 
 program
     .command('init')
-    .description('initialize a local readmeio project that can be synced')
+    .description('Initialize a local readmeio project that can be synced')
     .action(function() {
         Cli.init();
     });
@@ -25,7 +25,7 @@ program
 
 program
     .command('config')
-    .description('set the project name configurations for the project')
+    .description('Set the project name configurations for the project')
     .option('-s, --staging [staging]', 'set the staging project name')
     .option('-p, --production [production]', 'set the production project name')
     .action(function(options) {
