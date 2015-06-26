@@ -47,19 +47,19 @@
                 {
                     "title": "This Is Custom Content",
                     "body": "test/tmp/github-upload/v2.0/customPages/This Is Custom Content.md",
-                    "html": "",
+                    "html": "test/tmp/github-upload/v2.0/customPages/This Is Custom Content.html",
                     "slug": "this-is-custom-content"
                 },
                 {
                     "title": "More Custom Content",
                     "body": "test/tmp/github-upload/v2.0/customPages/More Custom Content.md",
-                    "html": "",
+                    "html": "test/tmp/github-upload/v2.0/customPages/More Custom Content.html",
                     "slug": "more-custom-content"
                 }
             ],
             "customContent": {
                 "appearance": {
-                    "html_head": "test/tmp/github-upload/v2.0/customContent/appearance/landing_page.html",
+                    "html_body": "test/tmp/github-upload/v2.0/customContent/appearance/landing_page.html",
                     "stylesheet": "test/tmp/github-upload/v2.0/customContent/appearance/styles.css"
                 }
             }
@@ -102,18 +102,18 @@
                 {
                     "title": "This Is Custom Content",
                     "body": "test/tmp/github-upload/v1.0/customPages/This Is Custom Content.md",
-                    "html": "",
+                    "html": "test/tmp/github-upload/v1.0/customPages/This Is Custom Content.html",
                     "slug": "this-is-custom-content"
                 },
                 {
                     "title": "Not Uploaded Page!",
                     "body": "test/tmp/github-upload/v1.0/customPages/More Custom Content.md",
-                    "html": ""
+                    "html": "test/tmp/github-upload/v1.0/customPages/More Custom Content.html"
                 }
             ],
             "customContent": {
                 "appearance": {
-                    "html_head": "test/tmp/github-upload/v1.0/customContent/appearance/landing_page.html",
+                    "html_body": "test/tmp/github-upload/v1.0/customContent/appearance/landing_page.html",
                     "stylesheet": "test/tmp/github-upload/v1.0/customContent/appearance/styles.css"
                 }
             }

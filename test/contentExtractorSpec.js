@@ -72,7 +72,7 @@ describe('ContentExtractor', function() {
                 customPages.forEach(function(page) {
                     var pagePath = extractor.pagePath('v1.0', page.title);
 
-                    assert.equal(page.body, pagePath);
+                    assert.equal(page.html, pagePath);
                     assert.isTrue(fs.existsSync(pagePath));
                 });
 
@@ -93,10 +93,10 @@ describe('ContentExtractor', function() {
 
                 var contentPaths = extractor.contentPaths('v1.0');
 
-                assert.equal(customContent.html_head, contentPaths.html_head);
+                assert.equal(customContent.html_body, contentPaths.html_body);
                 assert.equal(customContent.stylesheet, contentPaths.stylesheet);
 
-                assert.isTrue(fs.existsSync(customContent.html_head));
+                assert.isTrue(fs.existsSync(customContent.html_body));
                 assert.isTrue(fs.existsSync(customContent.stylesheet));
 
                 done();

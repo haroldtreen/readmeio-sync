@@ -53,7 +53,7 @@ describe('Requestor', function() {
             nock(urlGen2.base()).get(urlGen2.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
 
             requestor.customContent(resources, function(content) {
-                assert.isDefined(content[projectName]['v1.0'].customContent.appearance.html_head);
+                assert.isDefined(content[projectName]['v1.0'].customContent.appearance.html_body);
                 assert.isDefined(content[projectName]['v2.0'].customContent.appearance.stylesheet);
 
                 done();
@@ -164,7 +164,7 @@ describe('Requestor', function() {
                 var urlFn = page.slug ? 'pagesPutPath' : 'pagesPostPath';
                 var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
 
-                var requestBody = { title: page.title, body: fs.readFileSync(page.body).toString() }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
+                var requestBody = { title: page.title, html: fs.readFileSync(page.html).toString(), htmlmode: true, fullscreen: true, body: 'body' }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
                 scope[requestFn](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
             });
 
@@ -190,7 +190,7 @@ describe('Requestor', function() {
             registry.allCustomContent().forEach(function(content) {
                 var appearance = content.appearance;
                 var urlGen = content.version === 'v1.0' ? urlGen1 : urlGen2;
-                var requestBody = { appearance: { html_head: fs.readFileSync(appearance.html_head).toString(), stylesheet: fs.readFileSync(appearance.stylesheet).toString()}};
+                var requestBody = { appearance: { html_body: fs.readFileSync(appearance.html_body).toString(), stylesheet: fs.readFileSync(appearance.stylesheet).toString()}};
                 scope.put(urlGen.contentPutPath(), requestBody).reply(200, putResponse);
             });
 
@@ -198,7 +198,7 @@ describe('Requestor', function() {
                 assert.lengthOf(failedUploads, 0);
 
                 registry.allCustomContent().forEach(function(content) {
-                    assert.equal(fs.readFileSync(content.appearance.html_head).toString(), putResponse.appearance.html_head);
+                    assert.equal(fs.readFileSync(content.appearance.html_body).toString(), putResponse.appearance.html_body);
                     assert.equal(fs.readFileSync(content.appearance.stylesheet).toString(), putResponse.appearance.stylesheet);
 
                 });
