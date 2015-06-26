@@ -54,7 +54,7 @@ var mockAllPageRequests = function(uploaderRegistry) {
         var urlFn = page.slug ? 'pagesPutPath' : 'pagesPostPath';
         var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
 
-        var requestBody = { title: page.title, body: fs.readFileSync(page.body).toString() }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
+        var requestBody = { title: page.title, html: fs.readFileSync(page.html).toString(), htmlmode: true, fullscreen: true, body: 'body' }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
         scope[requestFn](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
     });
     return scope;
@@ -67,7 +67,7 @@ var mockAllContentRequests = function(uploaderRegistry) {
     uploaderRegistry.allCustomContent().forEach(function(content) {
         var appearance = content.appearance;
         var urlGen = content.version === 'v1.0' ? urlGen1 : urlGen2;
-        var requestBody = { appearance: { html_head: fs.readFileSync(appearance.html_head).toString(), stylesheet: fs.readFileSync(appearance.stylesheet).toString() }};
+        var requestBody = { appearance: { html_body: fs.readFileSync(appearance.html_body).toString(), stylesheet: fs.readFileSync(appearance.stylesheet).toString() }};
         scope.put(urlGen.contentPutPath(), requestBody).reply(200, putResponse);
     });
     return scope;

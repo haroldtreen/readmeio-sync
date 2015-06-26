@@ -12,7 +12,7 @@ program
     .command('init')
     .description('initialize a local readmeio project that can be synced')
     .action(function() {
-        console.log('Init!');
+        Cli.init();
     });
 
 program
