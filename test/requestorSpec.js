@@ -87,6 +87,20 @@ describe('Requestor', function() {
                 done();
             });
         });
+
+        it('can request versions', function(done) {
+            requestor = new Requestor('cookie', projectName);
+
+            var scope = nock(urlGen1.base());
+            scope.get(urlGen1.versionsPath()).reply(200, fs.readFileSync('test/fixtures/project-versions.json'));
+
+            requestor.versions(function(versions) {
+                assert.lengthOf(versions, 2);
+                scope.done();
+                done();
+            });
+
+        });
     });
 
     describe('post/put', function() {

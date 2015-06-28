@@ -18,10 +18,9 @@ describe('CLI', function() {
         mockery.disable();
     });
 
-    var initMock = {
-        initProjectInfo: function() {
-            initMock.called = true;
-        }
+    var initMock = function() {};
+    initMock.prototype.initProjectInfo = function() {
+        initMock.called = true;
     };
 
     var authMock = {

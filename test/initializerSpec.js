@@ -27,11 +27,15 @@ describe('Initializer', function() {
         scope.get(urlGenv1.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v1.json'));
         scope.get(urlGenv2.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v2.json'));
 
-        Initializer.initProjectInfo('test/tmp', { 'cookie': 'jar' }, function(registry) {
-            var files = fs.readdirSync('.');
+        var initializer = new Initializer('cookie');
+
+        initializer.initProjectInfo('test/tmp', function(registry) {
+            var files = fs.readdirSync('test/tmp');
 
             assert.isDefined(registry.version('v1.0'));
             assert.isAbove(files.indexOf('syncRegistry.json'), -1, 'Registry file was not created');
+
+            fs.unlink('test/tmp/syncRegistry.json');
 
             done();
         });
