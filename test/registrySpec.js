@@ -36,7 +36,7 @@ describe('Registry', function() {
     });
 
     it('can add versions', function() {
-        registry = new Registry('github-upload');
+        registry = new Registry('github-upload', []);
         var expectedRegistry = {
             'github-upload': {
                 'v1.0': {},
@@ -49,6 +49,29 @@ describe('Registry', function() {
         registry.addVersions(['v2.0', 'v3.0']);
 
         assert.deepEqual(registry.export(), expectedRegistry);
+    });
+
+    it('can diff itself against other registries', function() {
+        var registry1 = new Registry('github-upload');
+        var registry2 = new Registry('github-upload');
+
+        registry1.import(js.readFileSync('test/fixtures/registry-data-state1.json'));
+        registry2.import(js.readFileSync('test/fixtures/registry-data-state2.json'));
+
+        var diffs = registry1.diff(registry2);
+
+        assert.lengthOf(diffs.deleted.allCustomPages, 2);
+        assert.lengthOf(diffs.deleted.allDocs, 3);
+        assert.lengthOf(diffs.deleted.allDocCategories, 1);
+
+        assert.lengthOf(diffs.added.allCustomPages, 2);
+        assert.lengthOf(diffs.added.allDocs, 3);
+        assert.lengthOf(diffs.added.allDocCategories, 1);
+
+        ['allCustomPages', 'allDocs', 'allDocCategories'].forEach(function(section) {
+            diffs.deleted[section].forEach(function(diff) { assert.match(diff.slug, /state2/); });
+            diffs.added[section].forEach(function(diff) { assert.match(diff.slug, /state1/); });
+        });
     });
 
     describe('contents', function() {
