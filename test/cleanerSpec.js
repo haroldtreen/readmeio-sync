@@ -37,6 +37,19 @@ var mockDocDelete = function(diff) {
     return scope;
 };
 
+var mockDocCategoriesDelete = function(diff) {
+    var scope = nock(urlGen.base());
+
+    scope = mockRemoteRegistryGet(scope);
+
+    diff.deleted.allDocCategories.forEach(function(category) {
+        urlGen.version = category.version;
+        scope.delete(urlGen.docCategoriesDeletePath(category.slug)).reply(200, { success: true });
+    });
+
+    return scope;
+};
+
 var mockPageDelete = function(diff) {
     var scope = nock(urlGen.base());
 
@@ -68,8 +81,21 @@ describe('Cleaning', function() {
 
         var cleaner = new Cleaner(localRegistry, 'cookie');
 
-        cleaner.cleanDocs(function(failedDeletes) {
-            assert.lengthOf(failedDeletes, 0);
+        cleaner.cleanDocs(function(successfulDeletes) {
+            assert.lengthOf(successfulDeletes, diff.deleted.allDocs.length);
+            assert.isTrue(scope.isDone());
+
+            done();
+        });
+    });
+
+    it('deletes doc categories not specified in the sync registry', function(done) {
+        var scope = mockDocCategoriesDelete(diff);
+
+        var cleaner = new Cleaner(localRegistry, 'cookie');
+
+        cleaner.cleanDocCategories(function(successfulDeletes) {
+            assert.lengthOf(successfulDeletes, diff.deleted.allDocCategories.length);
             assert.isTrue(scope.isDone());
 
             done();
@@ -81,11 +107,31 @@ describe('Cleaning', function() {
 
         var cleaner = new Cleaner(localRegistry, 'cookie');
 
-        cleaner.cleanPages(function(failedDeletes) {
-            assert.lengthOf(failedDeletes, 0);
+        cleaner.cleanPages(function(successfulDeletes) {
+            assert.lengthOf(successfulDeletes, diff.deleted.allCustomPages.length);
             assert.isTrue(scope.isDone());
 
             done();
         });
+    });
+
+    it('deletes all unspecified content', function() {
+        var cleaner = new Cleaner(localRegistry, 'cookie');
+        var methods = ['cleanDocs', 'cleanDocCategories', 'cleanPages'];
+        var calledMethods = [];
+
+        methods.forEach(function(method) {
+            cleaner[method] = function(cb) {
+                calledMethods.push(method);
+                cb([]);
+            };
+        });
+
+        cleaner.cleanAll(function() {
+            methods.forEach(function(method) {
+                assert.isAbove(calledMethods.indexOf(method), -1, method + ' wasn\'t called!');
+            });
+        });
+
     });
 });
