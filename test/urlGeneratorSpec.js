@@ -87,6 +87,11 @@ describe('UrlGenerator', function() {
             assert.equal(urlGen.docsDeleteUrl('docs-slug'), expectedUrl);
         });
 
+        it('knows the doc categories url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/category/category-slug';
+            assert.equal(urlGen.docCategoriesDeleteUrl('category-slug'), expectedUrl);
+        });
+
         it('knows the pages url', function() {
             var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/page/pages-slug';
             assert.equal(urlGen.pagesDeleteUrl('pages-slug'), expectedUrl);
