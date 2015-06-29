@@ -221,6 +221,47 @@ describe('Requestor', function() {
         });
 
     });
+
+    describe('delete', function() {
+        var registry = new Registry();
+
+        beforeEach(function() {
+            registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
+        });
+
+        it('can delete docs', function() {
+            var deleteResponse = js.readFileSync('test/fixtures/delete.json');
+            var scope = nock(urlGen1.base());
+
+            registry.allDocs().forEach(function(doc) {
+                var urlGen = doc.version === 'v1.0' ? urlGen1 : urlGen2;
+                scope.delete(urlGen.docsDeletePath(doc.slug)).reply(200, deleteResponse);
+            });
+
+            requestor.deleteDocs(registry.allDocs(), function(failedDeletes) {
+                assert.lengthOf(failedDeletes, 0);
+
+                assert.isTrue(scope.isDone());
+            });
+        });
+
+        it('can delete custom pages', function() {
+            var deleteResponse = js.readFileSync('test/fixtures/delete.json');
+            var scope = nock(urlGen1.base());
+
+            registry.allCustomPages().forEach(function(page) {
+                var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
+                scope.delete(urlGen.pagesDeletePath(page.slug)).reply(200, deleteResponse);
+            });
+
+            requestor.deletePages(registry.allCustomPages(), function(failedDeletes) {
+                assert.lengthOf(failedDeletes, 0);
+
+                assert.isTrue(scope.isDone());
+            });
+        });
+
+    });
 });
 
 
