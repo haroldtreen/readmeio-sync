@@ -91,23 +91,26 @@ describe('Uploader', function() {
     });
 
     it('uploads docs', function(done) {
-        mockAllDocCategoriesRequests(registry);
-        mockAllDocRequests(registry);
+        var categoriesScope = mockAllDocCategoriesRequests(registry);
+        var docsScope = mockAllDocRequests(registry);
 
         uploader.uploadDocs('cookie', function(uploadedRegistry) {
             uploadedRegistry.allDocs().forEach(assertUploaded);
             uploadedRegistry.allDocCategories().forEach(assertUploaded);
 
+            assert.isTrue(categoriesScope.isDone());
+            assert.isTrue(docsScope.isDone());
             done();
         });
     });
 
     it('uploads custom pages', function(done) {
-        mockAllPageRequests(registry);
+        var scope = mockAllPageRequests(registry);
 
         uploader.uploadCustomPages('cookie', function(uploadedRegistry) {
             uploadedRegistry.allCustomPages().forEach(assertUploaded);
 
+            assert.isTrue(scope.isDone());
             done();
         });
     });
