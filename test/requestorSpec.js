@@ -161,7 +161,6 @@ describe('Requestor', function() {
                     assert.equal(doc.title, postResponse.title);
                     assert.equal(doc.slug, postResponse.slug);
                     assert.equal(doc.excerpt, postResponse.excerpt);
-                    assert.equal(fs.readFileSync(doc.body).toString(), postResponse.body);
                 });
 
                 assert.isTrue(scope.isDone());
@@ -210,12 +209,7 @@ describe('Requestor', function() {
 
             requestor.uploadContent(registry.allCustomContent(), function(failedUploads) {
                 assert.lengthOf(failedUploads, 0);
-
-                registry.allCustomContent().forEach(function(content) {
-                    assert.equal(fs.readFileSync(content.appearance.html_body).toString(), putResponse.appearance.html_body);
-                    assert.equal(fs.readFileSync(content.appearance.stylesheet).toString(), putResponse.appearance.stylesheet);
-
-                });
+                assert.isTrue(scope.isDone());
                 done();
             });
         });
@@ -243,6 +237,23 @@ describe('Requestor', function() {
 
                 assert.isTrue(scope.isDone());
             });
+        });
+
+        it('can delete doc categories', function(done) {
+            var deleteResponse = js.readFileSync('test/fixtures/delete.json');
+            var scope = nock(urlGen1.base());
+
+            registry.allDocCategories().forEach(function(category) {
+                var urlGen = category.version === 'v1.0' ? urlGen1 : urlGen2;
+                scope.delete(urlGen.docCategoriesDeletePath(category.slug)).reply(200, deleteResponse);
+            });
+
+            requestor.deleteDocCategories(registry.allDocCategories(), function(failedDeletes) {
+                assert.lengthOf(failedDeletes, 0);
+                assert.isTrue(scope.isDone());
+                done();
+            });
+
         });
 
         it('can delete custom pages', function() {
