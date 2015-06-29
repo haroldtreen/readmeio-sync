@@ -32,4 +32,13 @@ program
         Cli.config(options);
     });
 
+program
+    .command('clean-remote')
+    .description('Deletes all Readme.io content not listed in the registry')
+    .option('-P, --production', 'Clean the production project')
+    .action(function(options) {
+        Cli.clean(options);
+    });
+
+
 program.parse(process.argv);

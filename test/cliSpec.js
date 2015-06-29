@@ -61,8 +61,8 @@ describe('CLI', function() {
 
         it('can accept a production flag', function() {
             var config = require('../lib/config');
-            mockery.registerMock('./authenticator', { createSession: function(){} });
-            
+            mockery.registerMock('./authenticator', { createSession: function() {} });
+
             Cli = require('../lib/cli');
 
             Cli.upload({ production: true });
@@ -73,7 +73,7 @@ describe('CLI', function() {
         });
     });
 
-    describe('config command', function(){
+    describe('config command', function() {
         it('allows you to generate a config file', function() {
             Cli = require('../lib/cli');
             Cli.config({ production: 'github-upload-production', staging: 'github-upload-staging'});
@@ -91,6 +91,28 @@ describe('CLI', function() {
                 }
             });
         });
+    });
+
+    describe('clean command', function() {
+        var cleanerMock = function() {};
+        cleanerMock.prototype.cleanAll = function() {
+            cleanerMock.called = true;
+        };
+
+        it('allows you to clean docs, categories and pages', function() {
+            cleanerMock.called = false;
+            authMock.called = false;
+
+            mockery.registerMock('./cleaner', cleanerMock);
+            mockery.registerMock('./authenticator', authMock);
+
+            Cli = require('../lib/cli');
+            Cli.clean({});
+
+            assert.isTrue(authMock.called, 'Authentication didn\'t occur');
+            assert.isTrue(cleanerMock.called, 'Clean didn\'t occur');
+        });
+
     });
 
     it('has an init command', function() {
