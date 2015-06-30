@@ -45,6 +45,36 @@ readmeio-sync init
 
 This will use the `production` slug that you should have configured in step 3.
 
+### 5) Project Upload:
+Upload allows you to push updated content to Readme.io. This might include:
+
+* New categories, docs or custom pages you've added to the registry files.
+* Changes in content files.
+* Changes to document titles or excerpts.
+* etc.
+
+Once your project has been initialized and has a config, you can upload using the upload command.
+
+```
+readmeio-sync upload [--production]
+```
+By default, readmeio-sync will use your staging slug for the upload. Including the production flag allows you to upload to production.
+
+### 6) Remote Clean:
+When you remove content from your registry file, it does not auto-magically delete it from your Readmeio project too. Upload only does updates and creates.
+
+If you have out of date content on your Readmeio project, you can use the `remote-clean` command to remove all content that is not specified in your registry file.
+
+```
+readmeio-sync remote-clean [--production]
+```
+
+This will look at the state of your project, compare it to the state of your registry, and delete whatever is not specified locally. This will be done for staging unless the production flag is set.
+
+*(**Note**: If you remote clean a project and it removes all the documentation, Readmeio will not allow you to go into the documentation section. You will need to upload new content with the `readmeio-sync upload` command to get it working again.)*
+
+
+
 ------
 ## The Registry File
 `readmeio-sync` tracks all your content using the `syncRegistry.json` file. This file is created during initialization. 
