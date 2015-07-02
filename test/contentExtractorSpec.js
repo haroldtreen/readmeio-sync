@@ -9,9 +9,9 @@ var ContentExtractor = require('../lib/contentExtractor');
 
 var registry;
 describe('ContentExtractor', function() {
-    before(function(){
+    before(function() {
         registry = new Registry();
-    })
+    });
 
     it('is constructed with a output path and registry', function() {
         var registryData = { 'github-upload': { 'v1.0': 'versions', 'v2.0': 'versions' }};
