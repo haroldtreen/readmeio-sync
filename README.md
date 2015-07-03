@@ -58,7 +58,7 @@ Once your project has been initialized and has a config, you can upload using th
 ```
 readmeio-sync upload [--production]
 ```
-By default, readmeio-sync will use your staging slug for the upload. Including the production flag allows you to upload to production.
+Including the production flag will push the content to production.
 
 ### 6) Remote Clean:
 When you remove content from your registry file, it does not auto-magically delete it from your Readmeio project too. Upload only does updates and creates.
