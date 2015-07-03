@@ -57,6 +57,19 @@ describe('Registry', function() {
         });
     });
 
+    it('has helpers on diff object', function() {
+        var registry1 = new Registry(js.readFileSync('test/fixtures/registry-data-state1.json'));
+        var registry2 = new Registry(js.readFileSync('test/fixtures/registry-data-state2.json'));
+
+        var diffs = registry1.diff(registry2);
+
+        assert.isTrue(diffs.isAdded('allDocCategories', { slug: 'state1-category', version: 'v1.0'}), 'add missing');
+        assert.isTrue(diffs.isDeleted('allDocs', { slug: 'state2-page-v2', version: 'v2.0'}), 'delete missing');
+
+        assert.isFalse(diffs.isAdded('allDocs', { slug: 'state2-page-v2', version: 'v2.0'}), 'incorrect add found');
+        assert.isFalse(diffs.isDeleted('allCustomPages', { slug: 'state1-page-v2', version: 'v2.0'}), 'incorrect delete found');
+    });
+
     describe('contents', function() {
         before(function() {
             registry = new Registry(mockContents);
