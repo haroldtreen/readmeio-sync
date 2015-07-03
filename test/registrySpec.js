@@ -13,22 +13,8 @@ describe('Registry', function() {
         mockContents = js.readFileSync('test/fixtures/readmeContent.json');
     });
 
-    it('builds a skeleton when constructed', function() {
-        registry = new Registry('github-upload', ['v1.0', 'v2.0']);
-        var registrySkeleton = {
-            'github-upload': {
-                'v1.0': {},
-                'v2.0': {}
-            }
-        };
-
-        assert.deepEqual(registry.export(), registrySkeleton);
-    });
-
     it('can set its contents', function() {
-        registry = new Registry('other-project', ['v5.0']);
-
-        registry.import(mockContents);
+        registry = new Registry(mockContents);
 
         assert.equal(registry.projectName, 'github-upload');
         assert.deepEqual(registry.versions, ['v2.0', 'v1.0']);
@@ -36,7 +22,7 @@ describe('Registry', function() {
     });
 
     it('can add versions', function() {
-        registry = new Registry('github-upload', []);
+        registry = new Registry({ 'github-upload': {} });
         var expectedRegistry = {
             'github-upload': {
                 'v1.0': {},
@@ -52,11 +38,8 @@ describe('Registry', function() {
     });
 
     it('can diff itself against other registries', function() {
-        var registry1 = new Registry('github-upload');
-        var registry2 = new Registry('github-upload');
-
-        registry1.import(js.readFileSync('test/fixtures/registry-data-state1.json'));
-        registry2.import(js.readFileSync('test/fixtures/registry-data-state2.json'));
+        var registry1 = new Registry(js.readFileSync('test/fixtures/registry-data-state1.json'));
+        var registry2 = new Registry(js.readFileSync('test/fixtures/registry-data-state2.json'));
 
         var diffs = registry1.diff(registry2);
 
@@ -76,8 +59,7 @@ describe('Registry', function() {
 
     describe('contents', function() {
         before(function() {
-            registry = new Registry();
-            registry.import(mockContents);
+            registry = new Registry(mockContents);
         });
 
         it('can pull documentation data', function() {
@@ -97,9 +79,8 @@ describe('Registry', function() {
             registry.save(registryFilePath);
 
             var savedRegistryData = js.readFileSync(registryFilePath + '/syncRegistry.json');
-            var savedRegistry = new Registry();
+            var savedRegistry = new Registry(savedRegistryData);
 
-            savedRegistry.import(savedRegistryData);
             assert.deepEqual(registry.export(), savedRegistry.export());
 
             fs.unlinkSync(registryFilePath + '/syncRegistry.json');
@@ -108,8 +89,7 @@ describe('Registry', function() {
 
     describe('content aggregation', function() {
         before(function() {
-            registry = new Registry();
-            registry.import(mockContents);
+            registry = new Registry(mockContents);
         });
 
         it('can pull documentation categories', function() {

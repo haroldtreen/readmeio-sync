@@ -9,9 +9,8 @@ var Registry = require('../lib/registry');
 var Cleaner = require('../lib/cleaner');
 
 var urlGen = new UrlGenerator('github-upload');
-
-var localRegistry = new Registry();
-var remoteRegistry = new Registry();
+var localRegistry;
+var remoteRegistry;
 
 var mockRemoteRegistryGet = function(scope) {
     var urlGen1 = new UrlGenerator('github-upload', 'v1.0');
@@ -66,12 +65,12 @@ var mockPageDelete = function(diff) {
 describe('Cleaning', function() {
     var diff;
 
-    before(function() {
+    beforeEach(function() {
         var localData = js.readFileSync('test/fixtures/localSyncRegistry.json');
         var remoteData = js.readFileSync('test/fixtures/remoteSyncRegistry.json');
 
-        localRegistry.import(localData);
-        remoteRegistry.import(remoteData);
+        localRegistry = new Registry(localData);
+        remoteRegistry = new Registry(remoteData);
 
         diff = localRegistry.diff(remoteRegistry);
     });

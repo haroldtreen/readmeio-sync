@@ -104,10 +104,10 @@ describe('Requestor', function() {
     });
 
     describe('post/put', function() {
-        var registry = new Registry();
+        var registry;
 
         beforeEach(function() {
-            registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
+            registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
         });
 
         it('can post/put new doc categories', function(done) {
@@ -217,10 +217,10 @@ describe('Requestor', function() {
     });
 
     describe('delete', function() {
-        var registry = new Registry();
+        var registry;
 
         beforeEach(function() {
-            registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
+            registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
         });
 
         it('can delete docs', function() {

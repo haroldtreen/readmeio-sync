@@ -81,8 +81,7 @@ describe('Uploader', function() {
     };
 
     beforeEach(function() {
-        registry = new Registry();
-        registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
+        registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
         uploader = new Uploader(registry);
     });
 

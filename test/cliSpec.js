@@ -36,9 +36,10 @@ describe('CLI', function() {
         uploadMock.called = true;
     };
 
-    var registryMock = function() {};
-    registryMock.prototype.import = function() {
-        registryMock.importCalled = true;
+    var registryMock = function(data) {
+        if (Object.keys(data)[0] === 'github-upload') {
+            registryMock.importCalled = true;
+        }
     };
 
     describe('upload', function() {
