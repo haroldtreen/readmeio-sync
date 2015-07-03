@@ -82,7 +82,7 @@ describe('Uploader', function() {
 
     beforeEach(function() {
         registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
-        uploader = new Uploader(registry);
+        uploader = new Uploader(registry, 'cookie');
     });
 
     it('maintains a link to a registry', function() {
@@ -93,7 +93,7 @@ describe('Uploader', function() {
         var categoriesScope = mockAllDocCategoriesRequests(registry);
         var docsScope = mockAllDocRequests(registry);
 
-        uploader.uploadDocs('cookie', function(uploadedRegistry) {
+        uploader.uploadDocs(function(uploadedRegistry) {
             uploadedRegistry.allDocs().forEach(assertUploaded);
             uploadedRegistry.allDocCategories().forEach(assertUploaded);
 
@@ -106,7 +106,7 @@ describe('Uploader', function() {
     it('uploads custom pages', function(done) {
         var scope = mockAllPageRequests(registry);
 
-        uploader.uploadCustomPages('cookie', function(uploadedRegistry) {
+        uploader.uploadCustomPages(function(uploadedRegistry) {
             uploadedRegistry.allCustomPages().forEach(assertUploaded);
 
             assert.isTrue(scope.isDone());
@@ -117,7 +117,7 @@ describe('Uploader', function() {
     it('uploads custom content', function(done) {
         var scope = mockAllContentRequests(registry);
 
-        uploader.uploadCustomContent('cookie', function(uploadedRegistry) {
+        uploader.uploadCustomContent(function(uploadedRegistry) {
             assert.isTrue(scope.isDone());
             done();
         });
@@ -128,7 +128,7 @@ describe('Uploader', function() {
         var pagesStub = simple.mock(uploader, 'uploadCustomPages').callbackWith(registry);
         var docsStub = simple.mock(uploader, 'uploadDocs').callbackWith(registry);
 
-        uploader.uploadAll('cookie', function(uploadedRegistry) {
+        uploader.uploadAll(function(uploadedRegistry) {
             assert.equal(uploadedRegistry, registry);
             assert.equal(contentStub.callCount, 1);
             assert.equal(pagesStub.callCount, 1);
