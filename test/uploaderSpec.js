@@ -14,13 +14,31 @@ var projectName = 'github-upload';
 var urlGen1 = new UrlGenerator(projectName, 'v1.0');
 var urlGen2 = new UrlGenerator(projectName, 'v2.0');
 
-var mockAllDocCategoriesRequests = function(uploaderRegistry) {
+var mockVersionsDownload = function(scope) {
+    scope.get(urlGen1.versionsPath()).reply(200, js.readFileSync('test/fixtures/project-versions.json'));
+    return scope;
+};
+
+var mockRemoteRegistryGet = function() {
+    var scope = nock(urlGen1.base());
+    scope = mockVersionsDownload(scope);
+
+    ['docs', 'content', 'pages'].forEach(function(section) {
+        scope.get(urlGen1[section + 'Path']()).reply(200, js.readFileSync('test/fixtures/' + section + '-v1.json'));
+        scope.get(urlGen2[section + 'Path']()).reply(200, js.readFileSync('test/fixtures/' + section + '-v2.json'));
+    });
+    return scope;
+};
+
+var mockAllDocCategoriesRequests = function(uploaderRegistry, remoteRegistry) {
+    var diff = uploaderRegistry.diff(remoteRegistry);
     var postResponse = js.readFileSync('test/fixtures/doc-category-post.json');
     var scope = nock(urlGen1.base());
 
     uploaderRegistry.allDocCategories().forEach(function(category) {
-        var requestFn = category.slug ? 'put' : 'post';
-        var urlFn = category.slug ? 'docCategoriesPutPath' : 'docCategoriesPostPath';
+        var isAdded = diff.isAdded('allDocCategories', { slug: category.slug, version: category.version });
+        var requestFn = isAdded ? 'post' : 'put';
+        var urlFn = isAdded ? 'docCategoriesPostPath' : 'docCategoriesPutPath';
         var urlGen = category.version === 'v1.0' ? urlGen1 : urlGen2;
 
         scope[requestFn](urlGen[urlFn](category.slug), { title: category.title }).reply(200, postResponse);
@@ -28,16 +46,18 @@ var mockAllDocCategoriesRequests = function(uploaderRegistry) {
     return scope;
 };
 
-var mockAllDocRequests = function(uploaderRegistry) {
+var mockAllDocRequests = function(uploaderRegistry, remoteRegistry) {
+    var diff = uploaderRegistry.diff(remoteRegistry);
     var postResponse = js.readFileSync('test/fixtures/doc-post.json');
     var scope = nock(urlGen1.base());
 
     // Create network request mocks
     uploaderRegistry.allDocs().forEach(function(doc) {
-        var requestFn = doc.slug ? 'put' : 'post';
-        var urlFn = doc.slug ? 'docsPutPath' : 'docsPostPath';
+        var isAdded = diff.isAdded('allDocs', { slug: doc.slug, version: doc.version });
+        var requestFn = isAdded ? 'post' : 'put';
+        var urlFn = doc.slug ? 'docsPostPath' : 'docsPutPath';
         var urlGen = doc.version === 'v1.0' ? urlGen1 : urlGen2;
-        var slug = doc.slug || doc.categorySlug;
+        var slug = isAdded ? doc.categorySlug : doc.slug;
 
         var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString(), type: doc.type };
         scope[requestFn](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
@@ -45,13 +65,15 @@ var mockAllDocRequests = function(uploaderRegistry) {
     return scope;
 };
 
-var mockAllPageRequests = function(uploaderRegistry) {
+var mockAllPageRequests = function(uploaderRegistry, remoteRegistry) {
+    var diff = uploaderRegistry.diff(remoteRegistry);
     var postResponse = js.readFileSync('test/fixtures/custom-page-post.json');
     var scope = nock(urlGen1.base());
 
     uploaderRegistry.allCustomPages().forEach(function(page) {
-        var requestFn = page.slug ? 'put' : 'post';
-        var urlFn = page.slug ? 'pagesPutPath' : 'pagesPostPath';
+        var isAdded = diff.isAdded('allCustomPages', { slug: page.slug, version: page.version });
+        var requestFn = isAdded ? 'post' : 'put';
+        var urlFn = isAdded ? 'pagesPostPath' : 'pagesPutPath';
         var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
 
         var requestBody = { title: page.title, html: fs.readFileSync(page.html).toString(), htmlmode: true, fullscreen: true, body: 'body' }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
@@ -73,17 +95,25 @@ var mockAllContentRequests = function(uploaderRegistry) {
     return scope;
 };
 
+var DownloaderMock = function() {};
+DownloaderMock.prototype.downloadRemoteRegistry = function(cb) {
+    var remoteRegistry = new Registry(js.readFileSync('test/fixtures/registry-data-state1.json'));
+    cb(remoteRegistry);
+};
+
 describe('Uploader', function() {
     var uploader;
     var registry;
+    var remoteRegistry;
+
     var assertUploaded = function(resource) {
         assert.isDefined(resource.slug);
     };
 
     beforeEach(function() {
-        registry = new Registry();
-        registry.import(js.readFileSync('test/fixtures/syncRegistry.json'));
-        uploader = new Uploader(registry);
+        registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
+        remoteRegistry = new Registry(js.readFileSync('test/fixtures/registry-data-state1.json'));
+        uploader = new Uploader(registry, 'cookie');
     });
 
     it('maintains a link to a registry', function() {
@@ -91,26 +121,30 @@ describe('Uploader', function() {
     });
 
     it('uploads docs', function(done) {
-        var categoriesScope = mockAllDocCategoriesRequests(registry);
-        var docsScope = mockAllDocRequests(registry);
+        var downloadScope = mockRemoteRegistryGet();
+        var categoriesScope = mockAllDocCategoriesRequests(registry, remoteRegistry);
+        var docsScope = mockAllDocRequests(registry, remoteRegistry);
 
-        uploader.uploadDocs('cookie', function(uploadedRegistry) {
+        uploader.uploadDocs(function(uploadedRegistry) {
             uploadedRegistry.allDocs().forEach(assertUploaded);
             uploadedRegistry.allDocCategories().forEach(assertUploaded);
 
-            assert.isTrue(categoriesScope.isDone());
-            assert.isTrue(docsScope.isDone());
+            assert.isTrue(downloadScope.isDone(), 'some download endpoints were not called');
+            assert.isTrue(categoriesScope.isDone(), 'some category endpoints were not called');
+            assert.isTrue(docsScope.isDone(), 'some doc endpoints weren not called');
             done();
         });
     });
 
     it('uploads custom pages', function(done) {
-        var scope = mockAllPageRequests(registry);
+        var downloadScope = mockRemoteRegistryGet();
+        var scope = mockAllPageRequests(registry, remoteRegistry);
 
-        uploader.uploadCustomPages('cookie', function(uploadedRegistry) {
+        uploader.uploadCustomPages(function(uploadedRegistry) {
             uploadedRegistry.allCustomPages().forEach(assertUploaded);
 
-            assert.isTrue(scope.isDone());
+            assert.isTrue(downloadScope.isDone(), 'some download endpoints were not called');
+            assert.isTrue(scope.isDone(), 'some page endpoints were not called');
             done();
         });
     });
@@ -118,7 +152,7 @@ describe('Uploader', function() {
     it('uploads custom content', function(done) {
         var scope = mockAllContentRequests(registry);
 
-        uploader.uploadCustomContent('cookie', function(uploadedRegistry) {
+        uploader.uploadCustomContent(function(uploadedRegistry) {
             assert.isTrue(scope.isDone());
             done();
         });
@@ -129,7 +163,7 @@ describe('Uploader', function() {
         var pagesStub = simple.mock(uploader, 'uploadCustomPages').callbackWith(registry);
         var docsStub = simple.mock(uploader, 'uploadDocs').callbackWith(registry);
 
-        uploader.uploadAll('cookie', function(uploadedRegistry) {
+        uploader.uploadAll(function(uploadedRegistry) {
             assert.equal(uploadedRegistry, registry);
             assert.equal(contentStub.callCount, 1);
             assert.equal(pagesStub.callCount, 1);

@@ -7,13 +7,7 @@ var fs = require('fs');
 var Initializer = require('../lib/initializer');
 var UrlGenerator = require('../lib/urlGenerator');
 
-var urlGen;
-
 describe('Initializer', function() {
-    before(function() {
-        urlGen = new UrlGenerator('github-upload', 'v1.0');
-    });
-
     it('initializes project info', function(done) {
         var urlGenv1 = new UrlGenerator('github-upload', 'v1.0');
         var urlGenv2 = new UrlGenerator('github-upload', 'v2.0');

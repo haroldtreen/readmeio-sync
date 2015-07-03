@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var js = require('jsonfile');
 var mockery = require('mockery');
 var assert = require('chai').assert;
@@ -35,9 +36,10 @@ describe('CLI', function() {
         uploadMock.called = true;
     };
 
-    var registryMock = function() {};
-    registryMock.prototype.import = function() {
-        registryMock.importCalled = true;
+    var registryMock = function(data) {
+        if (Object.keys(data)[0] === 'github-upload') {
+            registryMock.importCalled = true;
+        }
     };
 
     describe('upload', function() {
@@ -76,9 +78,11 @@ describe('CLI', function() {
     describe('config command', function() {
         it('allows you to generate a config file', function() {
             Cli = require('../lib/cli');
+            var configPath = __dirname + '/fixtures/syncConfig.json';
+
+            fs.unlink(configPath);
             Cli.config({ production: 'github-upload-production', staging: 'github-upload-staging'});
 
-            var configPath = __dirname + '/fixtures/syncConfig.json';
             var config = js.readFileSync(configPath);
 
             assert.equal(config.projectNames.production, 'github-upload-production');
