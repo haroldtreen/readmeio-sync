@@ -18,14 +18,14 @@ var urlGen2 = new UrlGenerator(projectName, 'v2.0');
 
 describe('Requestor', function() {
     it('is constructed with resources + cookie', function() {
-        requestor = new Requestor('cookie', projectName);
+        requestor = new Requestor(projectName, 'cookie');
 
         assert.equal(requestor.projectName, projectName);
         assert.equal(requestor.cookie, 'cookie');
     });
 
     it('caches request responses', function(done) {
-        requestor = new Requestor('cookie', projectName);
+        requestor = new Requestor(projectName, 'cookie');
 
         var scope = nock(urlGen1.base());
         scope.get(urlGen1.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
@@ -47,7 +47,7 @@ describe('Requestor', function() {
 
     describe('get', function() {
         it('can request custom content', function(done) {
-            requestor = new Requestor('cookie', projectName);
+            requestor = new Requestor(projectName, 'cookie');
 
             nock(urlGen1.base()).get(urlGen1.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
             nock(urlGen2.base()).get(urlGen2.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
@@ -61,7 +61,7 @@ describe('Requestor', function() {
         });
 
         it('can request documentation', function(done) {
-            requestor = new Requestor('cookie', projectName);
+            requestor = new Requestor(projectName, 'cookie');
 
             nock(urlGen1.base()).get(urlGen1.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v1.json'));
             nock(urlGen2.base()).get(urlGen2.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v2.json'));
@@ -75,7 +75,7 @@ describe('Requestor', function() {
         });
 
         it('can request customPages', function(done) {
-            requestor = new Requestor('cookie', projectName);
+            requestor = new Requestor(projectName, 'cookie');
 
             nock(urlGen1.base()).get(urlGen1.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v1.json'));
             nock(urlGen2.base()).get(urlGen2.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v2.json'));
@@ -89,7 +89,7 @@ describe('Requestor', function() {
         });
 
         it('can request versions', function(done) {
-            requestor = new Requestor('cookie', projectName);
+            requestor = new Requestor(projectName, 'cookie');
 
             var scope = nock(urlGen1.base());
             scope.get(urlGen1.versionsPath()).reply(200, fs.readFileSync('test/fixtures/project-versions.json'));
@@ -124,7 +124,7 @@ describe('Requestor', function() {
             });
 
             // Make requests
-            requestor = new Requestor('cookie', projectName);
+            requestor = new Requestor(projectName, 'cookie');
             requestor.uploadDocCategories(registry.allDocCategories(), function(failedUploads) {
                 assert.lengthOf(failedUploads, 0);
 

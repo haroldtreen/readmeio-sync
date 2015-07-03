@@ -52,7 +52,6 @@ describe('Downloader', function() {
         scope = mockVersionsDownload(scope);
 
         downloader.downloadVersions(function(versions) {
-            console.log(versions);
             assert.lengthOf(versions, 2);
             assert.include(versions, { version: 'v1.0' });
             assert.include(versions, { version: 'v2.0' });
