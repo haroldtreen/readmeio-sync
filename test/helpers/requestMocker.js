@@ -99,4 +99,31 @@ RequestMocker.prototype.mockContentUpload = function(scope) {
     return scope;
 };
 
+RequestMocker.prototype.mockDocsOrderUpload = function(scope) {
+    var self = this;
+    var categoryRequestBody;
+    var urlGen;
+
+    self.registry.versions.forEach(function(version) {
+        categoryRequestBody = {};
+        self.registry.docs(version).forEach(function(category, index) {
+            categoryRequestBody[category._id] = index;
+        });
+
+        urlGen = version === 'v1.0' ? self.urlGen1 : self.urlGen2;
+        scope.post(urlGen.docCategoriesOrderPath()).reply(200, {});
+    });
+
+    var requestBodies = { 'v1.0': [], 'v2.0': [] };
+
+    self.registry.allDocs().forEach(function(doc) {
+        requestBodies[doc.version].push({ id: doc._id, parent: doc.categoryId, order: doc.order });
+    });
+
+    scope.post(self.urlGen1.docsOrderPath(), requestBodies['v1.0']).reply(200, {});
+    scope.post(self.urlGen2.docsOrderPath(), requestBodies['v2.0']).reply(200, {});
+
+    return scope;
+};
+
 module.exports = RequestMocker;

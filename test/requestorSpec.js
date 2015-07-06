@@ -270,9 +270,55 @@ describe('Requestor', function() {
                 assert.lengthOf(failedDeletes, 0);
 
                 assert.isTrue(scope.isDone());
+                done();
+            });
+        });
+    });
+
+    describe('order', function() {
+        var registry;
+
+        beforeEach(function() {
+            registry = new Registry(js.readFileSync('test/fixtures/orderedRegistry.json'));
+        });
+
+        it('can upload doc categories order', function(done) {
+            var scope = nock(urlGen1.base());
+            var requestBodies = { 'v1.0': {}, 'v2.0': {} };
+
+            registry.allDocCategories().forEach(function(category) {
+                requestBodies[category.version][category._id] = category.order;
+            });
+
+            scope.post(urlGen1.docCategoriesOrderPath(), requestBodies['v1.0']).reply(200, {});
+            scope.post(urlGen2.docCategoriesOrderPath(), requestBodies['v2.0']).reply(200, {});
+
+            requestor.uploadDocCategoriesOrder(registry.allDocCategories(), function(err) {
+                assert.isNull(err);
+                assert.isTrue(scope.isDone());
+
+                done();
             });
         });
 
+        it('can upload doc order', function(done) {
+            var scope = nock(urlGen1.base());
+            var requestBodies = { 'v1.0': [], 'v2.0': [] };
+
+            registry.allDocs().forEach(function(doc) {
+                requestBodies[doc.version].push({ id: doc._id, parent: doc.categoryId, order: doc.order });
+            });
+
+            scope.post(urlGen1.docsOrderPath(), requestBodies['v1.0']).reply(200, {});
+            scope.post(urlGen2.docsOrderPath(), requestBodies['v2.0']).reply(200, {});
+
+            requestor.uploadDocsOrder(registry.allDocs(), function(err) {
+                assert.isNull(err);
+                assert.isTrue(scope.isDone());
+
+                done();
+            });
+        });
     });
 });
 

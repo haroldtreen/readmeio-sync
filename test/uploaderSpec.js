@@ -82,13 +82,29 @@ describe('Uploader', function() {
         var contentStub = simple.mock(uploader, 'uploadCustomContent').callbackWith(registry);
         var pagesStub = simple.mock(uploader, 'uploadCustomPages').callbackWith(registry);
         var docsStub = simple.mock(uploader, 'uploadDocs').callbackWith(registry);
+        var orderStub = simple.mock(uploader, 'uploadDocsOrder').callbackWith(registry);
 
         uploader.uploadAll(function(uploadedRegistry) {
             assert.equal(uploadedRegistry, registry);
             assert.equal(contentStub.callCount, 1);
             assert.equal(pagesStub.callCount, 1);
             assert.equal(docsStub.callCount, 1);
+            assert.equal(orderStub.callCount, 1);
         });
         simple.restore();
+    });
+
+    it('can upload a doc page order', function(done) {
+        registry = new Registry(js.readFileSync('test/fixtures/orderedRegistry.json'));
+        requestMocker = new RequestMocker(registry);
+        uploader.registry = registry;
+
+        var scope = nock(urlGen1.base());
+        scope = requestMocker.mockDocsOrderUpload(scope);
+
+        uploader.uploadDocsOrder(function() {
+            assert.isTrue(scope.isDone());
+            done();
+        });
     });
 });
