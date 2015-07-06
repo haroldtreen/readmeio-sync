@@ -21,22 +21,6 @@ describe('Registry', function() {
         assert.equal(registry.export(), mockContents);
     });
 
-    it('can add versions', function() {
-        registry = new Registry({ 'github-upload': {} });
-        var expectedRegistry = {
-            'github-upload': {
-                'v1.0': {},
-                'v2.0': {},
-                'v3.0': {}
-            }
-        };
-
-        registry.addVersion('v1.0');
-        registry.addVersions(['v2.0', 'v3.0']);
-
-        assert.deepEqual(registry.export(), expectedRegistry);
-    });
-
     it('can diff itself against other registries', function() {
         var registry1 = new Registry(js.readFileSync('test/fixtures/registry-data-state1.json'));
         var registry2 = new Registry(js.readFileSync('test/fixtures/registry-data-state2.json'));
