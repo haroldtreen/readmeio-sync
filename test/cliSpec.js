@@ -58,7 +58,7 @@ describe('CLI', function() {
 
             assert.isTrue(authMock.called, 'Authentication didn\'t occur');
             assert.isTrue(uploadMock.called, 'Upload didn\'t occur');
-            assert.isTrue(registryMock.importCalled, 'Registry import didn\'t occur');
+            assert.isTrue(registryMock.importCalled, 'Registry was not created');
         });
 
         it('can accept a production flag', function() {
