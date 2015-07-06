@@ -116,11 +116,11 @@ describe('Requestor', function() {
             var scope = nock(urlGen1.base());
 
             registry.allDocCategories().forEach(function(category) {
-                var requestFn = category.slug ? 'put' : 'post';
+                category.method = category.slug ? 'put' : 'post';
                 var urlFn = category.slug ? 'docCategoriesPutPath' : 'docCategoriesPostPath';
                 var urlGen = category.version === 'v1.0' ? urlGen1 : urlGen2;
 
-                scope[requestFn](urlGen[urlFn](category.slug), { title: category.title }).reply(200, postResponse);
+                scope[category.method](urlGen[urlFn](category.slug), { title: category.title }).reply(200, postResponse);
             });
 
             // Make requests
@@ -144,13 +144,13 @@ describe('Requestor', function() {
             var scope = nock(urlGen1.base());
 
             registry.allDocs().forEach(function(doc) {
-                var requestFn = doc.slug ? 'put' : 'post';
+                doc.method = doc.slug ? 'put' : 'post';
                 var urlFn = doc.slug ? 'docsPutPath' : 'docsPostPath';
                 var urlGen = doc.version === 'v1.0' ? urlGen1 : urlGen2;
                 var slug = doc.slug || doc.categorySlug;
 
                 var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString(), type: doc.type };
-                scope[requestFn](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
+                scope[doc.method](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
             });
 
             // Make requests
@@ -173,12 +173,12 @@ describe('Requestor', function() {
             var scope = nock(urlGen1.base());
 
             registry.allCustomPages().forEach(function(page) {
-                var requestFn = page.slug ? 'put' : 'post';
+                page.method = page.slug ? 'put' : 'post';
                 var urlFn = page.slug ? 'pagesPutPath' : 'pagesPostPath';
                 var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
 
                 var requestBody = { title: page.title, html: fs.readFileSync(page.html).toString(), htmlmode: true, fullscreen: true, body: 'body' }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
-                scope[requestFn](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
+                scope[page.method](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
             });
 
             requestor.uploadPages(registry.allCustomPages(), function(failedUploads) {
@@ -223,7 +223,7 @@ describe('Requestor', function() {
             registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
         });
 
-        it('can delete docs', function() {
+        it('can delete docs', function(done) {
             var deleteResponse = js.readFileSync('test/fixtures/delete.json');
             var scope = nock(urlGen1.base());
 
@@ -236,6 +236,7 @@ describe('Requestor', function() {
                 assert.lengthOf(failedDeletes, 0);
 
                 assert.isTrue(scope.isDone());
+                done();
             });
         });
 
@@ -256,7 +257,7 @@ describe('Requestor', function() {
 
         });
 
-        it('can delete custom pages', function() {
+        it('can delete custom pages', function(done) {
             var deleteResponse = js.readFileSync('test/fixtures/delete.json');
             var scope = nock(urlGen1.base());
 
