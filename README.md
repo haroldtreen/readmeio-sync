@@ -61,13 +61,13 @@ readmeio-sync upload [--production]
 ```
 Including the production flag will push the content to production.
 
-### 6) Remote Clean:
+### 6) Cleaning Readme.io:
 When you remove content from your registry file, it does not auto-magically delete it from your Readmeio project too. Upload only does updates and creates.
 
-If you have out of date content on your Readmeio project, you can use the `remote-clean` command to remove all content that is not specified in your registry file.
+If you have out of date content on your Readmeio project, you can use the `clean-remote` command to remove all content that is not specified in your registry file.
 
 ```
-readmeio-sync remote-clean [--production]
+readmeio-sync clean-remote [--production]
 ```
 
 This will look at the state of your project, compare it to the state of your registry, and delete whatever is not specified locally. This will be done for staging unless the production flag is set.
