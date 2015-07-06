@@ -51,6 +51,7 @@ Upload allows you to push updated content to Readme.io. This might include:
 * New categories, docs or custom pages you've added to the registry files.
 * Changes in content files.
 * Changes to document titles or excerpts.
+* Changes to the way you want to order content.
 * etc.
 
 Once your project has been initialized and has a config, you can upload using the upload command.
