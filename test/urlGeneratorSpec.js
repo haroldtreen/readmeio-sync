@@ -97,4 +97,16 @@ describe('UrlGenerator', function() {
             assert.equal(urlGen.pagesDeleteUrl('pages-slug'), expectedUrl);
         });
     });
+
+    describe('ordering urls', function() {
+        it('knows the categories order url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/reorder-categories';
+            assert.equal(urlGen.docCategoriesOrderUrl(), expectedUrl);
+        });
+
+        it('knows the pages order url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/reorder-pages';
+            assert.equal(urlGen.docsOrderUrl(), expectedUrl);
+        });
+    });
 });
