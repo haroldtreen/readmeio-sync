@@ -75,7 +75,6 @@ This will look at the state of your project, compare it to the state of your reg
 *(**Note**: If you remote clean a project and it removes all the documentation, Readmeio will not allow you to go into the documentation section. You will need to upload new content with the `readmeio-sync upload` command to get it working again.)*
 
 
-
 ------
 ## The Registry File
 `readmeio-sync` tracks all your content using the `syncRegistry.json` file. This file is created during initialization. 
@@ -164,7 +163,7 @@ The top level key is the slug for the project the registry is representing.
 "adaptive-restructing-test": {...}
 ```
 
-### Versions
+#### Versions
 Within the top level object are all the hosted versions of the documentation.
 
 ```json
@@ -174,7 +173,7 @@ Within the top level object are all the hosted versions of the documentation.
 }
 ```
 
-### Documentation
+#### Documentation
 Each version has a documentation object, which is an array of categories.
 
 ```json
@@ -194,7 +193,7 @@ Each version has a documentation object, which is an array of categories.
 ...
 ```
 
-### Category Pages
+#### Category Pages
 Each category has as array of page objects.
 
 ```json
@@ -213,7 +212,7 @@ Each category has as array of page objects.
 - `excerpt`: Description of the document
 - `title`: Title of the document
 
-### Custom Pages
+#### Custom Pages
 Each version will have a section for custom pages. `customPages` is an array of objects representing custom pages.
 
 *(Currently there is a Readme.io bug which does not allow versioned pages. As such, only use one custom pages section for all versions.)*
@@ -242,7 +241,7 @@ Each version will have a section for custom pages. `customPages` is an array of 
 - `html`: A path to the custom pages html
 - `selector` (Optional): The selector key can be used to select a subset of the html in the specified html file. This can be useful if you are generating your custom pages and only need part of the generated html.
 
-### Custom Content
+#### Custom Content
 The custom content object let's you upload a stylesheet (Dashboard > Appearance > Custom Stylesheet) as well as html for the landing page (Dashboard > Appearance > Landing Page (Body Content)).
 
 ```json
@@ -263,3 +262,15 @@ The custom content object let's you upload a stylesheet (Dashboard > Appearance 
 - `html_body`: Path to the landing page html file
 - `stylesheet`: Path to a css stylesheet
 
+### Content Organization
+When using the web interface, you can drag and drop categories/documents to change their overall ordering. Ordering of documentation is important to ensure that their is a natural progression from top to bottom.
+
+With Readmeio-sync, ordering is determined by the order objects are specified in the `syncRegistry.json`.
+To change the order of documentation categories and pages, simply rearrange them in the `syncRegistry.json`.
+
+---------
+### Known Issues
+1. Doing a remote-clean when you have no documentation in your `syncRegistry.json` file will cause all your documentation on readme.io to be deleted (after all, you are saying "delete all the things I don't have specified locally"...which is nothing!). Having no documentation causes Readme.io to break (you can't enter the documentation section of the site). To fix this you will have to add a document to your `syncRegistry.json` and upload it...or get in contact with Readme.io and admit you were using internal APIs (OOPS!).
+
+1. Custom pages are not versioned. Ideally they would be, and that's why the "customPages" section exists in each version of the `syncRegistry.json`. When you initialize a project, the same custom pages will be downloaded for both versions and specified seperately in the `syncRegistry.json`. If you try and upload while the pages are specified in both versions, duplicates will be created. <br/><br/> **You can fix this by:**
+<br />1. Deleting all the custom pages in all versions except one (however if you `clean-remote` with this configuration, all custom pages will be deleted and you'll have to upload again). <br/>2. `clean-remote` after each upload.
