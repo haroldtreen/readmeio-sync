@@ -1,0 +1,23 @@
+machine:
+    node:
+
+dependencies:
+    pre:
+        - npm install -g harp
+        - harp compile
+
+test:
+    override:
+        - grunt test
+
+deployment:
+    production:
+        branch: production
+        commands: 
+            - export PRODUCTION=true 
+            - node scripts/syncCustomContent.js
+    staging:
+        branch: master
+        commands:
+            - export PRODUCTION=false
+            - node scripts/syncCustomContent.js
