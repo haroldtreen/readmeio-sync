@@ -1,5 +1,6 @@
 'use strict';
 
+var js = require('jsonfile');
 var path = require('path');
 var assert = require('chai').assert;
 var simple = require('simple-mock');
@@ -9,20 +10,7 @@ var RegistryBuilder = require('../lib/registryBuilder');
 describe('Registry Builder', function() {
 
     describe('building full registry', function() {
-        var buildSettings = {
-            'github-upload': {
-                'v1.0': {
-                    documentation: 'test/fixtures/project-fixture/v1.0/documentation',
-                    customPages: 'test/fixtures/project-fixture/v1.0/customPages',
-                    customContent: {
-                        appearance: {
-                            html_body: 'test/fixtures/project-fixture/v1.0/customContent/html_body.html',
-                            stylesheet: 'test/fixtures/project-fixture/v1.0/customContent/stylesheet.css'
-                        }
-                    }
-                }
-            }
-        };
+        var buildSettings = js.readFileSync('test/fixtures/syncSettings.json');
 
         it('calls all the section builders', function() {
             var docsSectionMock = simple.mock(RegistryBuilder, 'docsSection').callFn(function(input) { return input; });
@@ -93,8 +81,7 @@ describe('Registry Builder', function() {
                 idx++;
 
                 assert.equal(page.title, 'Page' + idx);
-                assert.equal(page.order, idx);
-                assert.equal(page.html, path.join(customPagesPath, page.order + '-' + page.title + '.html'));
+                assert.equal(page.html, path.join(customPagesPath, page.title + '.html'));
             });
         });
     });
