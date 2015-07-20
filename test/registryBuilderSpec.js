@@ -60,7 +60,7 @@ describe('Registry Builder', function() {
                     assert.equal(page.slug, 'v1-c' + cIdx + '-p' + pIdx);
                     assert.equal(page.title, 'V1-C' + cIdx + '-P' + pIdx);
                     assert.equal(page.excerpt, 'Version 1, Category ' + cIdx + ', Page ' + pIdx);
-                    assert.equal(page.body, path.join(docsPath, category.order + '-' + category.title, page.order + '-' + page.slug + '.md'));
+                    assert.equal(page.body, path.join(docsPath, category.order + '-' + category.title, page.order + '-' + page.title + '.md'));
                     assert.equal(page.order, pIdx);
                 });
             });
@@ -75,7 +75,7 @@ describe('Registry Builder', function() {
         });
 
         it('can parse pages', function() {
-            var page = RegistryBuilder.parseMdFile('test/fixtures/project-fixture/v1.0/documentation/1-Category 1/1-v1-c1-p1.md');
+            var page = RegistryBuilder.parseMdFile('test/fixtures/project-fixture/v1.0/documentation/1-Category 1/1-V1-C1-P1.md');
 
             assert.equal(page.title, 'V1-C1-P1');
             assert.equal(page.order, 1);
