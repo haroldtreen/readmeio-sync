@@ -1,5 +1,5 @@
-Title: Markdown File
-Excerpt: Description of Markdown File
+title: Markdown File
+excerpt: Description of Markdown File
 
 # Heading 1
 

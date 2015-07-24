@@ -31,4 +31,13 @@ describe('Utilities', function() {
         assert.equal(metadata.title, 'Markdown File');
         assert.equal(metadata.excerpt, 'Description of Markdown File');
     });
+
+    it('can extract md body', function() {
+        var markdown = fs.readFileSync('test/fixtures/markdown.md').toString();
+
+        var lines = markdown.split('\n');
+        var body = lines.slice(3, lines.length).join('\n');
+
+        assert.equal(utils.mdBody(markdown), body);
+    });
 });
