@@ -66,7 +66,7 @@ describe('ContentExtractor', function() {
                 var customPages = linkedRegistry.pages('v1.0');
 
                 customPages.forEach(function(page, pageIndex) {
-                    var pagePath = extractor.pagePath('v1.0', pageIndex + '-' + page.title);
+                    var pagePath = extractor.pagePath('v1.0', page.title);
 
                     assert.equal(page.html, pagePath);
                     assert.isTrue(fs.existsSync(pagePath));
