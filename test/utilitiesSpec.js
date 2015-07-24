@@ -21,6 +21,7 @@ describe('Utilities', function() {
         assert.equal(utils.titleToSlug('Category 1'), 'category-1');
         assert.equal(utils.titleToSlug('Category. Two.'), 'category-two');
         assert.equal(utils.titleToSlug('CATEGORY^^%$#'), 'category');
+        assert.equal(utils.titleToSlug('Category.Two'), 'categorytwo');
     });
 
     it('can extract md metadata', function() {
