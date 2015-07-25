@@ -1,0 +1,24 @@
+{
+    "adaptivejs-staging": {
+        "v2.0": {
+            "documentation": "adaptivejs-staging/v2.0/documentation",
+            "customPages": "adaptivejs-staging/v2.0/customPages",
+            "customContent": {
+                "appearance": {
+                    "html_body": "adaptivejs-staging/v2.0/customContent/appearance/landing_page.html",
+                    "stylesheet": "adaptivejs-staging/v2.0/customContent/appearance/styles.css"
+                }
+            }
+        },
+        "v1.0": {
+            "documentation": "adaptivejs-staging/v1.0/documentation",
+            "customPages": "adaptivejs-staging/v1.0/customPages",
+            "customContent": {
+                "appearance": {
+                    "html_body": "adaptivejs-staging/v1.0/customContent/appearance/landing_page.html",
+                    "stylesheet": "adaptivejs-staging/v1.0/customContent/appearance/styles.css"
+                }
+            }
+        }
+    }
+}

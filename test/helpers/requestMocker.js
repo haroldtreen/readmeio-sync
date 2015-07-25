@@ -5,6 +5,7 @@ var fs = require('fs');
 
 var config = require('../../lib/config');
 var UrlGenerator = require('../../lib/urlGenerator');
+var utils = require('../../lib/utils');
 
 
 var RequestMocker = function(registry) {
@@ -53,18 +54,25 @@ RequestMocker.prototype.mockDocCategoriesUpload = function(scope, remoteRegistry
 RequestMocker.prototype.mockDocsUpload = function(scope, remoteRegistry) {
     var self = this;
     var diff = this.registry.diff(remoteRegistry);
-    var postResponse = js.readFileSync('test/fixtures/doc-post.json');
 
     // Create network request mocks
     self.registry.allDocs().forEach(function(doc) {
+        var postResponse = js.readFileSync('test/fixtures/doc-post.json');
         var isAdded = diff.isAdded('allDocs', { slug: doc.slug, version: doc.version });
         var requestFn = isAdded ? 'post' : 'put';
         var urlFn = doc.slug ? 'docsPostPath' : 'docsPutPath';
         var urlGen = doc.version === 'v1.0' ? self.urlGen1 : self.urlGen2;
         var slug = isAdded ? doc.categorySlug : doc.slug;
 
-        var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString(), type: doc.type };
+        var requestBody = { title: doc.title, excerpt: doc.excerpt, body: utils.mdToReadme(utils.mdBody(fs.readFileSync(doc.body).toString())), type: doc.type };
+
         scope[requestFn](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
+
+        if (requestFn === 'post' && doc.slug && doc.slug !== postResponse.slug) {
+            var url = urlGen.docsPutPath(postResponse.slug);
+            postResponse.slug = doc.slug;
+            scope.put(url, JSON.stringify(postResponse)).reply(200, postResponse);
+        }
     });
     return scope;
 };

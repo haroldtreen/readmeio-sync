@@ -1,9 +1,11 @@
 'use strict';
 
 var assert = require('chai').assert;
-var Registry = require('../lib/registry');
 var js = require('jsonfile');
 var fs = require('fs');
+
+var Registry = require('../lib/registry');
+var RegistryBuilder = require('../lib/registryBuilder');
 
 var mockContents;
 var registry;
@@ -72,15 +74,27 @@ describe('Registry', function() {
         });
 
         it('can be saved to a file', function() {
-            var registryFilePath = 'test/tmp';
-            registry.save(registryFilePath);
+            var syncSettings = js.readFileSync('test/fixtures/syncPaths.json');
+            registry = RegistryBuilder.build(syncSettings);
 
-            var savedRegistryData = js.readFileSync(registryFilePath + '/syncRegistry.json');
-            var savedRegistry = new Registry(savedRegistryData);
+            var allDocs = registry.allDocs();
+            allDocs.forEach(function(doc) {
+                doc.slug = 'slug';
+                doc._contents = fs.readFileSync(doc.body).toString();
+            });
 
-            assert.deepEqual(registry.export(), savedRegistry.export());
+            registry.save();
 
-            fs.unlinkSync(registryFilePath + '/syncRegistry.json');
+            var saveStatus = allDocs.map(function(doc) {
+                var wasSaved = fs.readFileSync(doc.body).toString().match(/^slug: slug\n/);
+                fs.writeFileSync(doc.body, doc._contents);
+
+                return { name: doc.title, saved: !!wasSaved };
+            });
+
+            saveStatus.forEach(function(status) {
+                assert.isTrue(status.saved, status.name + ' was not saved');
+            });
         });
     });
 

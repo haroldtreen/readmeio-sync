@@ -27,9 +27,9 @@ describe('Initializer', function() {
             var files = fs.readdirSync('test/tmp');
 
             assert.isDefined(registry.version('v1.0'));
-            assert.isAbove(files.indexOf('syncRegistry.json'), -1, 'Registry file was not created');
+            assert.isAbove(files.indexOf('syncPaths.json'), -1, 'Registry settings was not created');
 
-            fs.unlink('test/tmp/syncRegistry.json');
+            fs.unlink('test/tmp/syncPaths.json');
 
             done();
         });
