@@ -74,7 +74,7 @@ describe('Registry', function() {
         });
 
         it('can be saved to a file', function() {
-            var syncSettings = js.readFileSync('test/fixtures/syncSettings.json');
+            var syncSettings = js.readFileSync('test/fixtures/syncPaths.json');
             registry = RegistryBuilder.build(syncSettings);
 
             var allDocs = registry.allDocs();

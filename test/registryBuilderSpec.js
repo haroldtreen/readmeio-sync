@@ -10,7 +10,7 @@ var RegistryBuilder = require('../lib/registryBuilder');
 describe('Registry Builder', function() {
 
     describe('building full registry', function() {
-        var buildSettings = js.readFileSync('test/fixtures/syncSettings.json');
+        var buildSettings = js.readFileSync('test/fixtures/syncPaths.json');
 
         it('calls all the section builders', function() {
             var docsSectionMock = simple.mock(RegistryBuilder, 'docsSection').callFn(function(input) { return input; });
