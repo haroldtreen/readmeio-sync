@@ -1,0 +1,218 @@
+{
+  "__v": 5,
+  "_id": "556f429a9893290d00988bba",
+  "owner": {
+    "_id": "556f41bcfc3aa80d00e1ab4e",
+    "unsubscribed": false,
+    "stripeId": "",
+    "username": "",
+    "email": "harold@mobify.com",
+    "name": "Harold Treen",
+    "id": "556f41bcfc3aa80d00e1ab4e"
+  },
+  "stable": {
+    "__v": 2,
+    "_id": "556f429a9893290d00988bbd",
+    "project": "556f429a9893290d00988bba",
+    "createdAt": "2015-06-03T18:08:26.477Z",
+    "releaseDate": "2015-06-03T18:08:26.477Z",
+    "categories": [
+      "556f429a9893290d00988bbe",
+      "557f1a0be211d20d006013e6"
+    ],
+    "is_hidden": false,
+    "is_beta": false,
+    "is_stable": true,
+    "codename": "",
+    "version_clean": "1.0.0",
+    "version": "1.0",
+    "id": "556f429a9893290d00988bbd"
+  },
+  "updates": [],
+  "apps": {
+    "base_domain": "",
+    "secret_key": "6eNTucqnhVcSNVgTScT0",
+    "enabled": false
+  },
+  "topnav": {
+    "edited": false,
+    "right": [],
+    "left": []
+  },
+  "appearance": {
+    "html_hidelinks": false,
+    "html_head": "",
+    "html_footer": "",
+    "html_body": "<div class=\"c-client-banner\"><p class=\"c-client-banner__message\">Are you looking for Mobify.js or Mobify Client Documentation?</p><a href=\"https://cloud.mobify.com/docs/client/\" class=\"c-button c--green\">Read Mobify Client Documentation Instead</a></div><div class=\"c-readme-body__container\"><section class=\"c-section\"><header><h2 class=\"c-header c--level2\">Overview</h2></header><div class=\"k-grid k-break-768\"><div class=\"k-span4 c-panel\"><a href=\"http://adaptivejs.mobify.com/v1.0/docs/what-is-adaptivejs\"><h3 class=\"c-panel__heading c-header c--level3\">What is Adaptive?</h3></a><p class=\"c-panel__message\">Read an overview of the Adaptive.js framework, the way it fits into your technology stack, and its benefits.</p><a href=\"http://adaptivejs.mobify.com/v1.0/docs/what-is-adaptivejs\" class=\"c-button\">Learn About Adaptive.js</a></div><div class=\"k-span4 c-panel\"><a href=\"http://adaptivejs.mobify.com/v1.0/docs/how-does-adaptivejs-work\"><h3 class=\"c-panel__heading c-header c--level3\">How does Adaptive.js work?</h3></a><p class=\"c-panel__message\">See how Adaptive.js transforms your site to be mobile-friendly with the Mobify tag.</p><a href=\"http://adaptivejs.mobify.com/v1.0/docs/how-does-adaptivejs-work\" class=\"c-button\">Learn How Adaptive.js Works</a></div><div class=\"k-span4 c-panel\"><a href=\"http://adaptivejs.mobify.com/v1.0/docs/the-mobify-bundle\"><h3 class=\"c-panel__heading c-header c--level3\">What is the Mobify Bundle?</h3></a><p class=\"c-panel__message\">Review a breakdown of the different components that comprise the Mobify bundle.</p><a href=\"http://adaptivejs.mobify.com/v1.0/docs/the-mobify-bundle\" class=\"c-button\">Learn about The Mobify Bundle</a></div></div></section><section class=\"c-section\"><header><h2 class=\"c-header c--level2\">Working With Adaptive.js</h2><p>As an experienced Adaptive.js user, browse these topics to enhance the features of your mobile site:</p></header><div class=\"k-grid k-break-768\"><div class=\"k-span6\"><a href=\"http://adaptivejs.mobify.com/v1.0/page/adapting\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Adapting</h3><p class=\"c-task__description\">Transform your desktop content into mobile content.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/scripting\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Scripting</h3><p class=\"c-task__description\">Write User Interface JavaScript for your content and use your existing desktop JavaScript.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/styling-your-project\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Styling Your Project</h3><p class=\"c-task__description\">Implement your design with Sass and HTML.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/previewing\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Previewing</h3><p class=\"c-task__description\">Preview your project on your computer or on a device.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/debugging\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Debugging</h3><p class=\"c-task__description\">Fix and debug issues on your site.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/publishing\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Publishing</h3><p class=\"c-task__description\">Deploy your site to production.</p></a></div><div class=\"k-span6\"><a href=\"http://adaptivejs.mobify.com/v1.0/page/automated-testing\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Automated Testing</h3><p class=\"c-task__description\">Read an introductory overview of automated testing.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/integration-testing\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Integration Testing</h3><p class=\"c-task__description\">Write automated tests to ensure that your mobile site has been transformed correctly.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/system-testing\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">System Testing</h3><p class=\"c-task__description\">Automate user interaction in a browser to test your mobile site.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/manual-testing\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Manual Testing</h3><p class=\"c-task__description\">Test the functionality and visual consistency of your mobile site across different devices.</p></a><a href=\"http://adaptivejs.mobify.com/v1.0/page/upgrading\" class=\"c-task\"><h3 class=\"c-panel__heading c-header c--level3\">Upgrading</h3><p class=\"c-task__description\">Change your Adaptive.js version and its dependencies.</p></a></div></div></section></div>",
+    "html_promo": "",
+    "javascript": "",
+    "stylesheet": "*{-ms-box-sizing:border-box;-o-box-sizing:border-box;box-sizing:border-box}html,body{margin:0;padding:0;font-size:100%;line-height:1.5}dt{font-weight:bold}fieldset{border:none;margin:0;padding:0}h1{font-size:1.8rem}h2{font-size:1.6rem}h3{font-size:1.4rem}h4{font-size:1.2rem}h5{font-size:1.1rem}h6{font-size:1rem}h1,h2,h3,h4,h5,h6{margin:0.5rem 0;font-weight:bold}header{position:relative}hr{height:0;margin:2rem 0;border:solid 1px;border-width:0 0 1px 0}img{max-width:100%;-ms-interpolation-mode:bicubic}p{margin:1rem 0}strong{font-weight:bold}table{width:100%;border-collapse:collapse;border-spacing:0}td,th{vertical-align:top;text-align:left;border-bottom:solid 1px}th{font-weight:bold}li{margin:0.5rem 0 0.5rem 2rem}ol li{list-style:decimal}ul li{list-style:square}ul,ol{margin:1rem 0;padding:0}.k-grid{padding:0;margin:0;overflow:hidden}.k-span1,.k-span2,.k-span3,.k-span4,.k-span5,.k-span6,.k-span7,.k-span8,.k-span9,.k-span10,.k-span11,.k-span12{margin:0 2.08333%;float:left}.k-span1:first-child,.k-span2:first-child,.k-span3:first-child,.k-span4:first-child,.k-span5:first-child,.k-span6:first-child,.k-span7:first-child,.k-span8:first-child,.k-span9:first-child,.k-span10:first-child,.k-span11:first-child,.k-span12:first-child{margin-left:0}.k-span1:last-child,.k-span2:last-child,.k-span3:last-child,.k-span4:last-child,.k-span5:last-child,.k-span6:last-child,.k-span7:last-child,.k-span8:last-child,.k-span9:last-child,.k-span10:last-child,.k-span11:last-child,.k-span12:last-child{margin-right:0}.k-span1{width:4.51389%}.k-span2{width:13.19444%}.k-span3{width:21.875%}.k-span4{width:30.55556%}.k-span5{width:39.23611%}.k-span6{width:47.91667%}.k-span7{width:56.59722%}.k-span8{width:65.27778%}.k-span9{width:73.95833%}.k-span10{width:82.63889%}.k-span11{width:91.31944%}.k-span12{width:100%}.k-offset1{margin-left:10.76389%}.k-offset1:first-child{margin-left:8.68056%}.k-offset2{margin-left:19.44444%}.k-offset2:first-child{margin-left:17.36111%}.k-offset3{margin-left:28.125%}.k-offset3:first-child{margin-left:26.04167%}.k-offset4{margin-left:36.80556%}.k-offset4:first-child{margin-left:34.72222%}.k-offset5{margin-left:45.48611%}.k-offset5:first-child{margin-left:43.40278%}.k-offset6{margin-left:54.16667%}.k-offset6:first-child{margin-left:52.08333%}.k-offset7{margin-left:62.84722%}.k-offset7:first-child{margin-left:60.76389%}.k-offset8{margin-left:71.52778%}.k-offset8:first-child{margin-left:69.44444%}.k-offset9{margin-left:80.20833%}.k-offset9:first-child{margin-left:78.125%}.k-offset10{margin-left:88.88889%}.k-offset10:first-child{margin-left:86.80556%}.k-offset11{margin-left:97.56944%}.k-offset11:first-child{margin-left:95.48611%}@media only screen and (max-width:320px){.k-grid.k-break-320>.k-span1,.k-grid.k-break-320>.k-span2,.k-grid.k-break-320>.k-span3,.k-grid.k-break-320>.k-span4,.k-grid.k-break-320>.k-span5,.k-grid.k-break-320>.k-span6,.k-grid.k-break-320>.k-span7,.k-grid.k-break-320>.k-span8,.k-grid.k-break-320>.k-span9,.k-grid.k-break-320>.k-span10,.k-grid.k-break-320>.k-span11,.k-grid.k-break-320>.k-span12{width:100%;margin:0}}@media only screen and (max-width:480px){.k-grid.k-break-480>.k-span1,.k-grid.k-break-480>.k-span2,.k-grid.k-break-480>.k-span3,.k-grid.k-break-480>.k-span4,.k-grid.k-break-480>.k-span5,.k-grid.k-break-480>.k-span6,.k-grid.k-break-480>.k-span7,.k-grid.k-break-480>.k-span8,.k-grid.k-break-480>.k-span9,.k-grid.k-break-480>.k-span10,.k-grid.k-break-480>.k-span11,.k-grid.k-break-480>.k-span12{width:100%;margin:0}}@media only screen and (max-width:600px){.k-grid.k-break-600>.k-span1,.k-grid.k-break-600>.k-span2,.k-grid.k-break-600>.k-span3,.k-grid.k-break-600>.k-span4,.k-grid.k-break-600>.k-span5,.k-grid.k-break-600>.k-span6,.k-grid.k-break-600>.k-span7,.k-grid.k-break-600>.k-span8,.k-grid.k-break-600>.k-span9,.k-grid.k-break-600>.k-span10,.k-grid.k-break-600>.k-span11,.k-grid.k-break-600>.k-span12{width:100%;margin:0}}@media only screen and (max-width:768px){.k-grid.k-break-768>.k-span1,.k-grid.k-break-768>.k-span2,.k-grid.k-break-768>.k-span3,.k-grid.k-break-768>.k-span4,.k-grid.k-break-768>.k-span5,.k-grid.k-break-768>.k-span6,.k-grid.k-break-768>.k-span7,.k-grid.k-break-768>.k-span8,.k-grid.k-break-768>.k-span9,.k-grid.k-break-768>.k-span10,.k-grid.k-break-768>.k-span11,.k-grid.k-break-768>.k-span12{width:100%;margin:0}}@media only screen and (max-width:800px){.k-grid.k-break-800>.k-span1,.k-grid.k-break-800>.k-span2,.k-grid.k-break-800>.k-span3,.k-grid.k-break-800>.k-span4,.k-grid.k-break-800>.k-span5,.k-grid.k-break-800>.k-span6,.k-grid.k-break-800>.k-span7,.k-grid.k-break-800>.k-span8,.k-grid.k-break-800>.k-span9,.k-grid.k-break-800>.k-span10,.k-grid.k-break-800>.k-span11,.k-grid.k-break-800>.k-span12{width:100%;margin:0}}@media only screen and (max-width:960px){.k-grid.k-break-960>.k-span1,.k-grid.k-break-960>.k-span2,.k-grid.k-break-960>.k-span3,.k-grid.k-break-960>.k-span4,.k-grid.k-break-960>.k-span5,.k-grid.k-break-960>.k-span6,.k-grid.k-break-960>.k-span7,.k-grid.k-break-960>.k-span8,.k-grid.k-break-960>.k-span9,.k-grid.k-break-960>.k-span10,.k-grid.k-break-960>.k-span11,.k-grid.k-break-960>.k-span12{width:100%;margin:0}}@media only screen and (max-width:1024px){.k-grid.k-break-1024>.k-span1,.k-grid.k-break-1024>.k-span2,.k-grid.k-break-1024>.k-span3,.k-grid.k-break-1024>.k-span4,.k-grid.k-break-1024>.k-span5,.k-grid.k-break-1024>.k-span6,.k-grid.k-break-1024>.k-span7,.k-grid.k-break-1024>.k-span8,.k-grid.k-break-1024>.k-span9,.k-grid.k-break-1024>.k-span10,.k-grid.k-break-1024>.k-span11,.k-grid.k-break-1024>.k-span12{width:100%;margin:0}}@media only screen and (max-width:1280px){.k-grid.k-break-1280>.k-span1,.k-grid.k-break-1280>.k-span2,.k-grid.k-break-1280>.k-span3,.k-grid.k-break-1280>.k-span4,.k-grid.k-break-1280>.k-span5,.k-grid.k-break-1280>.k-span6,.k-grid.k-break-1280>.k-span7,.k-grid.k-break-1280>.k-span8,.k-grid.k-break-1280>.k-span9,.k-grid.k-break-1280>.k-span10,.k-grid.k-break-1280>.k-span11,.k-grid.k-break-1280>.k-span12{width:100%;margin:0}}.k-gallery{overflow:hidden}.k-gallery img{float:left;width:23.875%;padding:0;margin:0.75%;vertical-align:middle}.k-gallery img:nth-child(4n){margin-right:0}.k-gallery img:nth-child(4n+1){margin-left:0;clear:left}@media only screen and (max-width:320px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}@media only screen and (max-width:480px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}@media only screen and (max-width:600px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}@media only screen and (max-width:768px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}@media only screen and (max-width:800px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}@media only screen and (max-width:960px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}@media only screen and (max-width:1024px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}@media only screen and (max-width:1280px){.k-gallery.k-break img{width:100%;margin:0.75% 0;clear:both}}form{margin:0.625em 0}[type=\"date\"],[type=\"email\"],[type=\"number\"],[type=\"password\"],[type=\"phone\"],[type=\"tel\"],[type=\"text\"],[type=\"url\"],textarea,button,[type=\"submit\"],select[multiple]{-webkit-appearance:none;-moz-appearance:none;-ms-appearance:none;-o-appearance:none;appearance:none;width:100%;padding:0.5em 0.25em;margin:0;border:solid 1px;font-size:1rem;display:inline-block}button,[type=\"submit\"]{width:auto;padding:0.625em 2em;cursor:pointer}[type=\"checkbox\"],[type=\"radio\"]{width:1.6em;height:1.6em}select{width:100%;height:2.5em;line-height:2.5em}select[multiple]{height:auto;padding:0}.k-field{display:block;margin:1.25em 0}.k-field:after{content:\"\";display:table;clear:both}.k-form-horizontal [type=\"date\"],.k-form-horizontal [type=\"email\"],.k-form-horizontal [type=\"number\"],.k-form-horizontal [type=\"password\"],.k-form-horizontal [type=\"phone\"],.k-form-horizontal [type=\"tel\"],.k-form-horizontal [type=\"text\"],.k-form-horizontal [type=\"url\"],.k-form-horizontal textarea,.k-form-horizontal select{float:left;width:75%}.k-form-horizontal button,.k-form-horizontal [type=\"submit\"]{padding:0.625em 2em;margin-left:25%}.k-form-horizontal button+button,.k-form-horizontal button+[type=\"submit\"],.k-form-horizontal [type=\"submit\"]+button,.k-form-horizontal [type=\"submit\"]+[type=\"submit\"]{margin-left:0}.k-form-horizontal label{display:inline-block;float:left;width:25%}.k-form-inline input,.k-form-inline label,.k-form-inline .k-field,.k-form-inline select,.k-form-inline textarea{display:inline-block;float:none;width:auto}.k-form-inline .k-field{margin:0.625em}.k-form-inline button,.k-form-inline [type=\"submit\"]{margin:0}@media only screen and (max-width:320px){form.k-break-320 button,form.k-break-320 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-320 label{padding-bottom:0.3125em}form.k-break-320 label,form.k-break-320 [type=\"date\"],form.k-break-320 [type=\"email\"],form.k-break-320 [type=\"number\"],form.k-break-320 [type=\"password\"],form.k-break-320 [type=\"phone\"],form.k-break-320 [type=\"tel\"],form.k-break-320 [type=\"text\"],form.k-break-320 [type=\"url\"],form.k-break-320 textarea,form.k-break-320 select{float:none;width:100%}form.k-break-320 .k-field,form.k-break-320 button,form.k-break-320 [type=\"submit\"]{margin:0.625em 0}}@media only screen and (max-width:480px){form.k-break-480 button,form.k-break-480 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-480 label{padding-bottom:0.3125em}form.k-break-480 label,form.k-break-480 [type=\"date\"],form.k-break-480 [type=\"email\"],form.k-break-480 [type=\"number\"],form.k-break-480 [type=\"password\"],form.k-break-480 [type=\"phone\"],form.k-break-480 [type=\"tel\"],form.k-break-480 [type=\"text\"],form.k-break-480 [type=\"url\"],form.k-break-480 textarea,form.k-break-480 select{float:none;width:100%}form.k-break-480 .k-field,form.k-break-480 button,form.k-break-480 [type=\"submit\"]{margin:0.625em 0}}@media only screen and (max-width:600px){form.k-break-600 button,form.k-break-600 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-600 label{padding-bottom:0.3125em}form.k-break-600 label,form.k-break-600 [type=\"date\"],form.k-break-600 [type=\"email\"],form.k-break-600 [type=\"number\"],form.k-break-600 [type=\"password\"],form.k-break-600 [type=\"phone\"],form.k-break-600 [type=\"tel\"],form.k-break-600 [type=\"text\"],form.k-break-600 [type=\"url\"],form.k-break-600 textarea,form.k-break-600 select{float:none;width:100%}form.k-break-600 .k-field,form.k-break-600 button,form.k-break-600 [type=\"submit\"]{margin:0.625em 0}}@media only screen and (max-width:768px){form.k-break-768 button,form.k-break-768 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-768 label{padding-bottom:0.3125em}form.k-break-768 label,form.k-break-768 [type=\"date\"],form.k-break-768 [type=\"email\"],form.k-break-768 [type=\"number\"],form.k-break-768 [type=\"password\"],form.k-break-768 [type=\"phone\"],form.k-break-768 [type=\"tel\"],form.k-break-768 [type=\"text\"],form.k-break-768 [type=\"url\"],form.k-break-768 textarea,form.k-break-768 select{float:none;width:100%}form.k-break-768 .k-field,form.k-break-768 button,form.k-break-768 [type=\"submit\"]{margin:0.625em 0}}@media only screen and (max-width:800px){form.k-break-800 button,form.k-break-800 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-800 label{padding-bottom:0.3125em}form.k-break-800 label,form.k-break-800 [type=\"date\"],form.k-break-800 [type=\"email\"],form.k-break-800 [type=\"number\"],form.k-break-800 [type=\"password\"],form.k-break-800 [type=\"phone\"],form.k-break-800 [type=\"tel\"],form.k-break-800 [type=\"text\"],form.k-break-800 [type=\"url\"],form.k-break-800 textarea,form.k-break-800 select{float:none;width:100%}form.k-break-800 .k-field,form.k-break-800 button,form.k-break-800 [type=\"submit\"]{margin:0.625em 0}}@media only screen and (max-width:960px){form.k-break-960 button,form.k-break-960 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-960 label{padding-bottom:0.3125em}form.k-break-960 label,form.k-break-960 [type=\"date\"],form.k-break-960 [type=\"email\"],form.k-break-960 [type=\"number\"],form.k-break-960 [type=\"password\"],form.k-break-960 [type=\"phone\"],form.k-break-960 [type=\"tel\"],form.k-break-960 [type=\"text\"],form.k-break-960 [type=\"url\"],form.k-break-960 textarea,form.k-break-960 select{float:none;width:100%}form.k-break-960 .k-field,form.k-break-960 button,form.k-break-960 [type=\"submit\"]{margin:0.625em 0}}@media only screen and (max-width:1024px){form.k-break-1024 button,form.k-break-1024 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-1024 label{padding-bottom:0.3125em}form.k-break-1024 label,form.k-break-1024 [type=\"date\"],form.k-break-1024 [type=\"email\"],form.k-break-1024 [type=\"number\"],form.k-break-1024 [type=\"password\"],form.k-break-1024 [type=\"phone\"],form.k-break-1024 [type=\"tel\"],form.k-break-1024 [type=\"text\"],form.k-break-1024 [type=\"url\"],form.k-break-1024 textarea,form.k-break-1024 select{float:none;width:100%}form.k-break-1024 .k-field,form.k-break-1024 button,form.k-break-1024 [type=\"submit\"]{margin:0.625em 0}}@media only screen and (max-width:1280px){form.k-break-1280 button,form.k-break-1280 [type=\"submit\"]{width:100%;margin-left:0}form.k-break-1280 label{padding-bottom:0.3125em}form.k-break-1280 label,form.k-break-1280 [type=\"date\"],form.k-break-1280 [type=\"email\"],form.k-break-1280 [type=\"number\"],form.k-break-1280 [type=\"password\"],form.k-break-1280 [type=\"phone\"],form.k-break-1280 [type=\"tel\"],form.k-break-1280 [type=\"text\"],form.k-break-1280 [type=\"url\"],form.k-break-1280 textarea,form.k-break-1280 select{float:none;width:100%}form.k-break-1280 .k-field,form.k-break-1280 button,form.k-break-1280 [type=\"submit\"]{margin:0.625em 0}}html{font-family:'Dagny OT',sans-serif;color:#4C4945;font-size:14px}body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:'Dagny OT',sans-serif}p,li{font-size:1.21rem}.header #jumbotron p{font-size:1.21rem}li{margin:0 0 0 0.71rem}.container{max-width:none;padding:0}.border-right.section-left .sidebar-nav h4{font-size:1.29rem;letter-spacing:.14rem;margin-top:1.28rem;margin-bottom:.36rem}.docs-header .ng-isolate-scope p{color:#86847F;font-size:1.29rem;font-weight:600;line-height:1.67rem}.docs-header>h1,.theme-solid .docs-header h1{font-weight:300;font-size:2.14rem;line-height:2.71rem}.theme-solid.header-custom .c-readme-body header,.theme-solid .c-readme-body header{background-color:white}.theme-solid.header-custom .c-readme-body header h2,.theme-solid .c-readme-body header h2{color:#4C4945}.theme-solid .btn.btn-lg.btn-primary{background-color:#2F9994;will-change:background-color;-webkit-transition:background-color 0.15s ease;transition:background-color 0.15s ease}.theme-solid .btn.btn-lg.btn-primary:hover{background-color:#99CCC9}.fa-caret-down::before{margin-left:.5rem}.theme-solid .navbar-nav a{font-size:1.1rem}.header .searchbox input{padding-top:9px}.header h1.navbar-brand{margin-top:10px}.c-button{background-color:#4DACC4;border-radius:4px;color:white;display:inline-block;font-size:1.21rem;line-height:1rem;padding:0.71rem 1.07rem;text-decoration:none;will-change:background-color;-webkit-transition:background-color 0.15s ease;transition:background-color 0.15s ease}.c-button:hover,.c-button:focus,.c-button:active{color:white;background-color:#008FB3}.c-button:last-child{margin-bottom:1.07rem}.c-button.c--green{background-color:#2F9994}@media screen and (min-width:768px){.c-button.c--green{margin-bottom:.43rem}}.c-button.c--green:hover,.c-button.c--green:focus,.c-button.c--green:active{background-color:#037F79}.c-client-banner{background:#64B2AF;color:white;text-align:center}@media screen and (min-width:768px){.c-client-banner>*:not(:last-child){margin-right:2rem}}.c-client-banner__message{margin:0;padding:1.14rem;display:inline-block}.c-errorMessage{padding-top:6rem}@media (max-width:960px){.c-errorMessage{padding-top:3rem}}.docs-content [marked] h1,.docs-content [marked] h2,.docs-content [marked] h3,.docs-content [marked] h4,.docs-content [marked] h5,.docs-content [marked] h6,.c-header{font-family:'Dagny OT',sans-serif;font-size:2.14rem;font-weight:400;color:#4C4945}.c-header.c--level2,.container .docs-content [marked] h2{font-size:1.86rem;margin-bottom:1.42rem}.container .docs-content [marked] h2{font-weight:600}.c-header.c--level3,.container .docs-content [marked] h3{font-size:1.43rem}.c-lineLogo{padding-left:2rem;padding-top:1rem;position:relative}@media (max-width:960px){.c-lineLogo{display:none}}.c-lineLogo__path{-webkit-animation:fadeIn 0.8s 1s 1 ease-in forwards,dash 1.3s 1s linear forwards,fadeOut 0.4s 2.2s 1 ease-in forwards;animation:fadeIn 0.8s 1s 1 ease-in forwards,dash 1.3s 1s linear forwards,fadeOut 0.4s 2.2s 1 ease-in forwards;opacity:0;stroke-dasharray:178;stroke-dashoffset:178}.c-lineLogo__fill{display:block;position:absolute;top:50%;left:0;padding-top:1rem;padding-left:2rem;-webkit-animation:fadeIn 0.4s 2.2s 1 ease-in forwards;animation:fadeIn 0.4s 2.2s 1 ease-in forwards;opacity:0;-webkit-transform:translateY(-53%);-ms-transform:translateY(-53%);transform:translateY(-53%)}@-webkit-keyframes fadeIn{from{opacity:0}to{opacity:1}}@keyframes fadeIn{from{opacity:0}to{opacity:1}}@-webkit-keyframes fadeOut{from{opacity:1}to{opacity:0}}@keyframes fadeOut{from{opacity:1}to{opacity:0}}@-webkit-keyframes dash{from{stroke-dashoffset:174}to{stroke-dashoffset:0}}@keyframes dash{from{stroke-dashoffset:174}to{stroke-dashoffset:0}}.c-linkList__listItem{margin:0;list-style:none}.c-linkList__link{text-decoration:none;color:#64B2AF}.c-panel{background:#F5F4F2;margin-bottom:2.14rem;padding:1.42rem;padding-bottom:0}.c-panel a{text-decoration:none}.c-panel__heading{margin-top:0}@media screen and (max-width:768px){.k-grid.k-break-768>.k-span6.c-panel,.k-grid.k-break-768>.k-span4.c-panel{margin-bottom:2.14rem}}.c-readme-body__container{max-width:76.43rem;margin:0 auto;padding:0 1.43rem}.c-section{padding-top:2.14rem}.c-section+.c-section{border-top:1px solid #D9D7D4}.c-task{display:block;padding:1.43rem;text-decoration:none;will-change:background-color;-webkit-transition:background-color 0.15s ease;transition:background-color 0.15s ease}.c-task .c-header.c--level3{color:#64B2AF}.c-task:hover,.c-task:focus,.c-task:active{background-color:#F5F4F2}.c-task__description{color:#4C4945;margin:0}",
+    "favicon": [],
+    "logo_white_use": false,
+    "logo_white": [],
+    "logo": [
+      "https://www.filepicker.io/api/file/t2CXg8q9Q6qwFV6i11re",
+      "sample-logo.png",
+      "291",
+      "80",
+      "#5ea43f",
+      "https://www.filepicker.io/api/file/OY6HMNAmQuaXQmjyPaXO"
+    ],
+    "promos": [
+      {
+        "_id": "556f429a9893290d00988bbb",
+        "extras": {
+          "buttonSecondary": "none",
+          "buttonPrimary": "get-started",
+          "type": "buttons"
+        },
+        "text": "Welcome to the Github Upload developer hub. You'll find comprehensive guides and documentation to help you start working with Github Upload as quickly as possible, as well as support if you get stuck. Let's jump right in!",
+        "title": "The Github Upload Developer Hub",
+        "id": "556f429a9893290d00988bbb"
+      }
+    ],
+    "body": {
+      "style": "none"
+    },
+    "header": {
+      "img_pos": "tl",
+      "img_size": "auto",
+      "img": [],
+      "style": "solid"
+    },
+    "typography": {
+      "tk_body": "",
+      "tk_headline": "",
+      "tk_key": "",
+      "typekit": false,
+      "body": "Open+Sans:400:sans-serif",
+      "headline": "Open+Sans:400:sans-serif"
+    },
+    "colors": {
+      "body_highlight": "",
+      "header_text": "",
+      "main_alt": "",
+      "main": "",
+      "highlight": ""
+    },
+    "main_body": {
+      "type": "html"
+    },
+    "hide_logo": false,
+    "sticky": false,
+    "landing": true,
+    "overlay": "triangles",
+    "notheme": false,
+    "theme": "line",
+    "link_logo_to_url": false
+  },
+  "oauth": {
+    "special": "",
+    "fieldEmail": "",
+    "fieldName": "",
+    "accessTokenName": "",
+    "userProfileURL": "",
+    "clientSecret": "",
+    "clientID": "",
+    "tokenURL": "",
+    "authenticationURL": "",
+    "enabled": false,
+    "configured": false
+  },
+  "nav_names": {
+    "discuss": "",
+    "blog": "",
+    "docs": ""
+  },
+  "okta": "",
+  "apiAlt": [],
+  "api": {
+    "headers": [],
+    "authextra": [],
+    "jwt_secret": "",
+    "jwt": false,
+    "explorer": true,
+    "auth": "",
+    "contenttype": "form",
+    "url": "",
+    "name": ""
+  },
+  "versions": [
+    {
+      "_id": "556f429a9893290d00988bbd",
+      "releaseDate": "2015-06-03T18:08:26.477Z",
+      "is_hidden": false,
+      "is_beta": false,
+      "is_stable": true,
+      "version_clean": "1.0.0",
+      "version": "1.0",
+      "id": "556f429a9893290d00988bbd"
+    },
+    {
+      "_id": "557f1a407eafa719001d1b8e",
+      "releaseDate": "2015-06-15T18:32:32.564Z",
+      "is_hidden": true,
+      "is_beta": false,
+      "is_stable": false,
+      "version_clean": "2.0.0",
+      "version": "2.0",
+      "id": "557f1a407eafa719001d1b8e"
+    }
+  ],
+  "github_color": "green_007200",
+  "github_repo": "",
+  "github_user": "",
+  "updatedAt": "2015-06-15T18:37:31.222Z",
+  "createdAt": "2015-06-03T18:08:26.024Z",
+  "coupon": "",
+  "planStripe": "",
+  "plan": "free",
+  "alert_github": false,
+  "steps": {
+    "step3": false,
+    "step2": true,
+    "step1": true
+  },
+  "domains": [],
+  "assets_from_readme": false,
+  "custom_domain": "",
+  "invoice": {
+    "address": "",
+    "contact": "",
+    "name": ""
+  },
+  "password": "",
+  "internal": "",
+  "heroku_id": "",
+  "error404": "",
+  "admins_pending": [],
+  "admins": [],
+  "is_active": false,
+  "flags": {
+    "ssl": false,
+    "oauth": false
+  },
+  "ghs": false,
+  "ssl": {
+    "cname": null
+  },
+  "discusscategories": [
+    "556f429a9893290d00988bbc"
+  ],
+  "discusses": [],
+  "custompages": [
+    "557f1b6a7eafa719001d1b97"
+  ],
+  "blogs": [
+    "556f429b9893290d00988bbf"
+  ],
+  "src": "",
+  "google_analytics": "",
+  "url": "",
+  "description": "",
+  "subdomain": "github-upload",
+  "name": "Github Upload",
+  "inactive_password": "2f7476856d",
+  "plan_trial": "business",
+  "id": "556f429a9893290d00988bba"
+}

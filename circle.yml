@@ -1,0 +1,6 @@
+machine:
+    node:
+
+test:
+    override:
+        - grunt test

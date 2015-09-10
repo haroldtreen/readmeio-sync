@@ -1,0 +1,21 @@
+{
+  "__v": 0,
+  "_id": "55845cfb899d6319008a8d49",
+  "initVersion": {
+    "_id": "557f1a407eafa719001d1b8e",
+    "version": "2.0"
+  },
+  "project": "556f429a9893290d00988bba",
+  "user": {
+    "_id": "556f41bcfc3aa80d00e1ab4e",
+    "username": "",
+    "name": "Harold Treen"
+  },
+  "createdAt": "2015-06-19T18:18:35.206Z",
+  "fullscreen": false,
+  "htmlmode": false,
+  "html": "",
+  "body": "This is the custom content!",
+  "slug": "posted-custom-page",
+  "title": "Puted Custom Page"
+}

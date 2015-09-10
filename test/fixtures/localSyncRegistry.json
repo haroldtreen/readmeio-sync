@@ -1,0 +1,82 @@
+{
+    "github-upload": {
+        "v2.0": {
+            "documentation": [
+                {
+                    "slug": "documentation",
+                    "title": "Documentation",
+                    "pages": [
+                        {
+                            "body": "test/github-upload/v2.0/documentation/Documentation/Getting Started with Github Upload.md",
+                            "excerpt": "This page will help you get started with Github Upload. You'll be up and running in a jiffy!",
+                            "title": "Getting Started with Github Upload",
+                            "slug": "getting-started"
+                        }
+                    ]
+                }
+            ],
+            "customPages": [
+                {
+                    "title": "This Is Custom Content",
+                    "body": "This is the custom content!",
+                    "html": "test/github-upload/v2.0/customPages/This Is Custom Content.html",
+                    "slug": "this-is-custom-content"
+                },
+                {
+                    "title": "More Custom Content",
+                    "body": "Here it is!",
+                    "html": "test/github-upload/v2.0/customPages/More Custom Content.html",
+                    "slug": "more-custom-content"
+                }
+            ],
+            "customContent": {
+                "appearance": {
+                    "html_body": "test/github-upload/v2.0/customContent/appearance/landing_page.html",
+                    "stylesheet": "test/github-upload/v2.0/customContent/appearance/styles.css"
+                }
+            }
+        },
+        "v1.0": {
+            "documentation": [
+                {
+                    "slug": "documentation",
+                    "title": "Documentation",
+                    "pages": [
+                        {
+                            "body": "test/github-upload/v1.0/documentation/Documentation/Getting Started with Github Upload.md",
+                            "excerpt": "This page will help you get started with Github Upload. You'll be up and running in a jiffy!",
+                            "title": "Getting Started with Github Upload",
+                            "slug": "getting-started"
+                        }
+                    ]
+                },
+                {
+                    "slug": "second-category",
+                    "title": "Second Category",
+                    "pages": [
+                        {
+                            "body": "test/github-upload/v1.0/documentation/Second Category/Second Category Doc.md",
+                            "excerpt": "Second Category Doc Description",
+                            "title": "Second Category Doc",
+                            "slug": "second-category-doc"
+                        }
+                    ]
+                }
+            ],
+            "customPages": [
+                {
+                    "title": "This Is Custom Content",
+                    "body": "This is the custom content!",
+                    "html": "test/github-upload/v1.0/customPages/This Is Custom Content.html",
+                    "slug": "this-is-custom-content"
+                }
+            ],
+            "customContent": {
+                "appearance": {
+                    "html_body": "test/github-upload/v1.0/customContent/appearance/landing_page.html",
+                    "stylesheet": "test/github-upload/v1.0/customContent/appearance/styles.css"
+                }
+            }
+        }
+    }
+}
