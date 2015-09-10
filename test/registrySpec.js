@@ -1,9 +1,11 @@
 'use strict';
 
 var assert = require('chai').assert;
-var Registry = require('../lib/registry');
 var js = require('jsonfile');
 var fs = require('fs');
+
+var Registry = require('../lib/registry');
+var RegistryBuilder = require('../lib/registryBuilder');
 
 var mockContents;
 var registry;
@@ -13,48 +15,50 @@ describe('Registry', function() {
         mockContents = js.readFileSync('test/fixtures/readmeContent.json');
     });
 
-    it('builds a skeleton when constructed', function() {
-        registry = new Registry('github-upload', ['v1.0', 'v2.0']);
-        var registrySkeleton = {
-            'github-upload': {
-                'v1.0': {},
-                'v2.0': {}
-            }
-        };
-
-        assert.deepEqual(registry.export(), registrySkeleton);
-    });
-
     it('can set its contents', function() {
-        registry = new Registry('other-project', ['v5.0']);
-
-        registry.import(mockContents);
+        registry = new Registry(mockContents);
 
         assert.equal(registry.projectName, 'github-upload');
         assert.deepEqual(registry.versions, ['v2.0', 'v1.0']);
         assert.equal(registry.export(), mockContents);
     });
 
-    it('can add versions', function() {
-        registry = new Registry('github-upload');
-        var expectedRegistry = {
-            'github-upload': {
-                'v1.0': {},
-                'v2.0': {},
-                'v3.0': {}
-            }
-        };
+    it('can diff itself against other registries', function() {
+        var registry1 = new Registry(js.readFileSync('test/fixtures/registry-data-state1.json'));
+        var registry2 = new Registry(js.readFileSync('test/fixtures/registry-data-state2.json'));
 
-        registry.addVersion('v1.0');
-        registry.addVersions(['v2.0', 'v3.0']);
+        var diffs = registry1.diff(registry2);
 
-        assert.deepEqual(registry.export(), expectedRegistry);
+        assert.lengthOf(diffs.deleted.allCustomPages, 2);
+        assert.lengthOf(diffs.deleted.allDocs, 3);
+        assert.lengthOf(diffs.deleted.allDocCategories, 1);
+
+        assert.lengthOf(diffs.added.allCustomPages, 2);
+        assert.lengthOf(diffs.added.allDocs, 3);
+        assert.lengthOf(diffs.added.allDocCategories, 1);
+
+        ['allCustomPages', 'allDocs', 'allDocCategories'].forEach(function(section) {
+            diffs.deleted[section].forEach(function(diff) { assert.match(diff.slug, /state2/); });
+            diffs.added[section].forEach(function(diff) { assert.match(diff.slug, /state1/); });
+        });
+    });
+
+    it('has helpers on diff object', function() {
+        var registry1 = new Registry(js.readFileSync('test/fixtures/registry-data-state1.json'));
+        var registry2 = new Registry(js.readFileSync('test/fixtures/registry-data-state2.json'));
+
+        var diffs = registry1.diff(registry2);
+
+        assert.isTrue(diffs.isAdded('allDocCategories', { slug: 'state1-category', version: 'v1.0'}), 'add missing');
+        assert.isTrue(diffs.isDeleted('allDocs', { slug: 'state2-page-v2', version: 'v2.0'}), 'delete missing');
+
+        assert.isFalse(diffs.isAdded('allDocs', { slug: 'state2-page-v2', version: 'v2.0'}), 'incorrect add found');
+        assert.isFalse(diffs.isDeleted('allCustomPages', { slug: 'state1-page-v2', version: 'v2.0'}), 'incorrect delete found');
     });
 
     describe('contents', function() {
         before(function() {
-            registry = new Registry();
-            registry.import(mockContents);
+            registry = new Registry(mockContents);
         });
 
         it('can pull documentation data', function() {
@@ -70,23 +74,33 @@ describe('Registry', function() {
         });
 
         it('can be saved to a file', function() {
-            var registryFilePath = 'test/tmp';
-            registry.save(registryFilePath);
+            var syncSettings = js.readFileSync('test/fixtures/syncPaths.json');
+            registry = RegistryBuilder.build(syncSettings);
 
-            var savedRegistryData = js.readFileSync(registryFilePath + '/syncRegistry.json');
-            var savedRegistry = new Registry();
+            var allDocs = registry.allDocs();
+            allDocs.forEach(function(doc) {
+                doc.slug = 'slug';
+                doc._contents = fs.readFileSync(doc.body).toString();
+            });
 
-            savedRegistry.import(savedRegistryData);
-            assert.deepEqual(registry.export(), savedRegistry.export());
+            registry.save();
 
-            fs.unlinkSync(registryFilePath + '/syncRegistry.json');
+            var saveStatus = allDocs.map(function(doc) {
+                var wasSaved = fs.readFileSync(doc.body).toString().match(/^slug: slug\n/);
+                fs.writeFileSync(doc.body, doc._contents);
+
+                return { name: doc.title, saved: !!wasSaved };
+            });
+
+            saveStatus.forEach(function(status) {
+                assert.isTrue(status.saved, status.name + ' was not saved');
+            });
         });
     });
 
     describe('content aggregation', function() {
         before(function() {
-            registry = new Registry();
-            registry.import(mockContents);
+            registry = new Registry(mockContents);
         });
 
         it('can pull documentation categories', function() {

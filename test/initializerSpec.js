@@ -7,13 +7,7 @@ var fs = require('fs');
 var Initializer = require('../lib/initializer');
 var UrlGenerator = require('../lib/urlGenerator');
 
-var urlGen;
-
 describe('Initializer', function() {
-    before(function() {
-        urlGen = new UrlGenerator('github-upload', 'v1.0');
-    });
-
     it('initializes project info', function(done) {
         var urlGenv1 = new UrlGenerator('github-upload', 'v1.0');
         var urlGenv2 = new UrlGenerator('github-upload', 'v2.0');
@@ -27,11 +21,15 @@ describe('Initializer', function() {
         scope.get(urlGenv1.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v1.json'));
         scope.get(urlGenv2.pagesPath()).reply(200, fs.readFileSync('test/fixtures/pages-v2.json'));
 
-        Initializer.initProjectInfo('test/tmp', { 'cookie': 'jar' }, function(registry) {
-            var files = fs.readdirSync('.');
+        var initializer = new Initializer('cookie');
+
+        initializer.initProjectInfo('test/tmp', function(registry) {
+            var files = fs.readdirSync('test/tmp');
 
             assert.isDefined(registry.version('v1.0'));
-            assert.isAbove(files.indexOf('syncRegistry.json'), -1, 'Registry file was not created');
+            assert.isAbove(files.indexOf('syncPaths.json'), -1, 'Registry settings was not created');
+
+            fs.unlink('test/tmp/syncPaths.json');
 
             done();
         });

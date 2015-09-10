@@ -1,0 +1,106 @@
+{
+    "github-upload": {
+        "v2.0": {
+            "documentation": [
+                {
+                    "slug": "documentation",
+                    "title": "Documentation",
+                    "pages": [
+                        {
+                            "title": "Getting Started with Github Upload",
+                            "slug": "getting-started"
+                        },
+                        {
+                            "title": "This is a doc",
+                            "slug": "this-is-a-doc"
+                        }
+                    ]
+                },
+                {
+                    "slug": "second-category",
+                    "title": "Second Category",
+                    "pages": [
+                        {
+                            "title": "Second Category Doc",
+                            "slug": "second-category-doc"
+                        },
+                        {
+                            "title": "Version 2 Doc",
+                            "slug": "version-2-doc"
+                        },
+                        {
+                            "title": "State2 Page v2",
+                            "slug": "state2-page-v2"
+                        }
+                    ]
+                }
+            ],
+            "customPages": [
+                {
+                    "title": "This Is Custom Content",
+                    "slug": "this-is-custom-content"
+                },
+                {
+                    "title": "More Custom Content",
+                    "slug": "more-custom-content"
+                },
+                {
+                    "title": "State2 Page v2",
+                    "slug": "state2-page-v2"
+                }
+            ]
+        },
+        "v1.0": {
+            "documentation": [
+                {
+                    "slug": "documentation",
+                    "title": "Documentation",
+                    "pages": [
+                        {
+                            "title": "Getting Started with Github Upload",
+                            "slug": "getting-started"
+                        },
+                        {
+                            "title": "This is a doc",
+                            "slug": "this-is-a-doc"
+                        }
+                    ]
+                },
+                {
+                    "slug": "second-category",
+                    "title": "Second Category",
+                    "pages": [
+                        {
+                            "title": "Second Category Doc",
+                            "slug": "second-category-doc"
+                        },
+                        {
+                            "title": "State 1 Page",
+                            "slug": "state2-page"
+                        }
+                    ]
+                },
+                {
+                    "slug": "state2-category",
+                    "title": "State2 Category",
+                    "pages": [
+                        { 
+                            "slug": "state2-category-page",
+                            "title": "State 1 Category Page"
+                        }
+                    ]
+                }
+            ],
+            "customPages": [
+                {
+                    "title": "This Is Custom Content",
+                    "slug": "this-is-custom-content"
+                },
+                {
+                    "title": "State2 Page",
+                    "slug": "state2-page"
+                }
+            ]
+        }
+    }
+}

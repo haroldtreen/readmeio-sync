@@ -1,0 +1,14 @@
+{
+    "github-upload": {
+        "v1.0": {
+            "documentation": "test/fixtures/project-fixture/v1.0/documentation",
+            "customPages": "test/fixtures/project-fixture/v1.0/customPages",
+            "customContent": {
+                "appearance": {
+                    "html_body": "test/fixtures/project-fixture/v1.0/customContent/html_body.html",
+                    "stylesheet": "test/fixtures/project-fixture/v1.0/customContent/stylesheet.css"
+                }
+            }
+        }
+    }
+}

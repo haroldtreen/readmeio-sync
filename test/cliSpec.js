@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var js = require('jsonfile');
 var mockery = require('mockery');
 var assert = require('chai').assert;
@@ -18,10 +19,9 @@ describe('CLI', function() {
         mockery.disable();
     });
 
-    var initMock = {
-        initProjectInfo: function() {
-            initMock.called = true;
-        }
+    var initMock = function() {};
+    initMock.prototype.initProjectInfo = function() {
+        initMock.called = true;
     };
 
     var authMock = {
@@ -36,9 +36,10 @@ describe('CLI', function() {
         uploadMock.called = true;
     };
 
-    var registryMock = function() {};
-    registryMock.prototype.import = function() {
-        registryMock.importCalled = true;
+    var registryMock = function(data) {
+        if (Object.keys(data)[0] === 'github-upload') {
+            registryMock.importCalled = true;
+        }
     };
 
     describe('upload', function() {
@@ -57,13 +58,13 @@ describe('CLI', function() {
 
             assert.isTrue(authMock.called, 'Authentication didn\'t occur');
             assert.isTrue(uploadMock.called, 'Upload didn\'t occur');
-            assert.isTrue(registryMock.importCalled, 'Registry import didn\'t occur');
+            assert.isTrue(registryMock.importCalled, 'Registry was not created');
         });
 
         it('can accept a production flag', function() {
             var config = require('../lib/config');
-            mockery.registerMock('./authenticator', { createSession: function(){} });
-            
+            mockery.registerMock('./authenticator', { createSession: function() {} });
+
             Cli = require('../lib/cli');
 
             Cli.upload({ production: true });
@@ -74,12 +75,14 @@ describe('CLI', function() {
         });
     });
 
-    describe('config command', function(){
+    describe('config command', function() {
         it('allows you to generate a config file', function() {
             Cli = require('../lib/cli');
+            var configPath = __dirname + '/fixtures/syncConfig.json';
+
+            fs.unlink(configPath);
             Cli.config({ production: 'github-upload-production', staging: 'github-upload-staging'});
 
-            var configPath = __dirname + '/fixtures/syncConfig.json';
             var config = js.readFileSync(configPath);
 
             assert.equal(config.projectNames.production, 'github-upload-production');
@@ -92,6 +95,28 @@ describe('CLI', function() {
                 }
             });
         });
+    });
+
+    describe('clean command', function() {
+        var cleanerMock = function() {};
+        cleanerMock.prototype.cleanAll = function() {
+            cleanerMock.called = true;
+        };
+
+        it('allows you to clean docs, categories and pages', function() {
+            cleanerMock.called = false;
+            authMock.called = false;
+
+            mockery.registerMock('./cleaner', cleanerMock);
+            mockery.registerMock('./authenticator', authMock);
+
+            Cli = require('../lib/cli');
+            Cli.clean({});
+
+            assert.isTrue(authMock.called, 'Authentication didn\'t occur');
+            assert.isTrue(cleanerMock.called, 'Clean didn\'t occur');
+        });
+
     });
 
     it('has an init command', function() {

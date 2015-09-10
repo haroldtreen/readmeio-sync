@@ -18,28 +18,30 @@ describe('UrlGenerator', function() {
         assert.equal(urlGen.apiBase(), 'https://dash.readme.io/api');
     });
 
-    it('knows the docs url', function() {
-        assert.equal(urlGen.docsUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs');
-    });
-
-    it('knows the versions url', function() {
-        assert.equal(urlGen.versionsUrl(), 'https://dash.readme.io/api/projects-v/github-upload');
-    });
-
-    it('knows the content url', function() {
-        assert.equal(urlGen.contentUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0');
-    });
-
-    it('knows the pages url', function() {
-        assert.equal(urlGen.pagesUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
-    });
-
-    it('can pass a slug to pages', function() {
-        assert.equal(urlGen.pagesUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
-    });
-
     it('pulls api base from config', function() {
         assert.equal(urlGen.base(), config.apiBase);
+    });
+
+    describe('get urls', function() {
+        it('knows the docs url', function() {
+            assert.equal(urlGen.docsUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs');
+        });
+
+        it('knows the versions url', function() {
+            assert.equal(urlGen.versionsUrl(), 'https://dash.readme.io/api/projects-v/github-upload');
+        });
+
+        it('knows the content url', function() {
+            assert.equal(urlGen.contentUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0');
+        });
+
+        it('knows the pages url', function() {
+            assert.equal(urlGen.pagesUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
+        });
+
+        it('can pass a slug to pages', function() {
+            assert.equal(urlGen.pagesUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
+        });
     });
 
     describe('post/put urls', function() {
@@ -76,6 +78,35 @@ describe('UrlGenerator', function() {
         it('can be generated for content put', function() {
             var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0';
             assert.equal(urlGen.contentPutUrl(), expectedUrl);
+        });
+    });
+
+    describe('delete urls', function() {
+        it('knows the doc url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/docs/docs-slug';
+            assert.equal(urlGen.docsDeleteUrl('docs-slug'), expectedUrl);
+        });
+
+        it('knows the doc categories url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/category/category-slug';
+            assert.equal(urlGen.docCategoriesDeleteUrl('category-slug'), expectedUrl);
+        });
+
+        it('knows the pages url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/page/pages-slug';
+            assert.equal(urlGen.pagesDeleteUrl('pages-slug'), expectedUrl);
+        });
+    });
+
+    describe('ordering urls', function() {
+        it('knows the categories order url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/reorder-categories';
+            assert.equal(urlGen.docCategoriesOrderUrl(), expectedUrl);
+        });
+
+        it('knows the pages order url', function() {
+            var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/reorder-pages';
+            assert.equal(urlGen.docsOrderUrl(), expectedUrl);
         });
     });
 });
