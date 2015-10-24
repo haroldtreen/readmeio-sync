@@ -1,5 +1,7 @@
 # readmeio-sync
-A tool for making local Readme.io development a breeze! 
+A tool for making local Readme.io development a breeze!
+
+[![Code Climate](https://codeclimate.com/github/mobify/readmeio-sync/badges/gpa.svg)](https://codeclimate.com/github/mobify/readmeio-sync)
 
 ### 1) Tool Setup:
 When readmeio-sync becomes available on npm, this process will be less 'linky'.
