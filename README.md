@@ -2,6 +2,7 @@
 A tool for making local Readme.io development a breeze!
 
 [![Code Climate](https://codeclimate.com/github/mobify/readmeio-sync/badges/gpa.svg)](https://codeclimate.com/github/mobify/readmeio-sync)
+[![Coverage Status](https://coveralls.io/repos/mobify/readmeio-sync/badge.svg?branch=master&service=github)](https://coveralls.io/github/mobify/readmeio-sync?branch=master)
 
 ### 1) Tool Setup:
 When readmeio-sync becomes available on npm, this process will be less 'linky'.
