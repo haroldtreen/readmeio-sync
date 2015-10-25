@@ -19,11 +19,11 @@ describe('Registry Builder', function() {
 
             RegistryBuilder.build(buildSettings);
 
-            var settingsV1 = buildSettings['github-upload']['v1.0'];
+            var settingsV2 = buildSettings['github-upload']['v2.0'];
 
-            assert.equal(docsSectionMock.lastCall.args[0], settingsV1.documentation);
-            assert.equal(customPagesSectionMock.lastCall.args[0], settingsV1.customPages);
-            assert.equal(customContentSectionMock.lastCall.args[0], settingsV1.customContent);
+            assert.equal(docsSectionMock.lastCall.args[0], settingsV2.documentation);
+            assert.equal(customPagesSectionMock.lastCall.args[0], settingsV2.customPages);
+            assert.equal(customContentSectionMock.lastCall.args[0], settingsV2.customContent);
 
             simple.restore();
         });

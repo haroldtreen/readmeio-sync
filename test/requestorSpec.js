@@ -8,6 +8,7 @@ var fs = require('fs');
 var UrlGenerator = require('../lib/urlGenerator');
 var Requestor = require('../lib/requestor');
 var Registry = require('../lib/registry');
+var RegistryBuilder = require('../lib/registryBuilder');
 
 var requestor;
 
@@ -107,7 +108,7 @@ describe('Requestor', function() {
         var registry;
 
         beforeEach(function() {
-            registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
+            registry = RegistryBuilder.build(js.readFileSync('test/fixtures/syncPaths.json'));
         });
 
         it('can post/put new doc categories', function(done) {
@@ -149,7 +150,7 @@ describe('Requestor', function() {
                 var urlGen = doc.version === 'v1.0' ? urlGen1 : urlGen2;
                 var slug = doc.slug || doc.categorySlug;
 
-                var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString(), type: doc.type };
+                var requestBody = { title: doc.title, excerpt: doc.excerpt, body: fs.readFileSync(doc.body).toString() };
                 scope[doc.method](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
             });
 
@@ -177,7 +178,7 @@ describe('Requestor', function() {
                 var urlFn = page.slug ? 'pagesPutPath' : 'pagesPostPath';
                 var urlGen = page.version === 'v1.0' ? urlGen1 : urlGen2;
 
-                var requestBody = { title: page.title, html: fs.readFileSync(page.html).toString(), htmlmode: true, fullscreen: true, body: 'body' }; //, version: page.version.replace('v', ''), subdomain: 'github-upload' };
+                var requestBody = { title: page.title, html: fs.readFileSync(page.html).toString(), htmlmode: true, fullscreen: true, body: 'body' };
                 scope[page.method](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
             });
 
@@ -188,7 +189,7 @@ describe('Requestor', function() {
                     assert.equal(page.title, postResponse.title);
                     assert.equal(page.slug, postResponse.slug);
                     assert.isUndefined(page.subdomain);
-                    assert.equal(fs.readFileSync(page.body).toString(), postResponse.body);
+                    assert.equal(fs.readFileSync(page.html).toString(), postResponse.html);
                 });
 
                 assert.isTrue(scope.isDone());
@@ -321,5 +322,3 @@ describe('Requestor', function() {
         });
     });
 });
-
-

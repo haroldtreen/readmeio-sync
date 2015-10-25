@@ -64,7 +64,7 @@ RequestMocker.prototype.mockDocsUpload = function(scope, remoteRegistry) {
         var urlGen = doc.version === 'v1.0' ? self.urlGen1 : self.urlGen2;
         var slug = isAdded ? doc.categorySlug : doc.slug;
 
-        var requestBody = { title: doc.title, excerpt: doc.excerpt, body: utils.mdToReadme(utils.mdBody(fs.readFileSync(doc.body).toString())), type: doc.type };
+        var requestBody = { title: doc.title, excerpt: doc.excerpt, body: utils.mdToReadme(utils.mdBody(fs.readFileSync(doc.body).toString())) };
 
         scope[requestFn](urlGen[urlFn](slug), requestBody).reply(200, postResponse);
 
