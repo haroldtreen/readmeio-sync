@@ -18,7 +18,7 @@ program
 program
     .command('upload')
     .description('uploads the files specified in syncRegistry.json to readmeio')
-    .option('-P, --production', 'Use production project')
+    .option('-p, --production', 'Use production project')
     .action(function(options) {
         Cli.upload(options);
     });
@@ -35,7 +35,8 @@ program
 program
     .command('clean-remote')
     .description('Deletes all Readme.io content not listed in the registry')
-    .option('-P, --production', 'Clean the production project')
+    .option('-p, --production', 'Clean the production project')
+    .option('-a, --aggressive', 'Clean all docs')
     .action(function(options) {
         Cli.clean(options);
     });
