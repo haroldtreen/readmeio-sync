@@ -36,9 +36,9 @@ readmeio-sync config -s <staging-project-slug> -p <production-project-slug>
 This will generate the `syncConfig.json` file with the proper keys set.
 
 ### 4) Project Initialization:
-Initialization allows you to download all your existing content from Readme.io. 
+Initialization allows you to download all your existing content from Readme.io.
 
-It also creates a new `syncPaths.json` file which represents the structure of your documenation and links to all your local content directories.
+It also creates a new `syncPaths.json` file which represents the structure of your documentation and links to all your local content directories.
 
 Initialize using the `init` command.
 
@@ -76,12 +76,22 @@ readmeio-sync clean-remote [--production]
 
 This will look at the state of your project, compare it to the state of your documentation, and delete whatever is not specified locally. This will be done for staging unless the production flag is set.
 
+Sometimes 'ghost' documents can appear in Readme. These are documents that have been created but are no longer shown in the list of documentation. Since you can't see them in the list of documentation, they can't be deleted. Additionally, attempting to create a new document with the same slug as a ghost doc will cause a document with a numbered slug to be created instead (eg. getting-started -> getting-started-1).
+
+To make sure none of your docs have slugs associated to ghost documents, an `--aggressive` flag can be set.
+
+When this flag is set, `readmeio-sync` will clean documents that only exist in Readme AND docs that only exist locally (and perhaps haven't been uploaded due to slug naming conflicts).
+
+```
+readmeio-sync clean-remote [--aggressive]
+```
+
 *(**Note**: If you remote clean a project and it removes all the documentation, Readmeio will not allow you to go into the documentation section. You will need to upload new content with the `readmeio-sync upload` command to get it working again.)*
 
 
 ------
 ## The Sync Paths File
-`readmeio-sync` tracks all your content using the `syncPaths.json` file. This file is created during initialization. 
+`readmeio-sync` tracks all your content using the `syncPaths.json` file. This file is created during initialization.
 
 Here is an example registy file:
 
@@ -190,7 +200,7 @@ slug: important-doc
 
  ```javascript
  	// This code block will get converted to readmeio format!
- 	
+
  	var foo = 'bar';
  ```
 ```
@@ -218,7 +228,7 @@ Custom pages are extracted from the specified directory. In the directory, your 
 ```
 - <root_folder>
 	* <page_title>.html
-	* ... 
+	* ...
 ```
 
 **Example:**

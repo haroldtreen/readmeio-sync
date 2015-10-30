@@ -1,16 +1,21 @@
 {
   "name": "readmeio-sync",
-  "version": "1.0.0",
+  "version": "0.6.0",
   "description": "Sync documentation between Readme.io and your Github Repo",
   "scripts": {
     "test": "grunt test"
+  },
+  "repository" : {
+      "type" : "git",
+      "url" : "https://github.com/mobify/readmeio-sync.git"
   },
   "keywords": [
     "readme.io",
     "sync",
     "markdown",
     "docs",
-    "documentation"
+    "documentation",
+    "github"
   ],
   "author": "Mobify Inc.",
   "license": "ISC",
