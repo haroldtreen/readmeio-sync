@@ -268,7 +268,8 @@ The custom content object let's you upload a stylesheet (Dashboard > Appearance 
 - `stylesheet`: Path to a css stylesheet
 
 ---------
-### Known Issues
+### [Known Issues](https://github.com/mobify/readmeio-sync/issues)
+
 1. Doing a remote-clean when you have no documentation in your `syncPaths.json` file will cause all your documentation on readme.io to be deleted (after all, you are saying "delete all the things I don't have specified locally"...which is nothing!). Having no documentation causes Readme.io to break (you can't enter the documentation section of the site). To fix this you will have to add a document to your `syncPaths.json` and upload it...or get in contact with Readme.io and admit you were using internal APIs (OOPS!).
 
 1. Custom pages are not versioned. Ideally they would be, and that's why the "customPages" section exists in each version of the `syncPaths.json`. When you initialize a project, the same custom pages will be downloaded for both versions and specified separately in the `syncPaths.json`. If you try and upload while the pages are specified in both versions, duplicates will be created. <br/><br/> **You can fix this by:**
