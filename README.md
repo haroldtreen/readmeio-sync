@@ -152,7 +152,7 @@ Each version has a documentation field, which holds a path to the folder where t
 ```
 
 ##### Documentation Folder Structure
-Documentation is automtically extracted from your filesystem. All you need to do is provide the path to the directory where the documentation for that version is.
+Documentation is automatically extracted from your filesystem. All you need to do is provide the path to the directory where the documentation for that version is.
 
 The directory should have the following structure:
 
@@ -183,6 +183,7 @@ The directory should have the following structure:
 \- = Directory
 
 The order numbers where determine the order that the documents/categories are organized.
+If you don't want a document to be uploaded, remove the order number from the beginning of its name.
 
 ##### Document File Structure
 Readmeio-sync does special parsing of your markdown files to:
@@ -198,12 +199,13 @@ slug: important-doc
 
 # Content!
 
- ```javascript
+ ` ``javascript
  	// This code block will get converted to readmeio format!
 
  	var foo = 'bar';
- ```
+ ` ``
 ```
+
 Make sure to include an `excerpt` and `slug` descriptor at the top of all your files, followed by a newline.
 
 
@@ -267,7 +269,9 @@ The custom content object let's you upload a stylesheet (Dashboard > Appearance 
 
 ---------
 ### Known Issues
-1. Doing a remote-clean when you have no documentation in your `syncPaths.json` file will cause all your documentation on readme.io to be deleted (after all, you are saying "delete all the things I don't have specified locally"...which is nothing!). Having no documentation causes Readme.io to break (you can't enter the documentation section of the site). To fix this you will have to add a document to your `syncRegistry.json` and upload it...or get in contact with Readme.io and admit you were using internal APIs (OOPS!).
+1. Doing a remote-clean when you have no documentation in your `syncPaths.json` file will cause all your documentation on readme.io to be deleted (after all, you are saying "delete all the things I don't have specified locally"...which is nothing!). Having no documentation causes Readme.io to break (you can't enter the documentation section of the site). To fix this you will have to add a document to your `syncPaths.json` and upload it...or get in contact with Readme.io and admit you were using internal APIs (OOPS!).
 
-1. Custom pages are not versioned. Ideally they would be, and that's why the "customPages" section exists in each version of the `syncRegistry.json`. When you initialize a project, the same custom pages will be downloaded for both versions and specified seperately in the `syncRegistry.json`. If you try and upload while the pages are specified in both versions, duplicates will be created. <br/><br/> **You can fix this by:**
+1. Custom pages are not versioned. Ideally they would be, and that's why the "customPages" section exists in each version of the `syncPaths.json`. When you initialize a project, the same custom pages will be downloaded for both versions and specified separately in the `syncPaths.json`. If you try and upload while the pages are specified in both versions, duplicates will be created. <br/><br/> **You can fix this by:**
 <br />1. Deleting all the custom pages in all versions except one (however if you `clean-remote` with this configuration, all custom pages will be deleted and you'll have to upload again). <br/>2. `clean-remote` after each upload.
+
+1. This tool is still in beta and may burn your project to the ground. Test it out, log issues, submit PRs.
