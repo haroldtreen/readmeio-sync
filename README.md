@@ -5,7 +5,13 @@ A tool for making local Readme.io development a breeze!
 [![Coverage Status](https://coveralls.io/repos/mobify/readmeio-sync/badge.svg?branch=master&service=github)](https://coveralls.io/github/mobify/readmeio-sync?branch=master)
 
 ### 1) Tool Setup:
-When readmeio-sync becomes available on npm, this process will be less 'linky'.
+
+**For Regular Use:**
+```
+npm install -g readmeio-sync
+```
+
+**For Development & Testing:**
 
 ```
 git clone git@github.com:mobify/readmeio-sync.git
