@@ -49,6 +49,7 @@ describe('Registry Builder', function() {
                     assert.equal(page.title, 'V1-C' + cIdx + '-P' + pIdx);
                     assert.equal(page.excerpt, 'Version 1, Category ' + cIdx + ', Page ' + pIdx);
                     assert.equal(page.body, path.join(docsPath, category.order + '-' + category.title, page.order + '-' + page.title + '.md'));
+                    assert.match(path.basename(page.body), RegistryBuilder.regex.pageDescriptor);
                     assert.equal(page.order, pIdx);
                 });
             });
