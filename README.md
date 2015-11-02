@@ -1,8 +1,9 @@
 # readmeio-sync
-A tool for making local Readme.io development a breeze!
+A tool for managing your `Readme.io` documentation locally.
 
 [![Code Climate](https://codeclimate.com/github/mobify/readmeio-sync/badges/gpa.svg)](https://codeclimate.com/github/mobify/readmeio-sync)
 [![Coverage Status](https://coveralls.io/repos/mobify/readmeio-sync/badge.svg?branch=master&service=github)](https://coveralls.io/github/mobify/readmeio-sync?branch=master)
+[![npm version](https://badge.fury.io/js/readmeio-sync.svg)](https://badge.fury.io/js/readmeio-sync)
 
 ### 1) Tool Setup:
 
@@ -22,31 +23,29 @@ npm link readmeio-sync
 ```
 
 ### 2) Credential Setup:
-The script will log into Readme.io for you in order to upload files. For this to work, it needs your credentials!
+This tool logs into Readme.io for you in order to upload files. For this to work, it needs your credentials!
 
-Tell `readmeio-sync` your credentials by setting the following environment variables like so.
+The `README_EMAIL` and `README_PASSWORD` environment variables need to be set for `readmeio-sync` to know your credentials.
 
-```
+```bash
 export README_EMAIL=<readmeio_account_email>
 export README_PASSWORD=<readmeio_account_password>
 ```
 
 ### 3) Config Setup:
-`readmeio-sync` differentiates between your production/staging projects through the `syncConfig.json` file.
+`readmeio-sync` differentiates between your production/staging projects using the `syncConfig.json` file.
 
 You can set the name of these projects using the `config` command.
 
 ```
 readmeio-sync config -s <staging-project-slug> -p <production-project-slug>
 ```
-This will generate the `syncConfig.json` file with the proper keys set.
+This will generate a `syncConfig.json` file with the proper keys set.
 
 ### 4) Project Initialization:
 Initialization allows you to download all your existing content from Readme.io.
 
 It also creates a new `syncPaths.json` file which represents the structure of your documentation and links to all your local content directories.
-
-Initialize using the `init` command.
 
 ```
 readmeio-sync init
@@ -57,7 +56,7 @@ This will use the `production` slug that you should have configured in step 3.
 ### 5) Project Upload:
 Upload allows you to push updated content to Readme.io. This might include:
 
-* New categories, docs or custom pages you've added to the registry files.
+* New categories, docs or custom pages.
 * Changes in content files.
 * Changes to document titles or excerpts.
 * Changes to the way you want to order content.
@@ -82,7 +81,9 @@ readmeio-sync clean-remote [--production]
 
 This will look at the state of your project, compare it to the state of your documentation, and delete whatever is not specified locally. This will be done for staging unless the production flag is set.
 
-Sometimes 'ghost' documents can appear in Readme. These are documents that have been created but are no longer shown in the list of documentation. Since you can't see them in the list of documentation, they can't be deleted. Additionally, attempting to create a new document with the same slug as a ghost doc will cause a document with a numbered slug to be created instead (eg. getting-started -> getting-started-1).
+Sometimes 'ghost' documents can appear in Readme. These are documents that have been created but are no longer shown in the list of documentation. Since you can't see them in the list of documentation, they can't be deleted.
+
+Additionally, attempting to create a new document with the same slug as a ghost doc will cause a document with a numbered slug to be created instead (eg. getting-started -> getting-started-1).
 
 To make sure none of your docs have slugs associated to ghost documents, an `--aggressive` flag can be set.
 
@@ -92,14 +93,14 @@ When this flag is set, `readmeio-sync` will clean documents that only exist in R
 readmeio-sync clean-remote [--aggressive]
 ```
 
-*(**Note**: If you remote clean a project and it removes all the documentation, Readmeio will not allow you to go into the documentation section. You will need to upload new content with the `readmeio-sync upload` command to get it working again.)*
+**Note**: If you remote clean a project and it removes all the documentation, Readmeio will not allow you to go into the documentation section. You will need to upload new content with the `readmeio-sync upload` command to get it working again.)*
 
 
 ------
 ## The Sync Paths File
 `readmeio-sync` tracks all your content using the `syncPaths.json` file. This file is created during initialization.
 
-Here is an example registy file:
+Here is an example `syncPaths.json` file:
 
 ```json
 {
@@ -139,6 +140,8 @@ The top level key is the slug for the project the registry is representing.
 #### Versions
 Within the top level object are all the hosted versions of the documentation.
 
+*This tool is currently not capable of creating new versions. You will need to ensure any versions listed in this file already exist on readme.io*
+
 ```json
 "adaptive-restructing-test": {
 	"v2.0": {...},
@@ -151,9 +154,9 @@ Each version has a documentation field, which holds a path to the folder where t
 
 ```json
 "v2.0": {
-	"documentation": 'adativejs-staging/v2.0/documentation,
+	"documentation": "adativejs-staging/v2.0/documentation",
 	...
-}
+},
 ...
 ```
 
@@ -185,10 +188,11 @@ The directory should have the following structure:
     - ...
 ```
 
-\* = File<br>
+\* = File  
 \- = Directory
 
 The order numbers where determine the order that the documents/categories are organized.
+
 If you don't want a document to be uploaded, remove the order number from the beginning of its name.
 
 ##### Document File Structure
@@ -213,7 +217,6 @@ slug: important-doc
 ```
 
 Make sure to include an `excerpt` and `slug` descriptor at the top of all your files, followed by a newline.
-
 
 
 #### Custom Pages
