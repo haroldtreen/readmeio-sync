@@ -62,15 +62,6 @@ describe('Registry Builder', function() {
             assert.equal(category.slug, 'category-1');
             assert.equal(category.order, 1);
         });
-
-        it('can parse pages', function() {
-            var page = RegistryBuilder.parseMdFile('test/fixtures/project-fixture/v1.0/documentation/1-Category 1/1-V1-C1-P1.md');
-
-            assert.equal(page.title, 'V1-C1-P1');
-            assert.equal(page.order, 1);
-            assert.equal(page.excerpt, 'Version 1, Category 1, Page 1');
-            assert.equal(page.slug, 'v1-c1-p1');
-        });
     });
 
     describe('custom pages', function() {
