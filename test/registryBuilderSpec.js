@@ -6,6 +6,7 @@ var assert = require('chai').assert;
 var simple = require('simple-mock');
 
 var RegistryBuilder = require('../lib/registryBuilder');
+var Document = require('../lib/document');
 
 describe('Registry Builder', function() {
 
@@ -49,18 +50,10 @@ describe('Registry Builder', function() {
                     assert.equal(page.title, 'V1-C' + cIdx + '-P' + pIdx);
                     assert.equal(page.excerpt, 'Version 1, Category ' + cIdx + ', Page ' + pIdx);
                     assert.equal(page.body, path.join(docsPath, category.order + '-' + category.title, page.order + '-' + page.title + '.md'));
-                    assert.match(path.basename(page.body), RegistryBuilder.regex.pageDescriptor);
+                    assert.match(path.basename(page.body), Document.filenameRegex);
                     assert.equal(page.order, pIdx);
                 });
             });
-        });
-
-        it('can parse categories', function() {
-            var category = RegistryBuilder.parseCategory('1-Category 1');
-
-            assert.equal(category.title, 'Category 1');
-            assert.equal(category.slug, 'category-1');
-            assert.equal(category.order, 1);
         });
     });
 
