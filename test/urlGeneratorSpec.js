@@ -109,4 +109,54 @@ describe('UrlGenerator', function() {
             assert.equal(urlGen.docsOrderUrl(), expectedUrl);
         });
     });
+
+    describe('maps', function() {
+        it('document methods', function() {
+            var methods = UrlGenerator.methodsForType('document');
+            var expectedMethods = {
+                get: 'docsGetUrl',
+                post: 'docsPostUrl',
+                put: 'docsPutUrl',
+                delete: 'docsDeleteUrl',
+                order: 'docsOrderUrl'
+            };
+
+            assert.deepEqual(methods, expectedMethods);
+        });
+
+        it('category methods', function() {
+            var methods = UrlGenerator.methodsForType('category');
+            var expectedMethods = {
+                get: 'docCategoriesGetUrl',
+                post: 'docCategoriesPostUrl',
+                put: 'docCategoriesPutUrl',
+                delete: 'docCategoriesDeleteUrl',
+                order: 'docCategoriesOrderUrl'
+            };
+
+            assert.deepEqual(methods, expectedMethods);
+        });
+
+        it('content methods', function() {
+            var methods = UrlGenerator.methodsForType('content');
+            var expectedMethods = {
+                get: 'contentGetUrl',
+                put: 'contentPutUrl',
+            };
+
+            assert.deepEqual(methods, expectedMethods);
+        });
+
+        it('page methods', function() {
+            var methods = UrlGenerator.methodsForType('customPage');
+            var expectedMethods = {
+                get: 'pagesGetUrl',
+                post: 'pagesPostUrl',
+                put: 'pagesPutUrl',
+                delete: 'pagesDeleteUrl'
+            };
+
+            assert.deepEqual(methods, expectedMethods);
+        });
+    });
 });
