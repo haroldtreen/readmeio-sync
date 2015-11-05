@@ -1,45 +1,44 @@
 [
   {
-    "__v": 1,
-    "_id": "557f1a417eafa719001d1b8f",
+    "__v": 2,
+    "_id": "556f429a9893290d00988bbe",
     "createdAt": "2015-06-03T18:08:26.998Z",
     "from_sync": false,
     "order": 9999,
     "pages": [
       {
-        "version": "557f1a407eafa719001d1b8e",
-        "category": "557f1a417eafa719001d1b8f",
         "__v": 0,
-        "project": "556f429a9893290d00988bba",
-        "user": "556f41bcfc3aa80d00e1ab4e",
-        "updates": [],
-        "_id": "557f1a417eafa719001d1b91",
-        "createdAt": "2015-06-03T18:08:27.784Z",
-        "link_external": false,
-        "link_url": "",
-        "githubsync": "",
-        "sync_unique": "",
-        "hidden": false,
+        "_id": "556f429b9893290d00988bc0",
         "api": {
           "auth": "required",
           "params": [],
           "url": ""
         },
-        "order": 0,
         "body": "This is where you show your users how to set it up. You can use code samples, like this:\n[block:code]\n{\n  \"codes\": [\n    {\n      \"code\": \"$http.post('/someUrl', data).success(successCallback);\\n\\nalert('test');\",\n      \"language\": \"javascript\"\n    }\n  ]\n}\n[/block]\nTry dragging a block from the right to see how easy it is to add more content!",
+        "category": "556f429a9893290d00988bbe",
+        "createdAt": "2015-06-03T18:08:27.784Z",
         "excerpt": "This page will help you get started with Github Upload. You'll be up and running in a jiffy!",
+        "githubsync": "",
+        "hidden": false,
+        "link_external": false,
+        "link_url": "",
+        "order": 0,
+        "project": "556f429a9893290d00988bba",
         "slug": "getting-started",
+        "sync_unique": "",
+        "title": "Getting Started with Github Upload",
         "type": "basic",
-        "title": "Getting Started with Github Upload"
+        "updates": [],
+        "user": "556f41bcfc3aa80d00e1ab4e",
+        "version": "556f429a9893290d00988bbd"
       },
       {
-        "version": "557f1a407eafa719001d1b8e",
-        "category": "557f1a417eafa719001d1b8f",
         "project": "556f429a9893290d00988bba",
+        "version": "556f429a9893290d00988bbd",
+        "category": "556f429a9893290d00988bbe",
+        "_id": "557f1a02e211d20d006013e4",
         "user": "556f41bcfc3aa80d00e1ab4e",
-        "__v": 0,
         "updates": [],
-        "_id": "557f1a417eafa719001d1b92",
         "createdAt": "2015-06-15T18:31:30.387Z",
         "link_external": false,
         "link_url": "",
@@ -73,30 +72,30 @@
         "excerpt": "This is that docs Description",
         "slug": "this-is-a-doc",
         "type": "basic",
-        "title": "This is a doc"
+        "title": "This is a doc",
+        "__v": 0
       }
     ],
     "project": "556f429a9893290d00988bba",
     "reference": false,
     "slug": "documentation",
     "title": "Documentation",
-    "version": "557f1a407eafa719001d1b8e"
+    "version": "556f429a9893290d00988bbd"
   },
   {
-    "__v": 2,
-    "_id": "557f1a417eafa719001d1b90",
+    "__v": 1,
+    "_id": "557f1a0be211d20d006013e6",
     "createdAt": "2015-06-15T18:31:39.612Z",
     "from_sync": false,
     "order": 9999,
     "pages": [
       {
-        "version": "557f1a407eafa719001d1b8e",
-        "category": "557f1a417eafa719001d1b90",
         "project": "556f429a9893290d00988bba",
+        "version": "556f429a9893290d00988bbd",
+        "category": "557f1a0be211d20d006013e6",
+        "_id": "557f1a25e211d20d006013e7",
         "user": "556f41bcfc3aa80d00e1ab4e",
-        "__v": 0,
         "updates": [],
-        "_id": "557f1a417eafa719001d1b93",
         "createdAt": "2015-06-15T18:32:05.890Z",
         "link_external": false,
         "link_url": "",
@@ -130,49 +129,7 @@
         "excerpt": "Second Category Doc Description",
         "slug": "second-category-doc",
         "type": "basic",
-        "title": "Second Category Doc"
-      },
-      {
-        "project": "556f429a9893290d00988bba",
-        "version": "557f1a407eafa719001d1b8e",
-        "category": "557f1a417eafa719001d1b90",
-        "_id": "557f1a677eafa719001d1b94",
-        "user": "556f41bcfc3aa80d00e1ab4e",
-        "updates": [],
-        "createdAt": "2015-06-15T18:33:11.914Z",
-        "link_external": false,
-        "link_url": "",
-        "githubsync": "",
-        "sync_unique": "",
-        "hidden": false,
-        "api": {
-          "results": {
-            "codes": [
-              {
-                "status": 200,
-                "language": "json",
-                "code": "{}",
-                "name": ""
-              },
-              {
-                "status": 400,
-                "language": "json",
-                "code": "{}",
-                "name": ""
-              }
-            ]
-          },
-          "settings": "",
-          "auth": "required",
-          "params": [],
-          "url": ""
-        },
-        "order": 999,
-        "body": "New content for version 2",
-        "excerpt": "Version 2 doc Description",
-        "slug": "version-2-doc",
-        "type": "basic",
-        "title": "Version 2 Doc",
+        "title": "Second Category Doc",
         "__v": 0
       }
     ],
@@ -180,6 +137,6 @@
     "reference": false,
     "slug": "second-category",
     "title": "Second Category",
-    "version": "557f1a407eafa719001d1b8e"
+    "version": "556f429a9893290d00988bbd"
   }
 ]

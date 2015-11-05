@@ -24,23 +24,23 @@ describe('UrlGenerator', function() {
 
     describe('get urls', function() {
         it('knows the docs url', function() {
-            assert.equal(urlGen.docsUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs');
+            assert.equal(urlGen.docsGetUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs');
         });
 
         it('knows the versions url', function() {
-            assert.equal(urlGen.versionsUrl(), 'https://dash.readme.io/api/projects-v/github-upload');
+            assert.equal(urlGen.versionsGetUrl(), 'https://dash.readme.io/api/projects-v/github-upload');
         });
 
         it('knows the content url', function() {
-            assert.equal(urlGen.contentUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0');
+            assert.equal(urlGen.contentGetUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0');
         });
 
         it('knows the pages url', function() {
-            assert.equal(urlGen.pagesUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
+            assert.equal(urlGen.pagesGetUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
         });
 
         it('can pass a slug to pages', function() {
-            assert.equal(urlGen.pagesUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
+            assert.equal(urlGen.pagesGetUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
         });
     });
 

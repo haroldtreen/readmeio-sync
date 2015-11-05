@@ -22,13 +22,13 @@ RequestMocker.fixtures = {
 };
 
 RequestMocker.prototype.mockVersionDownload = function(scope) {
-    scope.get(this.urlGen1.versionsPath()).reply(200, js.readFileSync('test/fixtures/project-versions.json'));
+    scope.get(this.urlGen1.versionsGetPath()).reply(200, js.readFileSync('test/fixtures/project-versions.json'));
     return scope;
 };
 
 RequestMocker.prototype.mockRemoteRegistryDownload = function(scope) {
     var self = this;
-    ['docs', 'content', 'pages'].forEach(function(section) {
+    ['docsGet', 'contentGet', 'pagesGet'].forEach(function(section) {
         scope.get(self.urlGen1[section + 'Path']()).reply(200, js.readFileSync('test/fixtures/' + section + '-v1.json'));
         scope.get(self.urlGen2[section + 'Path']()).reply(200, js.readFileSync('test/fixtures/' + section + '-v2.json'));
     });

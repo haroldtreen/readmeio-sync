@@ -16,7 +16,7 @@ var mockRemoteRegistryGet = function(scope) {
     var urlGen1 = new UrlGenerator('github-upload', 'v1.0');
     var urlGen2 = new UrlGenerator('github-upload', 'v2.0');
 
-    ['docs', 'content', 'pages'].forEach(function(section) {
+    ['docsGet', 'contentGet', 'pagesGet'].forEach(function(section) {
         scope.get(urlGen1[section + 'Path']()).reply(200, js.readFileSync('test/fixtures/' + section + '-v1.json'));
         scope.get(urlGen2[section + 'Path']()).reply(200, js.readFileSync('test/fixtures/' + section + '-v2.json'));
     });

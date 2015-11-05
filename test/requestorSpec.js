@@ -29,11 +29,11 @@ describe('Requestor', function() {
         requestor = new Requestor(projectName, 'cookie');
 
         var scope = nock(urlGen1.base());
-        scope.get(urlGen1.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
-        scope.get(urlGen2.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
+        scope.get(urlGen1.contentGetPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
+        scope.get(urlGen2.contentGetPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
 
-        scope.get(urlGen1.contentPath()).reply(200, '{ "github-upload": { "v1.0": { "customContent": "bleh" }}}');
-        scope.get(urlGen2.contentPath()).reply(200, '{ "github-upload": { "v2.0": { "customContent": "bleh" }}}');
+        scope.get(urlGen1.contentGetPath()).reply(200, '{ "github-upload": { "v1.0": { "customContent": "bleh" }}}');
+        scope.get(urlGen2.contentGetPath()).reply(200, '{ "github-upload": { "v2.0": { "customContent": "bleh" }}}');
 
         requestor.customContent(resources, function(response1) {
             requestor.customContent(resources, function(response2) {
@@ -50,8 +50,8 @@ describe('Requestor', function() {
         it('can request custom content', function(done) {
             requestor = new Requestor(projectName, 'cookie');
 
-            nock(urlGen1.base()).get(urlGen1.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
-            nock(urlGen2.base()).get(urlGen2.contentPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
+            nock(urlGen1.base()).get(urlGen1.contentGetPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
+            nock(urlGen2.base()).get(urlGen2.contentGetPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
 
             requestor.customContent(resources, function(content) {
                 assert.isDefined(content[projectName]['v1.0'].customContent.appearance.html_body);
@@ -64,8 +64,8 @@ describe('Requestor', function() {
         it('can request documentation', function(done) {
             requestor = new Requestor(projectName, 'cookie');
 
-            nock(urlGen1.base()).get(urlGen1.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v1.json'));
-            nock(urlGen2.base()).get(urlGen2.docsPath()).reply(200, js.readFileSync('test/fixtures/docs-v2.json'));
+            nock(urlGen1.base()).get(urlGen1.docsGetPath()).reply(200, js.readFileSync('test/fixtures/docs-v1.json'));
+            nock(urlGen2.base()).get(urlGen2.docsGetPath()).reply(200, js.readFileSync('test/fixtures/docs-v2.json'));
 
             requestor.documentation(resources, function(documentation) {
                 assert.isDefined(documentation[projectName]['v1.0'].documentation);
@@ -78,8 +78,8 @@ describe('Requestor', function() {
         it('can request customPages', function(done) {
             requestor = new Requestor(projectName, 'cookie');
 
-            nock(urlGen1.base()).get(urlGen1.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v1.json'));
-            nock(urlGen2.base()).get(urlGen2.pagesPath()).reply(200, js.readFileSync('test/fixtures/pages-v2.json'));
+            nock(urlGen1.base()).get(urlGen1.pagesGetPath()).reply(200, js.readFileSync('test/fixtures/pages-v1.json'));
+            nock(urlGen2.base()).get(urlGen2.pagesGetPath()).reply(200, js.readFileSync('test/fixtures/pages-v2.json'));
 
             requestor.customPages(resources, function(documentation) {
                 assert.isDefined(documentation[projectName]['v1.0'].customPages);
@@ -93,7 +93,7 @@ describe('Requestor', function() {
             requestor = new Requestor(projectName, 'cookie');
 
             var scope = nock(urlGen1.base());
-            scope.get(urlGen1.versionsPath()).reply(200, fs.readFileSync('test/fixtures/project-versions.json'));
+            scope.get(urlGen1.versionsGetPath()).reply(200, fs.readFileSync('test/fixtures/project-versions.json'));
 
             requestor.versions(function(versions) {
                 assert.lengthOf(versions, 2);
