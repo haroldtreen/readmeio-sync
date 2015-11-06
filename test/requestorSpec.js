@@ -25,27 +25,6 @@ describe('Requestor', function() {
         assert.equal(requestor.cookie, 'cookie');
     });
 
-    it('caches request responses', function(done) {
-        requestor = new Requestor(projectName, 'cookie');
-
-        var scope = nock(urlGen1.base());
-        scope.get(urlGen1.contentGetPath()).reply(200, js.readFileSync('test/fixtures/content-v1.json'));
-        scope.get(urlGen2.contentGetPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
-
-        scope.get(urlGen1.contentGetPath()).reply(200, '{ "github-upload": { "v1.0": { "customContent": "bleh" }}}');
-        scope.get(urlGen2.contentGetPath()).reply(200, '{ "github-upload": { "v2.0": { "customContent": "bleh" }}}');
-
-        requestor.customContent(resources, function(response1) {
-            requestor.customContent(resources, function(response2) {
-                assert.equal(JSON.stringify(response1), JSON.stringify(response2));
-
-                nock.cleanAll();
-
-                done();
-            });
-        });
-    });
-
     describe('get', function() {
         it('can request custom content', function(done) {
             requestor = new Requestor(projectName, 'cookie');
@@ -54,8 +33,8 @@ describe('Requestor', function() {
             nock(urlGen2.base()).get(urlGen2.contentGetPath()).reply(200, js.readFileSync('test/fixtures/content-v2.json'));
 
             requestor.customContent(resources, function(content) {
-                assert.isDefined(content[projectName]['v1.0'].customContent.appearance.html_body);
-                assert.isDefined(content[projectName]['v2.0'].customContent.appearance.stylesheet);
+                assert.isDefined(content['v1.0'].appearance.html_body);
+                assert.isDefined(content['v2.0'].appearance.stylesheet);
 
                 done();
             });
@@ -68,8 +47,7 @@ describe('Requestor', function() {
             nock(urlGen2.base()).get(urlGen2.docsGetPath()).reply(200, js.readFileSync('test/fixtures/docs-v2.json'));
 
             requestor.documentation(resources, function(documentation) {
-                assert.isDefined(documentation[projectName]['v1.0'].documentation);
-                assert.lengthOf(documentation[projectName]['v2.0'].documentation, 2);
+                assert.lengthOf(documentation['v2.0'], 2);
 
                 done();
             });
@@ -81,9 +59,8 @@ describe('Requestor', function() {
             nock(urlGen1.base()).get(urlGen1.pagesGetPath()).reply(200, js.readFileSync('test/fixtures/pages-v1.json'));
             nock(urlGen2.base()).get(urlGen2.pagesGetPath()).reply(200, js.readFileSync('test/fixtures/pages-v2.json'));
 
-            requestor.customPages(resources, function(documentation) {
-                assert.isDefined(documentation[projectName]['v1.0'].customPages);
-                assert.lengthOf(documentation[projectName]['v2.0'].customPages, 2);
+            requestor.customPages(resources, function(customPages) {
+                assert.lengthOf(customPages['v2.0'], 2);
 
                 done();
             });

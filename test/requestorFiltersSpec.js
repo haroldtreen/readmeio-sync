@@ -82,4 +82,16 @@ describe('Requestor Filters', function() {
             assert.equal(version.version, 'v' + (index + 1) + '.0');
         });
     });
+
+    describe('#forResource', function() {
+        it('can get the filter for a given resource', function() {
+            Object.keys(RequestorFilters.resourceToFilterMap).forEach(function(key) {
+                var filterName = RequestorFilters.resourceToFilterMap[key];
+                var filterFn = RequestorFilters[filterName];
+
+                assert.equal(RequestorFilters.forResource({ resourceType: key }), filterFn);
+                assert.isFunction(filterFn);
+            });
+        });
+    });
 });
