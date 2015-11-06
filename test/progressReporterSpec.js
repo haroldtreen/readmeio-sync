@@ -19,6 +19,11 @@ describe('ProgressReporter', function() {
         assert.match(logger.lastCall.arg, /Section/);
     });
 
+    it('logs headers', function() {
+        progress.header('Header 1');
+        assert.match(logger.lastCall.arg, /Header/);
+    });
+
     it('logs success', function() {
         progress.success('Task 1');
         assert.match(logger.lastCall.arg, /\u2713/);
@@ -29,11 +34,24 @@ describe('ProgressReporter', function() {
         assert.match(logger.lastCall.arg, /\u2717/);
     });
 
-    it('logs multiple failures', function() {
-        progress.failures([{ title: 'Failure 1' }, { title: 'Failure 2' }], function(failed) {
-            return failed.title;
-        });
+    it('logs arrays', function() {
+        progress.reportResultsArray([{error: 'failed', title: 'Doc'}, { title: 'Doc 2' }]);
 
         assert.lengthOf(logger.calls, 2);
+        assert.match(logger.calls[0].arg, /\u2717/);
+        assert.match(logger.calls[1].arg, /\u2713/);
+    });
+
+    it('logs objects', function() {
+        progress.reportResultsObject({
+            html_body: '<html></html>',
+            stylesheet: '.id { }',
+            'v2.0': [{title: 'Doc'}]
+        });
+
+        assert.lengthOf(logger.calls, 4);
+        [/html_body/, /stylesheet/, /v2\.0/, /Doc/].forEach(function(regex, index) {
+            assert.match(logger.calls[index].arg, regex);
+        });
     });
 });
