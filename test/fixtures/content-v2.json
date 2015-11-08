@@ -31,7 +31,6 @@
   "updates": [],
   "apps": {
     "base_domain": "",
-    "secret_key": "6eNTucqnhVcSNVgTScT0",
     "enabled": false
   },
   "topnav": {

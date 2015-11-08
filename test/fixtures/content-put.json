@@ -35,7 +35,6 @@
   "updates": [],
   "apps": {
     "base_domain": "",
-    "secret_key": "6eNTucqnhVcSNVgTScT0",
     "enabled": false
   },
   "topnav": {
@@ -185,7 +184,6 @@
     "contact": "",
     "name": ""
   },
-  "password": "",
   "internal": "",
   "heroku_id": "",
   "error404": "",
@@ -223,7 +221,6 @@
   "description": "",
   "subdomain": "github-upload",
   "name": "Github Upload",
-  "inactive_password": "2f7476856d",
   "plan_trial": "business",
   "id": "556f429a9893290d00988bba"
 }
