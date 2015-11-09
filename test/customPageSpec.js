@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var CustomPage = require('../lib/customPage');
+var CustomPage = require('../lib/resources/customPage');
 
 describe('Custom Page', function() {
     var pageProperties = { 'title': 'Title', html: '<html></html>', slug: 'slug' };

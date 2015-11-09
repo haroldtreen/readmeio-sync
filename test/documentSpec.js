@@ -1,7 +1,7 @@
 'use strict';
 
 var assert = require('chai').assert;
-var Document = require('../lib/Document');
+var Document = require('../lib/resources/document');
 
 describe('Document', function() {
     var docProperties = { 'title': 'Title', slug: 'slug', excerpt: 'Excerpt' };

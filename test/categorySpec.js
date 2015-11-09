@@ -2,7 +2,7 @@
 
 var assert = require('chai').assert;
 var path = require('path');
-var Category = require('../lib/category');
+var Category = require('../lib/resources/category');
 
 describe('Category', function() {
     var docProperties = { 'title': 'Title', slug: 'slug', excerpt: 'Excerpt', pages: [] };

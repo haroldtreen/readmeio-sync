@@ -6,7 +6,7 @@ var assert = require('chai').assert;
 var simple = require('simple-mock');
 
 var RegistryBuilder = require('../lib/registryBuilder');
-var Document = require('../lib/document');
+var Document = require('../lib/resources/document');
 
 describe('Registry Builder', function() {
 
