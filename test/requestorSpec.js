@@ -103,8 +103,8 @@ describe('Requestor', function() {
 
             // Make requests
             requestor = new Requestor(projectName, 'cookie');
-            requestor.uploadDocCategories(registry.allDocCategories(), function(failedUploads) {
-                assert.lengthOf(failedUploads, 0);
+            requestor.uploadDocCategories(registry.allDocCategories(), function(uploadedCategories) {
+                assert.lengthOf(uploadedCategories, 4);
 
                 registry.allDocCategories().forEach(function(category) {
                     assert.equal(category.title, postResponse.title);
@@ -132,8 +132,8 @@ describe('Requestor', function() {
             });
 
             // Make requests
-            requestor.uploadDocs(registry.allDocs(), function(failedUploads) {
-                assert.lengthOf(failedUploads, 0);
+            requestor.uploadDocs(registry.allDocs(), function(uploadedDocs) {
+                assert.lengthOf(uploadedDocs, 8);
 
                 registry.allDocs().forEach(function(doc) {
                     assert.equal(doc.title, postResponse.title);
@@ -159,8 +159,8 @@ describe('Requestor', function() {
                 scope[page.method](urlGen[urlFn](page.slug), requestBody).reply(200, postResponse);
             });
 
-            requestor.uploadPages(registry.allCustomPages(), function(failedUploads) {
-                assert.lengthOf(failedUploads, 0);
+            requestor.uploadPages(registry.allCustomPages(), function(uploadedPages) {
+                assert.lengthOf(uploadedPages, 8);
 
                 registry.allCustomPages().forEach(function(page) {
                     assert.equal(page.title, postResponse.title);
@@ -185,8 +185,8 @@ describe('Requestor', function() {
                 scope.put(urlGen.contentPutPath(), requestBody).reply(200, putResponse);
             });
 
-            requestor.uploadContent(registry.allCustomContent(), function(failedUploads) {
-                assert.lengthOf(failedUploads, 0);
+            requestor.uploadContent(registry.allCustomContent(), function(uploadedContent) {
+                assert.lengthOf(uploadedContent, 2);
                 assert.isTrue(scope.isDone());
                 done();
             });
