@@ -112,7 +112,7 @@ describe('UrlGenerator', function() {
 
     describe('maps', function() {
         it('document methods', function() {
-            var methods = UrlGenerator.methodsForType('document');
+            var methods = UrlGenerator.methodsForType('doc');
             var expectedMethods = {
                 get: 'docsGetUrl',
                 post: 'docsPostUrl',
@@ -138,7 +138,7 @@ describe('UrlGenerator', function() {
         });
 
         it('content methods', function() {
-            var methods = UrlGenerator.methodsForType('content');
+            var methods = UrlGenerator.methodsForType('customContent');
             var expectedMethods = {
                 get: 'contentGetUrl',
                 put: 'contentPutUrl',

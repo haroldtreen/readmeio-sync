@@ -89,7 +89,7 @@ describe('Requestor Filters', function() {
                 var filterName = RequestorFilters.resourceToFilterMap[key];
                 var filterFn = RequestorFilters[filterName];
 
-                assert.equal(RequestorFilters.forResource({ resourceType: key }), filterFn);
+                assert.equal(RequestorFilters.forResource({ getType: function() { return key; } }), filterFn);
                 assert.isFunction(filterFn);
             });
         });

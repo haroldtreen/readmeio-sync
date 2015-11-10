@@ -24,4 +24,8 @@ describe('Document', function() {
         assert.equal(doc.body, filepath);
     });
 
+    it('has a type', function() {
+        assert.equal(new Document({}).getType(), 'doc');
+    });
+
 });

@@ -6,10 +6,10 @@ var CustomPage = require('../lib/resources/customPage');
 describe('Custom Page', function() {
     var pageProperties = { 'title': 'Title', html: '<html></html>', slug: 'slug' };
     it('can accept properties', function() {
-        var doc = new CustomPage(pageProperties);
+        var page = new CustomPage(pageProperties);
 
         Object.keys(pageProperties).forEach(function(key) {
-            assert.equal(doc[key], pageProperties[key]);
+            assert.equal(page[key], pageProperties[key]);
         });
     });
 
@@ -30,6 +30,10 @@ describe('Custom Page', function() {
         assert.equal(customPage.title, 'Second Custom Page');
         assert.equal(customPage.slug, 'second-custom-page');
         assert.equal(customPage.html, '/Users/johndoe/Second Custom Page.html');
+    });
+
+    it('has a type', function() {
+        assert.equal(new CustomPage({}).getType(), 'customPage');
     });
 
 });

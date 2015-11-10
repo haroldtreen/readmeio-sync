@@ -24,7 +24,10 @@ describe('Category', function() {
             assert.equal(category.order, 1);
             assert.equal(category.slug, 'category-1');
         });
+    });
 
+    it('has a type', function() {
+        assert.equal(new Category({}).getType(), 'category');
     });
 
 });
