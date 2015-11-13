@@ -1,3 +1,7 @@
 node_modules
 test/tmp
 coverage
+adaptivejs-staging
+github-upload
+syncConfig.json
+syncPaths.json
