@@ -1,1 +1,6 @@
 test/**
+coverage
+adaptivejs-staging
+github-upload
+syncConfig.json
+syncPaths.json
