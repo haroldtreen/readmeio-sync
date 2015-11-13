@@ -24,23 +24,23 @@ describe('UrlGenerator', function() {
 
     describe('get urls', function() {
         it('knows the docs url', function() {
-            assert.equal(urlGen.docsUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs');
+            assert.equal(urlGen.docsGetUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/docs');
         });
 
         it('knows the versions url', function() {
-            assert.equal(urlGen.versionsUrl(), 'https://dash.readme.io/api/projects-v/github-upload');
+            assert.equal(urlGen.versionsGetUrl(), 'https://dash.readme.io/api/projects-v/github-upload');
         });
 
         it('knows the content url', function() {
-            assert.equal(urlGen.contentUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0');
+            assert.equal(urlGen.contentGetUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0');
         });
 
         it('knows the pages url', function() {
-            assert.equal(urlGen.pagesUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
+            assert.equal(urlGen.pagesGetUrl(), 'https://dash.readme.io/api/projects/github-upload/v1.0/page');
         });
 
         it('can pass a slug to pages', function() {
-            assert.equal(urlGen.pagesUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
+            assert.equal(urlGen.pagesGetUrl('test-page'), 'https://dash.readme.io/api/projects/github-upload/v1.0/page/test-page');
         });
     });
 
@@ -107,6 +107,56 @@ describe('UrlGenerator', function() {
         it('knows the pages order url', function() {
             var expectedUrl = 'https://dash.readme.io/api/projects/github-upload/v1.0/reorder-pages';
             assert.equal(urlGen.docsOrderUrl(), expectedUrl);
+        });
+    });
+
+    describe('maps', function() {
+        it('document methods', function() {
+            var methods = UrlGenerator.methodsForType('doc');
+            var expectedMethods = {
+                get: 'docsGetUrl',
+                post: 'docsPostUrl',
+                put: 'docsPutUrl',
+                delete: 'docsDeleteUrl',
+                order: 'docsOrderUrl'
+            };
+
+            assert.deepEqual(methods, expectedMethods);
+        });
+
+        it('category methods', function() {
+            var methods = UrlGenerator.methodsForType('category');
+            var expectedMethods = {
+                get: 'docCategoriesGetUrl',
+                post: 'docCategoriesPostUrl',
+                put: 'docCategoriesPutUrl',
+                delete: 'docCategoriesDeleteUrl',
+                order: 'docCategoriesOrderUrl'
+            };
+
+            assert.deepEqual(methods, expectedMethods);
+        });
+
+        it('content methods', function() {
+            var methods = UrlGenerator.methodsForType('customContent');
+            var expectedMethods = {
+                get: 'contentGetUrl',
+                put: 'contentPutUrl',
+            };
+
+            assert.deepEqual(methods, expectedMethods);
+        });
+
+        it('page methods', function() {
+            var methods = UrlGenerator.methodsForType('customPage');
+            var expectedMethods = {
+                get: 'pagesGetUrl',
+                post: 'pagesPostUrl',
+                put: 'pagesPutUrl',
+                delete: 'pagesDeleteUrl'
+            };
+
+            assert.deepEqual(methods, expectedMethods);
         });
     });
 });

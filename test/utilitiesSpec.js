@@ -41,4 +41,10 @@ describe('Utilities', function() {
 
         assert.equal(utils.mdBody(markdown), body);
     });
+
+    it('can detect versions', function() {
+        assert.isTrue(utils.isVersion('v1.2.4'));
+        assert.isFalse(utils.isVersion('1-Test'));
+    });
+
 });

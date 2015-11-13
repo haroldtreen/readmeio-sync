@@ -2,7 +2,7 @@
 
 var Downloader = require('../../lib/downloader');
 var registryFactory = require('../factories/registryFactory');
-var SpyHelpers = require('../helpers/mockHelpers');
+var MockHelpers = require('../helpers/mockHelpers');
 
 var DownloaderMock = function(projectName, cookie) {
     this.projectName = projectName;
@@ -15,6 +15,6 @@ DownloaderMock.prototype.downloadRemoteRegistry = function(cb) {
     cb(registryFactory());
 };
 
-DownloaderMock = SpyHelpers.spyOnPrototype(DownloaderMock);
+DownloaderMock = MockHelpers.spyOnPrototype(DownloaderMock);
 
 module.exports = DownloaderMock;
