@@ -46,7 +46,7 @@ describe('ProgressReporter', function() {
         progress.reportResultsObject({
             html_body: '<html></html>',
             stylesheet: '.id { }',
-            'v2.0': [{title: 'Doc'}]
+            'v2.0': [{toString: function() { return 'Doc'; }}]
         });
 
         assert.lengthOf(logger.calls, 4);

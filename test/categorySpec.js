@@ -5,12 +5,12 @@ var path = require('path');
 var Category = require('../lib/resources/category');
 
 describe('Category', function() {
-    var docProperties = { 'title': 'Title', slug: 'slug', excerpt: 'Excerpt', pages: [] };
+    var categoryProperties = { title: 'Title', slug: 'slug', pages: [] };
     it('can accept properties', function() {
-        var doc = new Category(docProperties);
+        var category = new Category(categoryProperties);
 
-        Object.keys(docProperties).forEach(function(key) {
-            assert.equal(doc[key], docProperties[key]);
+        Object.keys(categoryProperties).forEach(function(key) {
+            assert.deepEqual(category[key], categoryProperties[key]);
         });
     });
 
@@ -28,6 +28,18 @@ describe('Category', function() {
 
     it('has a type', function() {
         assert.equal(new Category({}).getType(), 'category');
+    });
+
+    it('has a toString()', function() {
+        var category = new Category(categoryProperties);
+
+        assert.equal(category.toString(), 'Title <slug> (0 docs)');
+
+        category.version = 'v1.0';
+        assert.equal(category.toString(), 'v1.0 - Title <slug> (0 docs)');
+
+        category.method = 'delete';
+        assert.equal(category.toString(), 'DELETE: v1.0 - Title <slug> (0 docs)');
     });
 
 });

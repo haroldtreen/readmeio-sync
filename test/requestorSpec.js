@@ -271,8 +271,10 @@ describe('Requestor', function() {
             scope.post(urlGen1.docCategoriesOrderPath(), requestBodies['v1.0']).reply(200, {});
             scope.post(urlGen2.docCategoriesOrderPath(), requestBodies['v2.0']).reply(200, {});
 
-            requestor.uploadDocCategoriesOrder(registry.allDocCategories(), function(err) {
-                assert.isNull(err);
+            requestor.uploadDocCategoriesOrder(registry.allDocCategories(), function(results) {
+                for (var version in results) {
+                    if (results.hasOwnProperty(version)) { assert.isTrue(results[version]); }
+                }
                 assert.isTrue(scope.isDone());
 
                 done();
@@ -290,8 +292,10 @@ describe('Requestor', function() {
             scope.post(urlGen1.docsOrderPath(), requestBodies['v1.0']).reply(200, {});
             scope.post(urlGen2.docsOrderPath(), requestBodies['v2.0']).reply(200, {});
 
-            requestor.uploadDocsOrder(registry.allDocs(), function(err) {
-                assert.isNull(err);
+            requestor.uploadDocsOrder(registry.allDocs(), function(results) {
+                for (var version in results) {
+                    if (results.hasOwnProperty(version)) { assert.isTrue(results[version]); }
+                }
                 assert.isTrue(scope.isDone());
 
                 done();

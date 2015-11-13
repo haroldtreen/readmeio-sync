@@ -7,6 +7,8 @@ var js = require('jsonfile');
 var Downloader = require('../lib/downloader');
 var UrlGenerator = require('../lib/urlGenerator');
 
+var Version = require('../lib/resources/version');
+
 var downloader;
 var urlGen1 = new UrlGenerator('github-upload', 'v1.0');
 var urlGen2 = new UrlGenerator('github-upload', 'v2.0');
@@ -53,8 +55,8 @@ describe('Downloader', function() {
 
         downloader.downloadVersions(function(versions) {
             assert.lengthOf(versions, 2);
-            assert.include(versions, { version: 'v1.0' });
-            assert.include(versions, { version: 'v2.0' });
+            assert.include(versions, new Version({ version: 'v1.0' }));
+            assert.include(versions, new Version({ version: 'v2.0' }));
 
             assert.isTrue(scope.isDone());
 

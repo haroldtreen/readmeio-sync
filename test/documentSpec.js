@@ -28,4 +28,16 @@ describe('Document', function() {
         assert.equal(new Document({}).getType(), 'doc');
     });
 
+    it('has a toString()', function() {
+        var doc = new Document(docProperties);
+
+        assert.equal(doc.toString(), 'Title <slug>');
+
+        doc.version = 'v1.0';
+        assert.equal(doc.toString(), 'v1.0 - Title <slug>');
+
+        doc.method = 'delete';
+        assert.equal(doc.toString(), 'DELETE: v1.0 - Title <slug>');
+    });
+
 });
