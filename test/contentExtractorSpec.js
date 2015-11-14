@@ -65,7 +65,7 @@ describe('ContentExtractor', function() {
             extractor.customPages(function(linkedRegistry) {
                 var customPages = linkedRegistry.pages('v1.0');
 
-                customPages.forEach(function(page, pageIndex) {
+                customPages.forEach(function(page) {
                     var pagePath = extractor.pagePath('v1.0', page.title);
 
                     assert.equal(page.html, pagePath);

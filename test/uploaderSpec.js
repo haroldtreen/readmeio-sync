@@ -12,7 +12,6 @@ var RequestorMock = require('./mocks/requestorMock');
 var DownloaderMock = require('./mocks/downloaderMock');
 
 var UrlGenerator = require('../lib/urlGenerator');
-var Registry = require('../lib/registry');
 var RegistryBuilder = require('../lib/registryBuilder');
 
 var projectName = 'github-upload';
@@ -98,7 +97,7 @@ describe('Uploader', function() {
 
     it('can upload a doc page order', function(done) {
         Uploader = require('../lib/Uploader');
-        registry = new Registry(js.readFileSync('test/fixtures/orderedRegistry.json'));
+        registry = RegistryBuilder.build(js.readFileSync('test/fixtures/syncPaths.json'));
         requestMocker = new RequestMocker(registry);
         uploader.registry = registry;
 

@@ -124,7 +124,12 @@ RequestMocker.prototype.mockDocsOrderUpload = function(scope) {
 
     var requestBodies = { 'v1.0': [], 'v2.0': [] };
 
+    self.registry.allDocCategories().forEach(function(category) {
+        category._id = Math.floor(Math.random() * 10000);
+    });
+
     self.registry.allDocs().forEach(function(doc) {
+        doc._id = Math.floor(Math.random() * 10000);
         requestBodies[doc.version].push({ id: doc._id, parent: doc.categoryId, order: doc.order });
     });
 

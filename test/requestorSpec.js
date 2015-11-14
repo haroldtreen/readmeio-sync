@@ -7,9 +7,7 @@ var fs = require('fs');
 
 var UrlGenerator = require('../lib/urlGenerator');
 var Requestor = require('../lib/requestor');
-var Registry = require('../lib/registry');
 var RegistryBuilder = require('../lib/registryBuilder');
-
 var requestor;
 
 var projectName = 'github-upload';
@@ -198,7 +196,7 @@ describe('Requestor', function() {
         var registry;
 
         beforeEach(function() {
-            registry = new Registry(js.readFileSync('test/fixtures/syncRegistry.json'));
+            registry = RegistryBuilder.build(js.readFileSync('test/fixtures/syncPaths.json'));
         });
 
         it('can delete docs', function(done) {
@@ -210,8 +208,10 @@ describe('Requestor', function() {
                 scope.delete(urlGen.docsDeletePath(doc.slug)).reply(200, deleteResponse);
             });
 
-            requestor.deleteDocs(registry.allDocs(), function(failedDeletes) {
-                assert.lengthOf(failedDeletes, 0);
+            requestor.deleteDocs(registry.allDocs(), function(deleteResults) {
+                var failed = deleteResults.filter(function(result) { return !!result.error; });
+
+                assert.lengthOf(failed, 0);
 
                 assert.isTrue(scope.isDone());
                 done();
@@ -227,8 +227,10 @@ describe('Requestor', function() {
                 scope.delete(urlGen.docCategoriesDeletePath(category.slug)).reply(200, deleteResponse);
             });
 
-            requestor.deleteDocCategories(registry.allDocCategories(), function(failedDeletes) {
-                assert.lengthOf(failedDeletes, 0);
+            requestor.deleteDocCategories(registry.allDocCategories(), function(deleteResults) {
+                var failed = deleteResults.filter(function(result) { return !!result.error; });
+
+                assert.lengthOf(failed, 0);
                 assert.isTrue(scope.isDone());
                 done();
             });
@@ -244,8 +246,9 @@ describe('Requestor', function() {
                 scope.delete(urlGen.pagesDeletePath(page.slug)).reply(200, deleteResponse);
             });
 
-            requestor.deletePages(registry.allCustomPages(), function(failedDeletes) {
-                assert.lengthOf(failedDeletes, 0);
+            requestor.deletePages(registry.allCustomPages(), function(deleteResults) {
+                var failed = deleteResults.filter(function(result) { return !!result.error; });
+                assert.lengthOf(failed, 0);
 
                 assert.isTrue(scope.isDone());
                 done();
@@ -257,7 +260,7 @@ describe('Requestor', function() {
         var registry;
 
         beforeEach(function() {
-            registry = new Registry(js.readFileSync('test/fixtures/orderedRegistry.json'));
+            registry = RegistryBuilder.build(js.readFileSync('test/fixtures/syncPaths.json'));
         });
 
         it('can upload doc categories order', function(done) {
@@ -285,7 +288,12 @@ describe('Requestor', function() {
             var scope = nock(urlGen1.base());
             var requestBodies = { 'v1.0': [], 'v2.0': [] };
 
+            registry.allDocCategories().forEach(function(category) {
+                category._id = Math.floor(Math.random() * 10000);
+            });
+
             registry.allDocs().forEach(function(doc) {
+                doc._id = Math.floor(Math.random() * 10000);
                 requestBodies[doc.version].push({ id: doc._id, parent: doc.categoryId, order: doc.order });
             });
 

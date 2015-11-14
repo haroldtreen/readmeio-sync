@@ -4,7 +4,7 @@ var assert = require('chai').assert;
 var Document = require('../lib/resources/document');
 
 describe('Document', function() {
-    var docProperties = { 'title': 'Title', slug: 'slug', excerpt: 'Excerpt' };
+    var docProperties = { 'title': 'Title', slug: 'slug', excerpt: 'Excerpt', version: 'v1.0' };
     it('can accept properties', function() {
         var doc = new Document(docProperties);
 
@@ -31,9 +31,6 @@ describe('Document', function() {
     it('has a toString()', function() {
         var doc = new Document(docProperties);
 
-        assert.equal(doc.toString(), 'Title <slug>');
-
-        doc.version = 'v1.0';
         assert.equal(doc.toString(), 'v1.0 - Title <slug>');
 
         doc.method = 'delete';
