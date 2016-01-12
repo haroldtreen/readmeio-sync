@@ -97,15 +97,13 @@ readmeio-sync clean-remote [--aggressive]
 
 **Note**: If you remote clean a project and it removes all the documentation, Readmeio will not allow you to go into the documentation section. You will need to upload new content with the `readmeio-sync upload` command to get it working again.)*
 
-------
 
 ## Configuration
 
 For an in-depth explanation of how to configuration works, see [CONFIGURATION.md](https://github.com/mobify/readmeio-sync/blob/master/CONFIGURATION.md)
 
-------
 
-### [Known Issues](https://github.com/mobify/readmeio-sync/issues)
+## [Known Issues](https://github.com/mobify/readmeio-sync/issues)
 
 1. Doing a remote-clean when you have no documentation in your `syncPaths.json` file will cause all your documentation on readme.io to be deleted (after all, you are saying "delete all the things I don't have specified locally"...which is nothing!). Having no documentation causes Readme.io to break (you can't enter the documentation section of the site). To fix this you will have to add a document to your `syncPaths.json` and upload it...or get in contact with Readme.io and admit you were using internal APIs (OOPS!).
 
