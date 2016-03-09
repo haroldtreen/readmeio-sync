@@ -1,7 +1,7 @@
 # readmeio-sync
 A tool for managing your `Readme.io` documentation locally.
 
-**NOTE** This project is not officially supported by ReadMe. For support, please use the [GitHub Issues](https://github.com/mobify/readmeio-sync/issues) for this project.
+**NOTE** This project is not officially supported by ReadMe. For support, please use the [GitHub Issues](https://github.com/haroldtreen/readmeio-sync/issues) for this project.
 
 [![Code Climate](https://codeclimate.com/github/mobify/readmeio-sync/badges/gpa.svg)](https://codeclimate.com/github/mobify/readmeio-sync)
 [![Coverage Status](https://coveralls.io/repos/mobify/readmeio-sync/badge.svg?branch=master&service=github)](https://coveralls.io/github/mobify/readmeio-sync?branch=master)
