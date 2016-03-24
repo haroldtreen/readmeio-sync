@@ -47,7 +47,7 @@ describe('Registry Builder', function() {
                     pIdx++;
 
                     assert.equal(page.slug, 'v1-c' + cIdx + '-p' + pIdx);
-                    assert.equal(page.title, 'V1-C' + cIdx + '-P' + pIdx);
+                    assert.equal(page.title, 'v1-c' + cIdx + '-p' + pIdx);
                     assert.equal(page.excerpt, 'Version 1, Category ' + cIdx + ', Page ' + pIdx);
                     assert.equal(page.body, path.join(docsPath, category.order + '-' + category.title, page.order + '-' + page.title + '.md'));
                     assert.match(path.basename(page.body), Document.filenameRegex);
