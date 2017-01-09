@@ -1,6 +1,6 @@
 {
   "name": "readmeio-sync",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "description": "Sync documentation between Readme.io and your Github Repo",
   "scripts": {
     "test": "grunt test"
